@@ -1,0 +1,55 @@
+QAirlineProject/
+├── backend/                    # Backend server code
+│   ├── controllers/            # Logic to handle incoming requests and responses
+│   │   ├── flightController.js
+│   │   ├── bookingController.js
+│   │   └── adminController.js
+│   ├── models/                 # Database models for representing data
+│   │   ├── Flight.js
+│   │   ├── Booking.js
+│   │   └── User.js
+│   ├── routes/                 # API routes for handling different endpoints
+│   │   ├── flightRoutes.js
+│   │   ├── bookingRoutes.js
+│   │   └── adminRoutes.js
+│   ├── config/                 # Configuration files (e.g., database, authentication)
+│   │   └── databaseConfig.js
+│   ├── utils/                  # Utility functions (e.g., validation, authentication)
+│   │   ├── validation.js
+│   │   └── auth.js
+│   ├── server.js               # Main server entry point
+│   └── app.js                  # Express app configuration
+├── frontend/                   # Frontend code for the website
+│   ├── public/                 # Static files like images, fonts, etc.
+│   │   └── logo.png
+│   ├── src/                    # Source files for frontend development
+│   │   ├── assets/             # Custom CSS, JavaScript, and other assets
+│   │   │   ├── css/
+│   │   │   │   ├── main.css    # Main CSS for styling
+│   │   │   │   └── branding.css # Custom styles for QAirline's identity
+│   │   │   └── js/
+│   │   │       ├── main.js     # Main JavaScript file for functionality
+│   │   │       └── api.js      # Handles API requests with fetch/AJAX
+│   │   ├── components/         # Reusable UI components
+│   │   │   ├── Header.js
+│   │   │   ├── Footer.js
+│   │   │   └── FlightCard.js
+│   │   ├── pages/              # Different pages of the website
+│   │   │   ├── HomePage.js
+│   │   │   ├── FlightSearchPage.js
+│   │   │   └── BookingPage.js
+│   │   ├── services/           # Interact with backend APIs
+│   │   │   ├── flightService.js
+│   │   │   └── bookingService.js
+│   │   └── index.html          # Main HTML file
+├── database/                   # Database scripts or migrations
+│   ├── migrations/             # Database migration scripts
+│   ├── seeds/                  # Initial data for populating the database
+│   └── schema.sql              # SQL schema definition (if using SQL)
+├── tests/                      # Unit and integration tests
+│   ├── backend/
+│   └── frontend/
+├── .env                        # Environment variables (e.g., database URL, API keys)
+├── .gitignore                  # Files to ignore in Git
+├── package.json                # Dependencies and scripts for Node.js
+└── README.md                   # Project documentation
