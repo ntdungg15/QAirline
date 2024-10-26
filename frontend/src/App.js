@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import logo from './logo.svg';
-import Login from './components/login';  // Nhập Login component
+import Login from './components/js/login';  // Nhập Login component
 function App() {
   return (
     <div className="App">
