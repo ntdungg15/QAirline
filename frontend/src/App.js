@@ -2,10 +2,15 @@ import React from 'react';
 import './App.css';
 import logo from './logo.svg';
 import Login from './components/js/login';  // Nhập Login component
+import Homepage from './pages/js/Homepage';
+
 function App() {
   return (
     <div className="App">
-      <Login />
+
+      <Homepage />
+
+      {/* <Login /> */}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

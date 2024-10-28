@@ -1,0 +1,27 @@
+.homepage {
+    display: flex;
+    justify-content: right;
+    background: linear-gradient(to top right, #a570de, #3f82f6);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.menu {
+    display: flex;
+    justify-content: right;
+}
+
+
+.navbar {
+    display: flex;
+    gap: 20px; 
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.login, .register {
+    padding: 10px;
+}
