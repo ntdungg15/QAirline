@@ -1,6 +1,6 @@
-.homepage {
-    display: flex;
-    justify-content: right;
+.header {
+    display: grid;
+    justify-content: center;
     background: linear-gradient(to top right, #a570de, #3f82f6);
     width: 100vw;
     height: 100vh;
@@ -9,19 +9,50 @@
 }
 
 .menu {
-    display: flex;
-    justify-content: right;
+    margin-top: 40px;
+    width: 40vw;
+    height: 60px;
+
 }
 
 
-.navbar {
+.nav-links {
     display: flex;
-    gap: 20px; 
+    justify-content: center;
+    align-items: center;
+    height: 60px;
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
+    background-color: aqua;
+
 }
 
-.login, .register {
-    padding: 10px;
+
+.distance {
+    width: 20vw;
+    margin-right: 100px;
+    /* background-color: black; */
+}
+
+.login_register {
+    display: flex;
+    align-items: center;
+}
+
+.user-icon {
+    font-size: 24px;
+    color: rgb(69, 67, 60);
+    margin-left: 5px;
+}
+
+/* Styles for individual elements */
+#find_flight, #book_ticket, #login, #register {
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#find_flight:hover, #book_ticket:hover, #login:hover, #register:hover {
+    text-decoration: underline;
 }

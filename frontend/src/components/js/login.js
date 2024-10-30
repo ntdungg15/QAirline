@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import '../css/Login.css'; 
+let username;
+let password;
+
+// Your code that uses username and password
 
 const Login = () => {
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -21,6 +26,7 @@ const Login = () => {
     };
 
     return (
+        
         <div className="login-container">
             <form className="login-form" onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
                 <h2>Login</h2>
@@ -47,5 +53,6 @@ const Login = () => {
         </div>
     );
 };
+
 
 export default Login;
