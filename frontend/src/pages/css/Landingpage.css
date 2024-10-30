@@ -10,7 +10,7 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: auto;
-    background: linear-gradient(to top right, #c8a5ed, #7ca1e2);
+    background: linear-gradient(to top right, #d3b8f0, #7ca1e2);
 }
 
 .landingpage-landingpage {
@@ -32,7 +32,7 @@ body {
     width: 90%;
     height: 20px;
     padding: 10px 0;
-    background: linear-gradient(to top right, #dfd8e7, #7ca1e2);
+    background: linear-gradient(to top right, #dfd8e7, #bacbe9);
     border-radius: 10px;
 }
 
@@ -45,7 +45,7 @@ body {
 
 .nav-items {
     display: flex;
-    gap: 20px;
+    gap: 35px;
     justify-content: center;
     flex-grow: 1;
 }
@@ -60,23 +60,29 @@ body {
 .nav-link {
     font-size: 16px;
     font-family: Poppins, sans-serif;
-    color: rgba(40, 56, 65, 1);
+    color: rgba(34, 58, 96, 1);
     text-decoration: none;
-    font-weight: 500;
-    opacity: 0.60;
+    font-weight: 600;
+    opacity: 0.7;
 }
 
 .nav-link:hover {
     text-decoration: underline;
     opacity: 1;
+    scale: 1.3;
 }
 
 .nav-link.active {
     font-weight: 600;
     color: rgba(34, 58, 96, 1);
-    opacity: 1;
+    opacity: 0.7;
 }
 
+.nav-link.active:hover {
+    text-decoration: underline;
+    opacity: 1;
+    /* scale: 1.3; */
+}
 
 .signup-link, .signin-link {
     font-size: 16px;
