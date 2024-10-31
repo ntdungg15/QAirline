@@ -1,16 +1,14 @@
-import React from 'react';
-import './App.css';
-import Login from './components/js/login';  // Nhập Login component
-import Homepage from './pages/js/Homepage';
-import Landingpage from './pages/js/Landingpage';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ReactDOM from 'react-dom'
+import React from "react";
+import "./App.css";
+import Login from "./components/js/login"; // Nhập Login component
+import Homepage from "./pages/js/Homepage";
+import Landingpage from "./pages/js/Landingpage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ReactDOM from "react-dom";
 // import Register from './components/js/register';
-
 
 function App() {
   return (
-
     <Router>
       <div className="App">
         <Routes>
@@ -43,6 +41,3 @@ function App() {
 }
 
 export default App;
-
-
-
