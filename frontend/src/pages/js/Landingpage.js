@@ -1,26 +1,34 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-
+import videoFile from '../img/back.mp4';
 import '../css/Landingpage.css';
 import '../../services/css/book_ticket.css';
+
 const Landingpage = () => {
-
     const handleSignInClick = () => {
-        window.location.href = '/login'; // Chuyển hướng đến trang Sign In
-
+        window.location.href = '/login';
     };
 
     const handleflightClick = () => {
         // window.location.href = '/login';
-
     };
+
     return (
         <div className="landingpage-container">
             <Helmet>
                 <title>QAirline</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
             </Helmet>
+
+            {/* Video nền */}
+            <div className="background-video">
+                <video autoPlay loop muted playsInline>
+                    <source src={videoFile} type="video/mp4" />
+                    Trình duyệt của bạn không hỗ trợ video.
+                </video>
+            </div>
+
+            {/* Nội dung */}
             <div className="landingpage-landingpage">
                 <div className="navbar">
                     <div className="logo">Logo</div>
@@ -29,41 +37,47 @@ const Landingpage = () => {
                         <a href="#about" className="nav-link">Thông tin hành trình</a>
                         <a href="#hotels" className="nav-link">Khám phá</a>
                         <a href="#flights" onClick={handleflightClick} className="nav-link">Đặt vé</a>
-                        {/* <a href="#blog" className="nav-link">Tìm chuyến bay</a> */}
                     </div>
                     <div className="auth-buttons">
                         <a href="#signin" onClick={handleSignInClick} className="signin-link">Sign In</a>
                         <a href="#signup" className="signup-link">Sign Up</a>
                     </div>
                 </div>
-                <div class="flight-booking-container">
-                    <div class="tabs">
-                        <button class="tab active">✈️ Đặt chuyến bay</button>
-                        <button class="tab">➕ Stopover / Gói dịch vụ</button>
-                        <button class="tab">📅 Quản lý / Làm thủ tục</button>
-                        <button class="tab">📍 Trạng thái chuyến bay</button>
+                
+                <div className="flight-booking-container">
+                    <div className="tabs">
+                        <button className="tab">✈️ Đặt chuyến bay</button>
+                        <button className="tab">➕ Stopover / Gói dịch vụ</button>
+                        <button className="tab">📅 Quản lý / Làm thủ tục</button>
+                        <button className="tab">📍 Trạng thái chuyến bay</button>
                     </div>
-                    <div class="booking-options">
-                        <label><input type="radio" name="flightType" checked /> Khứ hồi</label>
+
+                    <div className="booking-options">
+                        <label><input type="radio" name="flightType" defaultChecked /> Khứ hồi</label>
                         <label><input type="radio" name="flightType" /> Một chiều</label>
                         <label><input type="radio" name="flightType" /> Nhiều thành phố</label>
                     </div>
-                    <div class="booking-form">
-                        <div class="location-fields">
+
+                    <div className="booking-form">
+                        <div className="location-fields">
                             <input type="text" placeholder="Từ" />
-                            <span class="swap-icon">⇆</span>
+                            <span className="swap-icon">⇆</span>
                             <input type="text" placeholder="Đến" />
                         </div>
-                        <div class="date-fields">
-                            <div class="date-field">
-                                <label>Ngày đi</label>
-                                <span>31 T10 2024</span>
+
+                        <div className="date-passenger-container">
+                            <div className="date-fields">
+                                <div className="date-field">
+                                    <label>Ngày đi</label>
+                                    <input type="date" />
+                                </div>
+                                <div className="date-field">
+                                    <label>Ngày về</label>
+                                    <input type="date" />
+                                </div>
                             </div>
-                            <div class="date-field">
-                                <label>Ngày về</label>
-                                <span>7 T11 2024</span>
-                            </div>
-                            <div class="passenger-class-field">
+
+                            <div className="passenger-class-field">
                                 <label>Hành khách / Hạng ghế</label>
                                 <select>
                                     <option>1 Hành khách Phổ thông</option>
@@ -71,11 +85,14 @@ const Landingpage = () => {
                                     <option>1 Hành khách Hạng thương gia</option>
                                 </select>
                             </div>
+
+                            <div className="discount-search-container">
+                                <div className="discount-code">
+                                    <a href="#add-code">+ Thêm mã ưu đãi</a>
+                                </div>
+                                <button className="search-button">Tìm chuyến bay</button>
+                            </div>
                         </div>
-                        <div class="discount-code">
-                            <a href="dhbhvbhv">+ Thêm mã ưu đãi</a>
-                        </div>
-                        <button class="search-button">Tìm chuyến bay</button>
                     </div>
                 </div>
             </div>
