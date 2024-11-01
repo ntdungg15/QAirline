@@ -33,7 +33,7 @@ body {
     width: 90%;
     height: 20px;
     padding: 10px 0;
-    background: linear-gradient(to top right, #dfd8e7, #bacbe9);
+    /* background: linear-gradient(to top right, #dfd8e7, #bacbe9); */
     border-radius: 10px;
 }
 
@@ -46,7 +46,7 @@ body {
 
 .nav-items {
     display: flex;
-    gap: 35px;
+    gap: 50px;
     justify-content: center;
     flex-grow: 1;
 }
@@ -59,12 +59,12 @@ body {
 }
 
 .nav-link {
-    font-size: 16px;
+    font-size: 19px;
     font-family: Poppins, sans-serif;
-    color: rgba(34, 58, 96, 1);
+    color: rgb(255, 255, 255);
     text-decoration: none;
-    font-weight: 600;
-    opacity: 0.7;
+    font-weight: 700;
+    opacity: 0.8;
 }
 
 .nav-link:hover {
