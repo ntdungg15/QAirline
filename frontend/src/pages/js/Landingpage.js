@@ -15,7 +15,10 @@ const Landingpage = () => {
     const handleflightClick = () => {
         // window.location.href = '/login';
     };
-    const handleserviceClick = () => { navigate('/package_service'); };
+    
+    const handleserviceClick = () => { 
+        navigate('/package_service'); 
+    };
 
     return (
         <div className="landingpage-container">

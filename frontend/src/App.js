@@ -6,7 +6,6 @@ import Landingpage from "./pages/js/Landingpage";
 import Packageservice from "./services/js/package_service";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom";
-// import Register from './components/js/register';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
           <Route path="/" element={<Landingpage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/package_service" element={<Packageservice />} />
-          {/* <Route path="/register" element={<Register />} /> */}
         </Routes>
       </div>
     </Router>
