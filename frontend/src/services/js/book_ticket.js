@@ -106,9 +106,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-export function handleserviceClick() {
-    const script = document.createElement("script");
-    script.src = "./package_service.js";
-    script.async = true;
-    document.body.appendChild(script);
-}
+
