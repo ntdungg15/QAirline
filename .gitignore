@@ -25,3 +25,5 @@ yarn-error.log*
 
 # Frontend specific
 /frontend/.env
+
+node_modules/
