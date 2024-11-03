@@ -66,8 +66,12 @@ const Login = () => {
     });
   };
 
+  const toggleMode = () => {
+    setIsSignUp(!isSignUp);
+  };
+
   return (
-    <div className="container" id="container">
+    <div className={`container ${isSignUp ? "active" : ""}`} id="container">
       <div className="form-container sign-up">
         <form onSubmit={handleAuth}>
           <h1>Create Account</h1>
@@ -107,7 +111,7 @@ const Login = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          <button onClick={() => setIsSignUp(true)}>Sign Up</button>
+          <button type="submit">Sign Up</button>
         </form>
       </div>
       <div className="form-container sign-in">
@@ -143,7 +147,7 @@ const Login = () => {
             onChange={handleChange}
           />
           <a href="#">Forget Your Password?</a>
-          <button onClick={() => setIsSignUp(false)}>Sign In</button>
+          <button type="submit">Sign In</button>
         </form>
       </div>
       <div className="toggle-container">
@@ -151,7 +155,7 @@ const Login = () => {
           <div className="toggle-panel toggle-left">
             <h1>Welcome Back!</h1>
             <p>Enter your personal details to use all of site features</p>
-            <button className="hidden" id="login">
+            <button className="hidden" onClick={toggleMode}>
               Sign In
             </button>
           </div>
@@ -160,7 +164,7 @@ const Login = () => {
             <p>
               Register with your personal details to use all of site features
             </p>
-            <button className="hidden" id="register">
+            <button className="hidden" onClick={toggleMode}>
               Sign Up
             </button>
           </div>
