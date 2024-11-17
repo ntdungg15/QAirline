@@ -1,6 +1,8 @@
 body {
     overflow-x: hidden;
     max-width: 100vw;
+    height: auto;
+    width: auto;
 }
 
 .landingpage-container {
@@ -9,13 +11,13 @@ body {
     /* flex-direction: column; */
     align-items: center;
     min-height: 100vh;
+    
     overflow-y: auto;
-    background: linear-gradient(to top right, #d3b8f0, #7ca1e2);
 }
 
 .landingpage-landingpage {
 
-    width: 90%;
+    width: 90vw;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -30,7 +32,7 @@ body {
     gap: 10px;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 90vw;
     height: 20px;
     padding: 10px 0;
     /* background: linear-gradient(to top right, #dfd8e7, #bacbe9); */
@@ -58,6 +60,20 @@ body {
     justify-content: center;
 }
 
+.account {
+    display: flex;
+    margin-right: 10px;
+    gap: 10px;
+    justify-content: center;
+}
+.account-link {
+    font-size: 19px;
+    font-family: Poppins, sans-serif;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: 700;
+    opacity: 0.8;
+}
 .nav-link {
     font-size: 19px;
     font-family: Poppins, sans-serif;
