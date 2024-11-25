@@ -1,0 +1,98 @@
+footer {
+  margin-top: 4vh;
+  width: 100vw;
+  background: linear-gradient(to right, #485dd4, #68a9d4);
+  color: #ebebeb;
+  padding: 20px 0;
+  text-align: left;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+
+}
+
+/* EMAIL*/
+.email {
+  padding: 20px;
+  border-radius: 10px;
+  text-align:start;
+  margin-left: 30px;
+}
+
+.email h1 {
+  margin-bottom: 10px;
+}
+
+.email p {
+  margin-bottom: 20px;
+}
+
+.email-input {
+  margin-left: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 250px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: darkgreen;
+}
+ /* EMAIL*/
+
+  /* other*/
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 30px;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 10px;
+  min-width: 200px;
+}
+
+.footer-section h2 {
+  margin-bottom: 10px;
+}
+
+.footer-section p {
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #ebebeb;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  /* background: #c9d6ff; */
+  color: #e6e2e2;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 20px;
+}

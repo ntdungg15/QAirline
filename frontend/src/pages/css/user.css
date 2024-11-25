@@ -1,0 +1,104 @@
+#LocationID {
+    width: 20vw;
+    margin-right: 30vw;
+}
+
+
+.place {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.place-image {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden; 
+    border-radius: 20px; 
+
+
+}
+
+
+img {
+    border-radius: 20px;
+    display: block; 
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.3s ease; 
+}
+
+.img-big {
+    width: 30vw;
+    height: 35vh;
+}
+
+.img-small {
+    width: 30vw;
+    height: 35vh;
+}
+
+.place-image a {
+    display: block;
+    position: relative;
+    text-decoration: none;
+
+}
+
+.place-image a img:hover {
+    transform: scale(1.1); 
+}
+.place-image a img {
+    display: block;
+    transition: transform 0.3s ease;
+}
+.place-image:hover img {
+    transform: scale(1.1); 
+  }
+.place-image a span {
+    position: absolute;
+    bottom: 5%;
+    left: 8%;
+    background: rgba(77, 76, 76, 0.5);
+    border-radius: 3px;
+    color: white;
+    padding: 5px 10px;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+
+/* Nút "Đặt vé" */
+.book-button {
+    width: 10vw;
+    position: absolute;
+    bottom: -50px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, #485dd4, #68a9d4);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-family: Poppins, sans-serif;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease; 
+}
+
+
+.place-image:hover .book-button {
+    bottom: 20px; /* Vị trí cuối cùng sau khi trượt lên */
+    opacity: 1;
+}
+
+.place-image:hover a span {
+    bottom: 70px; }
