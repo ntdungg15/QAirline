@@ -8,9 +8,37 @@ import "../css/footer.css";
 import "../../services/css/book_ticket.css";
 import { useNavigate } from "react-router-dom";
 import userImage from "../img/user.png";
+import {
+  useLocationSearch,
+  LocationDropdown,
+} from "../../components/js/locationComponent";
+import { authService } from "../../services/auth.js";
 
 const Landingpage = () => {
+  const {
+    fromLocation,
+    toLocation,
+    fromDropdown,
+    toDropdown,
+    fromFilteredLocations,
+    toFilteredLocations,
+    handleFromLocationChange,
+    handleToLocationChange,
+    handleFromLocationSelect,
+    handleToLocationSelect,
+    handleSwapLocations,
+  } = useLocationSearch();
+
   const navigate = useNavigate();
+  // Đăng xuất
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
   const handleflightClick = () => {
     // window.location.href = '/login';
@@ -144,11 +172,37 @@ const Landingpage = () => {
             {activeTab === "flight" && (
               <div>
                 <div className="location-fields">
-                  <input type="text" placeholder="Từ" id="fromLocation" />
-                  <span className="swap-icon" id="swapIcon">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Từ"
+                      value={fromLocation}
+                      onChange={(e) => handleFromLocationChange(e.target.value)}
+                    />
+                    <LocationDropdown
+                      locations={fromFilteredLocations}
+                      onLocationSelect={handleFromLocationSelect}
+                      show={fromDropdown}
+                    />
+                  </div>
+
+                  <span className="swap-icon" onClick={handleSwapLocations}>
                     ⇆
                   </span>
-                  <input type="text" placeholder="Đến" id="toLocation" />
+
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Đến"
+                      value={toLocation}
+                      onChange={(e) => handleToLocationChange(e.target.value)}
+                    />
+                    <LocationDropdown
+                      locations={toFilteredLocations}
+                      onLocationSelect={handleToLocationSelect}
+                      show={toDropdown}
+                    />
+                  </div>
                 </div>
 
                 <div className="date-passenger-container">
