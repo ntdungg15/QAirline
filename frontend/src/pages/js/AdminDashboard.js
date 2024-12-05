@@ -190,7 +190,7 @@ const AdminDashboard = () => {
             className={`admin-tab ${activeTab === "change-time" ? "active" : ""}`}
             onClick={() => handleTabClick("change-time")}
           >
-            Thay đổi giờ khởi hành
+            Giờ khởi hành
           </button>
         </div>
 
