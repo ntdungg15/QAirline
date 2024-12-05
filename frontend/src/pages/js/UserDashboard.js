@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import userImage from "../img/user.png";
 
 const Landingpage = () => {
+
   const navigate = useNavigate();
 
   const handleflightClick = () => {
@@ -38,8 +39,9 @@ const Landingpage = () => {
         <title>Sunrise Airlines</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Helmet>
+
       {/* Video nền */}
-      <div
+      {/* <div
         className="background-video"
         style={{
           transform: `translateY(-${videoOffset}px)`,
@@ -48,10 +50,12 @@ const Landingpage = () => {
         <video autoPlay loop muted playsInline>
           <source src={videoFile} type="video/mp4" />
         </video>
-      </div>
+
+      </div> */}
 
       {/* Nội dung */}
       <div className="landingpage-landingpage">
+
         <div className="navbar">
           <div className="logo">
             <div>
@@ -112,139 +116,109 @@ const Landingpage = () => {
 
           <div className="booking-options">
             <label>
-              <input
-                type="radio"
-                name="flightType"
-                value="Khứ hồi"
-                id="roundTripRadio"
-              />{" "}
-              Khứ hồi
+              <input type="radio" name="flightType" value="Khứ hồi" id="roundTripRadio" /> Khứ hồi
             </label>
             <label>
-              <input
-                type="radio"
-                name="flightType"
-                value="Một chiều"
-                id="oneWayRadio"
-              />{" "}
-              Một chiều
+              <input type="radio" name="flightType" value="Một chiều" id="oneWayRadio" /> Một chiều
             </label>
             <label>
-              <input
-                type="radio"
-                name="flightType"
-                value="Nhiều thành phố"
-                id="multiCityRadio"
-              />{" "}
-              Nhiều thành phố
+              <input type="radio" name="flightType" value="Nhiều thành phố" id="multiCityRadio" /> Nhiều thành phố
             </label>
           </div>
 
           <div className="booking-form">
             {activeTab === "flight" && (
-              <div>
+              <div className="aa">
                 <div className="location-fields">
                   <input type="text" placeholder="Từ" id="fromLocation" />
-                  <span className="swap-icon" id="swapIcon">
-                    ⇆
-                  </span>
+
+                  <span className="swap-icon" id="swapIcon">⇆</span>
                   <input type="text" placeholder="Đến" id="toLocation" />
                 </div>
-
-                <div className="date-passenger-container">
-                  <div className="date-fields">
-                    <div className="date-field">
-                      <label>Ngày đi</label>
-                      <input type="date" id="departDate" />
+                <div className="bottom-book">
+                  <div className="date-passenger-container">
+                    <div className="date-fields">
+                      <div className="date-field">
+                        <label>Ngày đi</label>
+                        <input type="date" id="departDate" />
+                      </div>
+                      <div className="date-field">
+                        <label>Ngày về</label>
+                        <input type="date" id="returnDate" />
+                      </div>
                     </div>
-                    <div className="date-field">
-                      <label>Ngày về</label>
-                      <input type="date" id="returnDate" />
-                    </div>
-                  </div>
 
-                  <div className="passenger-class-field">
-                    <label>Hành khách / Hạng ghế</label>
-                    <select id="passengerClass">
-                      <option>1 Hành khách Phổ thông</option>
-                      <option>2 Hành khách Phổ thông</option>
-                      <option>1 Hành khách Hạng thương gia</option>
-                    </select>
-                  </div>
-
-                  <div className="discount-search-container">
-                    <div className="discount-code">
-                      <a href="#add-code">+ Thêm mã ưu đãi</a>
+                    <div className="passenger-class-field">
+                      <label>Hành khách / Hạng ghế</label>
+                      <select id="passengerClass">
+                        <option>1 Hành khách Phổ thông</option>
+                        <option>2 Hành khách Phổ thông</option>
+                        <option>1 Hành khách Hạng thương gia</option>
+                      </select>
                     </div>
-                    <button className="search-button" id="searchButton">
-                      Tìm chuyến bay
-                    </button>
+
+                    <div className="discount-search-container">
+                      <div className="discount-code">
+                        <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
+                      </div>
+                      <button className="search-button" id="searchButton">Tìm chuyến bay</button>
+                    </div>
                   </div>
                 </div>
               </div>
             )}
             {activeTab === "service" && (
               <div>
+
                 <div className="location-fields">
                   <input type="text" placeholder="Từ" id="fromLocation" />
-                  <span className="swap-icon" id="swapIcon">
-                    ⇆
-                  </span>
+                  <span className="swap-icon" id="swapIcon">⇆</span>
                   <input type="text" placeholder="Đến" id="toLocation" />
                 </div>
 
                 <div className="date-passenger-container">
-                  <div className="date-fields">
-                    <div className="date-field">
-                      <label>Ngày đi</label>
-                      <input type="date" id="departDate" />
+                  <div className="stopover">
+                    <div className="date-fields">
+                      <div className="date-field">
+                        <label>Ngày đi</label>
+                        <input type="date" id="departDate" />
+                      </div>
+                      <div className="date-field">
+                        <label>Ngày về</label>
+                        <input type="date" id="returnDate" />
+                      </div>
                     </div>
-                    <div className="date-field">
-                      <label>Ngày về</label>
-                      <input type="date" id="returnDate" />
+
+                    <div className="passenger-class-field">
+                      <label>Hành khách / Hạng ghế</label>
+                      <select id="passengerClass">
+                        <option>1 Hành khách Phổ thông</option>
+                        <option>2 Hành khách Phổ thông</option>
+                        <option>1 Hành khách Hạng thương gia</option>
+                      </select>
                     </div>
-                  </div>
 
-                  <div className="passenger-class-field">
-                    <label>Hành khách / Hạng ghế</label>
-                    <select id="passengerClass">
-                      <option>1 Hành khách Phổ thông</option>
-                      <option>2 Hành khách Phổ thông</option>
-                      <option>1 Hành khách Hạng thương gia</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="passengers">Hành khách / Phòng</label>
-                    <input
-                      type="text"
-                      id="passengers"
-                      placeholder="2 Hành khách, 1 phòng"
-                    />
-                  </div>
-
-                  <div className="discount-search-container">
-                    <div className="discount-code">
-                      <a href="#add-code">+ Thêm mã ưu đãi</a>
+                    <div class="form-group">
+                      <label for="passengers">Hành khách / Phòng</label>
+                      <input type="text" id="passengers" placeholder="2 Hành khách, 1 phòng" />
                     </div>
-                    <button className="search-button" id="searchButton">
-                      Tìm chuyến bay
-                    </button>
+
+                    <div className="discount-search-container">
+                      <div className="discount-code">
+                        <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
+                      </div>
+                      <button className="search-button" id="searchButton">Tìm chuyến bay</button>
+                    </div>
                   </div>
                 </div>
+
               </div>
             )}
             {activeTab === "manage" && (
               <div>
                 <div className="location-fields">
-                  <input
-                    type="text"
-                    placeholder="Số mã đặt chỗ"
-                    id="LocationID"
-                  />
-                  <button className="search-button" id="">
-                    Truy xuất vé
-                  </button>
+                  <input type="text" placeholder="Số mã đặt chỗ" id="LocationID" />
+                  <button className="search-button" id="">Truy xuất vé</button>
                 </div>
               </div>
             )}
@@ -284,6 +258,8 @@ const Landingpage = () => {
             <span>Phuket</span>
           </a>
           <button className="book-button">Đặt vé</button>
+
+
         </div>
         {/* Place image 3 */}
         <div className="place-image">
@@ -294,8 +270,10 @@ const Landingpage = () => {
               alt="Beautiful Place"
             />
             <span>Tahiti</span>
+
           </a>
           <button className="book-button">Đặt vé</button>
+
         </div>
         {/* Place image 4 */}
         <div className="place-image">
@@ -308,87 +286,68 @@ const Landingpage = () => {
             <span>Tokyo</span>
           </a>
           <button className="book-button">Đặt vé</button>
+
         </div>
         {/* Place image 5 */}
         <div className="place-image">
           <a href="#">
             <img
               className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/155aaa2/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FGeorge_PachantourisCity-center-square-buildings-flowers-sky-sunset.jpg"
-              alt="Beautiful Place"
+              src="https://travel.usnews.com/dims4/USNEWS/155aaa2/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FGeorge_PachantourisCity-center-square-buildings-flowers-sky-sunset.jpg" alt="Beautiful Place"
             />
             <span>Amsterdam</span>
           </a>
           <button className="book-button">Đặt vé</button>
+
+
         </div>
         {/* Place image 6 */}
         <div className="place-image">
           <a href="#">
             <img
               className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/8c65c6b/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FParc_Guell_Gatsi_Getty.jpg"
-            />
+              src="https://travel.usnews.com/dims4/USNEWS/8c65c6b/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FParc_Guell_Gatsi_Getty.jpg" />
             <span>Barcelona</span>
+
           </a>
           <button className="book-button">Đặt vé</button>
+
         </div>
       </div>
 
       <footer>
         <div className="email">
           <h1>Đăng Ký Email!</h1>
-          <span>
-            Đăng ký Email để nhận ngay các thông tin, ưu đãi mới nhất từ Bamboo
-            Airways.
-          </span>
-          <input
-            type="email"
-            class="email-input"
-            placeholder="Nhập email của bạn"
-          />
-          <button class="submit-button">Đăng Ký</button>
-        </div>
+          <span>Đăng ký Email để nhận ngay các thông tin, ưu đãi mới nhất từ Sunrise Airline.</ span>
+          <input type="email" class="email-input" placeholder="Nhập email của bạn" />
+          <button class="submit-button">Đăng Ký</button></div>
         <div class="footer-container">
           <div class="footer-section about">
             <h2>About Us</h2>
             <p>
-              Tại Sunrise Airlines, chúng tôi mang đến những trải nghiệm bay
-              tuyệt vời và đáng nhớ cho hành khách. Với cam kết chất lượng dịch
-              vụ cao cấp và an toàn hàng đầu, chúng tôi luôn đặt sự hài lòng của
-              khách hàng lên hàng đầu.
+              Tại Sunrise Airlines, chúng tôi mang đến những trải nghiệm bay tuyệt
+              vời và đáng nhớ cho hành khách. Với cam kết chất lượng dịch vụ cao
+              cấp và an toàn hàng đầu, chúng tôi luôn đặt sự hài lòng của khách
+              hàng lên hàng đầu.
             </p>
           </div>
           <div class="footer-section links">
             <h2>Quick Links</h2>
             <ul>
-              <li>
-                <a href="#home">Home</a>
-              </li>
-              <li>
-                <a href="#about">About</a>
-              </li>
-              <li>
-                <a href="#services">Services</a>
-              </li>
-              <li>
-                <a href="#contact">Contact</a>
-              </li>
-              <li>
-                <a href="#faq">FAQ</a>
-              </li>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#faq">FAQ</a></li>
             </ul>
           </div>
           <div class="footer-section contact">
             <h2>Contact Us</h2>
             <ul>
               <li>
-                <a href="mailto:info@sportswear.com">
-                  sunriseAirline@gmail.com
-                </a>
+                <a href="mailto:info@sportswear.com">sunriseAirline@gmail.com</a>
               </li>
-              <li>
-                <a href="#">0943894676</a>
-              </li>
+              <li><a href="#">0943894676</a></li>
               <li>144 Xuân Thủy, Cầu Giấy, Hà nội , Việt Nam</li>
             </ul>
           </div>
@@ -400,3 +359,4 @@ const Landingpage = () => {
 };
 
 export default Landingpage;
+

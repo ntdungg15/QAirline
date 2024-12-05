@@ -3,6 +3,7 @@ body {
   max-width: 100vw;
   height: auto;
   width: auto;
+
 }
 
 .landingpage-container {
@@ -13,15 +14,33 @@ body {
   align-items: center;
   min-height: 100vh;
   /* overflow-y: auto; */
+  background: linear-gradient(135deg, #00d2ff, #3a47d5, #c9ffbf, #ffafbd);
+  background-size: 100% 100%;
+  /* animation: neonGradient 8s ease infinite; */
 }
 
+@keyframes neonGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .landingpage-landingpage {
   width: 90vw;
   min-height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+
 }
+
+
+
 
 .navbar {
   margin-top: 20px;
@@ -38,7 +57,7 @@ body {
 .logo {
   font-size: 22px;
   font-weight: bold;
-  color: rgb(97, 10, 114);
+  color: rgb(255, 236, 128);
   margin-left: 10px;
   width: 17vw;
   display: flex;
@@ -70,16 +89,17 @@ body {
 .nav-link {
   font-size: 19px;
   font-family: Poppins, sans-serif;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   text-decoration: none;
   font-weight: 700;
   opacity: 0.8;
 }
 
 .nav-link:hover {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   opacity: 1;
   transform: scale(1.3);
+  transition: transform 0.2s ease-out;
 }
 
 .nav-link.active {
@@ -110,12 +130,12 @@ body {
   background-color: #2d4c78;
 }
 
-.background-video {
+/* .background-video {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 95vh;
+  height: 100vh;
   overflow: hidden;
   z-index: -1;
   transform: translateY(0);
@@ -126,7 +146,7 @@ body {
   width: 100vw;
   height: auto;
   object-fit: cover;
-}
+} */
 
 .heading {
   width: 80vw;
@@ -138,14 +158,14 @@ body {
   align-items: flex-start;
 }
 
+p {
+  color: #fff;
+}
 /* service*/
 
 .discount-search-container {
   display: flex;
-  flex-direction: column;
-  /* Stack elements vertically */
   gap: 10px;
-  /* Add space between elements */
 }
 
 .discount-code {
@@ -162,20 +182,6 @@ body {
   text-decoration: underline;
 }
 
-.search-button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
-  /* Add margin to separate from discount code */
-}
 
-.search-button:hover {
-  background-color: #45a049;
-}
 
 /* service*/
