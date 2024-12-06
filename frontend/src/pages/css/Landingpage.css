@@ -23,13 +23,16 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
+
 .landingpage-landingpage {
   width: 90vw;
   min-height: 100vh;
@@ -52,6 +55,7 @@ body {
   height: 20px;
   padding: 10px 0;
   border-radius: 10px;
+  z-index: 2;
 }
 
 .logo {
@@ -65,6 +69,8 @@ body {
   align-items: center;
   margin-top: 20px;
   gap: 10px;
+  mix-blend-mode: difference;
+  text-shadow: 2px 2px 4px rgba(109, 98, 0, 0.7);
 }
 
 .sun {
@@ -79,6 +85,58 @@ body {
   flex-grow: 1;
 }
 
+.post-infor {
+  block-size: 90vh;
+  inline-size: 100vw;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/post.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  opacity: 0.75;
+
+
+}
+.post-button{
+  z-index: 2;
+  margin-top: 30vh;
+  margin-left: 12.5vw;
+  align-self: flex-start;
+  padding: 5px 20px;
+}
+
+.post-button-detail{
+
+}
+
+.post-button-detail{
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50; 
+  color: white; 
+  border: none; 
+  border-radius: 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+.post-button-detail:hover {
+  background-color: #45a049; 
+}
 .auth-buttons {
   display: flex;
   margin-right: 10px;
@@ -87,12 +145,17 @@ body {
 }
 
 .nav-link {
-  font-size: 19px;
+  font-size: 21px;
   font-family: Poppins, sans-serif;
-  color: rgb(255, 255, 255);
+  /* background: linear-gradient(135deg, #c9ffbf, #ffafbd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  color: #fff;
+  mix-blend-mode: difference;
+  text-shadow: 2px 2px 4px rgba(109, 98, 0, 0.7);
   text-decoration: none;
-  font-weight: 700;
-  opacity: 0.8;
+  font-weight: bold;
+  /* opacity: 0.3; */
 }
 
 .nav-link:hover {
@@ -161,6 +224,7 @@ body {
 p {
   color: #fff;
 }
+
 /* service*/
 
 .discount-search-container {

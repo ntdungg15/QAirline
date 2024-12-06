@@ -1,9 +1,10 @@
 .flight-booking-container {
+    z-index: 2; 
     background: linear-gradient(to top right, #7ca1e2, #d3b8f0);
     padding: 30px;
     border-radius: 12px;
     width: 75vw;
-    margin-top: 60vh;
+    margin-top: 3vh;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 

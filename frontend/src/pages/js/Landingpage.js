@@ -50,173 +50,182 @@ const Landingpage = () => {
       {/* Nội dung */}
       <div className="landingpage-landingpage">
 
-        <div className="navbar">
-          <div className="logo">
-            <div>
-              <span>Sunrise Airlines</span>
-              {/* <span><br></br>Airline</span> */}
+        <div className="post-infor">
+          <div className="post-image">
+          </div>
+          <div className="navbar">
+            <div className="logo">
+              <div>
+                <span>Sunrise Airlines</span>
+                {/* <span><br></br>Airline</span> */}
+              </div>
+              <div>
+                <img className="sun" src={logo}></img>
+              </div>
             </div>
-            <div>
-              <img className="sun" src={logo}></img>
+            <div className="nav-items">
+              <a href="#home" className="nav-link">
+                Home
+              </a>
+              <a href="#about" className="nav-link">
+                Thông tin hành trình
+              </a>
+              <a href="#hotels" className="nav-link">
+                Khám phá
+              </a>
+              <a href="#flights" onClick={handleflightClick} className="nav-link">
+                Đặt vé
+              </a>
+            </div>
+            <div className="auth-buttons">
+              <a
+                href="#signin"
+                onClick={handleSignInClick}
+                className="signin-link"
+              >
+                Sign In
+              </a>
+              <a href="#signup" className="signup-link">
+                Sign Up
+              </a>
             </div>
           </div>
-          <div className="nav-items">
-            <a href="#home" className="nav-link">
-              Home
-            </a>
-            <a href="#about" className="nav-link">
-              Thông tin hành trình
-            </a>
-            <a href="#hotels" className="nav-link">
-              Khám phá
-            </a>
-            <a href="#flights" onClick={handleflightClick} className="nav-link">
-              Đặt vé
-            </a>
-          </div>
-          <div className="auth-buttons">
-            <a
-              href="#signin"
-              onClick={handleSignInClick}
-              className="signin-link"
-            >
-              Sign In
-            </a>
-            <a href="#signup" className="signup-link">
-              Sign Up
-            </a>
-          </div>
-        </div>
 
-        <div className="flight-booking-container">
-          <div className="tabs">
-            <button className="tab" onClick={() => handleTabClick("flight")}>
-              ✈️ Đặt chuyến bay
-            </button>
-            <button className="tab" onClick={() => handleTabClick("service")}>
-              ➕ Stopover / Gói dịch vụ
-            </button>
-            <button className="tab" onClick={() => handleTabClick("manage")}>
-              📅 Quản lý / Làm thủ tục
-            </button>
-            <button className="tab" onClick={() => handleTabClick("status")}>
-              📍 Trạng thái chuyến bay
-            </button>
+          <div className="post-button">
+            <button className="post-button-detail">Chi tiết</button>
           </div>
 
-          <div className="booking-options">
-            <label>
-              <input type="radio" name="flightType" value="Khứ hồi" id="roundTripRadio" /> Khứ hồi
-            </label>
-            <label>
-              <input type="radio" name="flightType" value="Một chiều" id="oneWayRadio" /> Một chiều
-            </label>
-            <label>
-              <input type="radio" name="flightType" value="Nhiều thành phố" id="multiCityRadio" /> Nhiều thành phố
-            </label>
-          </div>
+          <div className="flight-booking-container">
+            <div className="tabs">
+              <button className="tab" onClick={() => handleTabClick("flight")}>
+                ✈️ Đặt chuyến bay
+              </button>
+              <button className="tab" onClick={() => handleTabClick("service")}>
+                ➕ Stopover / Gói dịch vụ
+              </button>
+              <button className="tab" onClick={() => handleTabClick("manage")}>
+                📅 Quản lý / Làm thủ tục
+              </button>
+              <button className="tab" onClick={() => handleTabClick("status")}>
+                📍 Trạng thái chuyến bay
+              </button>
+            </div>
 
-          <div className="booking-form">
-            {activeTab === "flight" && (
-              <div className="aa">
-                <div className="location-fields">
-                  <input type="text" placeholder="Từ" id="fromLocation" />
+            <div className="booking-options">
+              <label>
+                <input type="radio" name="flightType" value="Khứ hồi" id="roundTripRadio" /> Khứ hồi
+              </label>
+              <label>
+                <input type="radio" name="flightType" value="Một chiều" id="oneWayRadio" /> Một chiều
+              </label>
+              <label>
+                <input type="radio" name="flightType" value="Nhiều thành phố" id="multiCityRadio" /> Nhiều thành phố
+              </label>
+            </div>
 
-                  <span className="swap-icon" id="swapIcon">⇆</span>
-                  <input type="text" placeholder="Đến" id="toLocation" />
+            <div className="booking-form">
+              {activeTab === "flight" && (
+                <div className="aa">
+                  <div className="location-fields">
+                    <input type="text" placeholder="Từ" id="fromLocation" />
+
+                    <span className="swap-icon" id="swapIcon">⇆</span>
+                    <input type="text" placeholder="Đến" id="toLocation" />
+                  </div>
+                  <div className="bottom-book">
+                    <div className="date-passenger-container">
+                      <div className="date-fields">
+                        <div className="date-field">
+                          <label>Ngày đi</label>
+                          <input type="date" id="departDate" />
+                        </div>
+                        <div className="date-field">
+                          <label>Ngày về</label>
+                          <input type="date" id="returnDate" />
+                        </div>
+                      </div>
+
+                      <div className="passenger-class-field">
+                        <label>Hành khách / Hạng ghế</label>
+                        <select id="passengerClass">
+                          <option>1 Hành khách Phổ thông</option>
+                          <option>2 Hành khách Phổ thông</option>
+                          <option>1 Hành khách Hạng thương gia</option>
+                        </select>
+                      </div>
+
+                      <div className="discount-search-container">
+                        <div className="discount-code">
+                          <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
+                        </div>
+                        <button className="search-button" id="searchButton">Tìm chuyến bay</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="bottom-book">
+              )}
+              {activeTab === "service" && (
+                <div>
+
+                  <div className="location-fields">
+                    <input type="text" placeholder="Từ" id="fromLocation" />
+                    <span className="swap-icon" id="swapIcon">⇆</span>
+                    <input type="text" placeholder="Đến" id="toLocation" />
+                  </div>
+
                   <div className="date-passenger-container">
-                    <div className="date-fields">
-                      <div className="date-field">
-                        <label>Ngày đi</label>
-                        <input type="date" id="departDate" />
+                    <div className="stopover">
+                      <div className="date-fields">
+                        <div className="date-field">
+                          <label>Ngày đi</label>
+                          <input type="date" id="departDate" />
+                        </div>
+                        <div className="date-field">
+                          <label>Ngày về</label>
+                          <input type="date" id="returnDate" />
+                        </div>
                       </div>
-                      <div className="date-field">
-                        <label>Ngày về</label>
-                        <input type="date" id="returnDate" />
-                      </div>
-                    </div>
 
-                    <div className="passenger-class-field">
-                      <label>Hành khách / Hạng ghế</label>
-                      <select id="passengerClass">
-                        <option>1 Hành khách Phổ thông</option>
-                        <option>2 Hành khách Phổ thông</option>
-                        <option>1 Hành khách Hạng thương gia</option>
-                      </select>
-                    </div>
-
-                    <div className="discount-search-container">
-                      <div className="discount-code">
-                        <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
+                      <div className="passenger-class-field">
+                        <label>Hành khách / Hạng ghế</label>
+                        <select id="passengerClass">
+                          <option>1 Hành khách Phổ thông</option>
+                          <option>2 Hành khách Phổ thông</option>
+                          <option>1 Hành khách Hạng thương gia</option>
+                        </select>
                       </div>
-                      <button className="search-button" id="searchButton">Tìm chuyến bay</button>
+
+                      <div class="form-group">
+                        <label for="passengers">Hành khách / Phòng</label>
+                        <input type="text" id="passengers" placeholder="2 Hành khách, 1 phòng" />
+                      </div>
+
+                      <div className="discount-search-container">
+                        <div className="discount-code">
+                          <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
+                        </div>
+                        <button className="search-button" id="searchButton">Tìm chuyến bay</button>
+                      </div>
                     </div>
                   </div>
+
                 </div>
-              </div>
-            )}
-            {activeTab === "service" && (
-              <div>
-
-                <div className="location-fields">
-                  <input type="text" placeholder="Từ" id="fromLocation" />
-                  <span className="swap-icon" id="swapIcon">⇆</span>
-                  <input type="text" placeholder="Đến" id="toLocation" />
-                </div>
-
-                <div className="date-passenger-container">
-                  <div className="stopover">
-                    <div className="date-fields">
-                      <div className="date-field">
-                        <label>Ngày đi</label>
-                        <input type="date" id="departDate" />
-                      </div>
-                      <div className="date-field">
-                        <label>Ngày về</label>
-                        <input type="date" id="returnDate" />
-                      </div>
-                    </div>
-
-                    <div className="passenger-class-field">
-                      <label>Hành khách / Hạng ghế</label>
-                      <select id="passengerClass">
-                        <option>1 Hành khách Phổ thông</option>
-                        <option>2 Hành khách Phổ thông</option>
-                        <option>1 Hành khách Hạng thương gia</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="passengers">Hành khách / Phòng</label>
-                      <input type="text" id="passengers" placeholder="2 Hành khách, 1 phòng" />
-                    </div>
-
-                    <div className="discount-search-container">
-                      <div className="discount-code">
-                        <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
-                      </div>
-                      <button className="search-button" id="searchButton">Tìm chuyến bay</button>
-                    </div>
+              )}
+              {activeTab === "manage" && (
+                <div>
+                  <div className="location-fields">
+                    <input type="text" placeholder="Số mã đặt chỗ" id="LocationID" />
+                    <button className="search-button" id="">Truy xuất vé</button>
                   </div>
                 </div>
-
-              </div>
-            )}
-            {activeTab === "manage" && (
-              <div>
-                <div className="location-fields">
-                  <input type="text" placeholder="Số mã đặt chỗ" id="LocationID" />
-                  <button className="search-button" id="">Truy xuất vé</button>
-                </div>
-              </div>
-            )}
-            {activeTab === "status" && (
-              <div>Content for Trạng thái chuyến bay</div>
-            )}
+              )}
+              {activeTab === "status" && (
+                <div>Content for Trạng thái chuyến bay</div>
+              )}
+            </div>
           </div>
         </div>
+
       </div>
 
       {/* Place */}

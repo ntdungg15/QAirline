@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // Đảm bảo đã cài đặt axios
 import "../css/adminDashboard.css";
 import { authService } from "../../services/auth";
+import AdminInfo from "../../admin/js/post_information";
+import "../../admin/css/post_information.css";
 
 const AdminDashboard = () => {
   const [flights, setFlights] = useState([]);
@@ -160,7 +162,7 @@ const AdminDashboard = () => {
 
           <button
             className={`admin-tab ${activeTab === "flight" ? "active" : ""}`}
-            onClick={() => handleTabClick("flight")}
+            onClick={() => handleTabClick("post-information")}
           >
             Đăng thông tin
           </button>
@@ -303,6 +305,8 @@ const AdminDashboard = () => {
             </div>
 
           )}
+
+          {activeTab === "post-information" && <AdminInfo />}
 
         </div>
 
