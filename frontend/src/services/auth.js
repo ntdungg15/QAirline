@@ -47,6 +47,11 @@ export const authService = {
   logout: async () => {
     try {
       await signOut(auth);
+      // Xóa thông tin người dùng và path khỏi localStorage
+      localStorage.removeItem("user");
+      localStorage.removeItem("currentPath");
+      // Chuyển hướng về trang login hoặc trang chủ
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error logging out:", error);
       throw error;

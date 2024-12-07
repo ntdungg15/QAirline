@@ -9,10 +9,23 @@ import "../css/footer.css";
 import "../../services/css/book_ticket.css";
 import { useNavigate } from "react-router-dom";
 import userImage from "../img/user.png";
+import {
+  useLocationSearch,
+  LocationDropdown,
+} from "../../components/js/locationComponent";
+import { authService } from "../../services/auth.js";
 
 const Landingpage = () => {
-
   const navigate = useNavigate();
+  // Đăng xuất
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
   const handleflightClick = () => {
     // window.location.href = '/login';
@@ -56,10 +69,8 @@ const Landingpage = () => {
 
       {/* Nội dung */}
       <div className="landingpage-landingpage">
-
         <div className="post-infor">
-          <div className="post-image">
-          </div>
+          <div className="post-image"></div>
           <div className="navbar">
             <div className="logo">
               <div>
@@ -80,7 +91,11 @@ const Landingpage = () => {
               <a href="#hotels" className="nav-link">
                 Khám phá
               </a>
-              <a href="#flights" onClick={handleflightClick} className="nav-link">
+              <a
+                href="#flights"
+                onClick={handleflightClick}
+                className="nav-link"
+              >
                 Đặt vé
               </a>
             </div>
@@ -124,13 +139,31 @@ const Landingpage = () => {
 
             <div className="booking-options">
               <label>
-                <input type="radio" name="flightType" value="Khứ hồi" id="roundTripRadio" /> Khứ hồi
+                <input
+                  type="radio"
+                  name="flightType"
+                  value="Khứ hồi"
+                  id="roundTripRadio"
+                />{" "}
+                Khứ hồi
               </label>
               <label>
-                <input type="radio" name="flightType" value="Một chiều" id="oneWayRadio" /> Một chiều
+                <input
+                  type="radio"
+                  name="flightType"
+                  value="Một chiều"
+                  id="oneWayRadio"
+                />{" "}
+                Một chiều
               </label>
               <label>
-                <input type="radio" name="flightType" value="Nhiều thành phố" id="multiCityRadio" /> Nhiều thành phố
+                <input
+                  type="radio"
+                  name="flightType"
+                  value="Nhiều thành phố"
+                  id="multiCityRadio"
+                />{" "}
+                Nhiều thành phố
               </label>
             </div>
 
@@ -140,7 +173,9 @@ const Landingpage = () => {
                   <div className="location-fields">
                     <input type="text" placeholder="Từ" id="fromLocation" />
 
-                    <span className="swap-icon" id="swapIcon">⇆</span>
+                    <span className="swap-icon" id="swapIcon">
+                      ⇆
+                    </span>
                     <input type="text" placeholder="Đến" id="toLocation" />
                   </div>
                   <div className="bottom-book">
@@ -167,9 +202,15 @@ const Landingpage = () => {
 
                       <div className="discount-search-container">
                         <div className="discount-code">
-                          <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
+                          <input
+                            type="text"
+                            placeholder="Mã ưu đãi"
+                            id="toLocation"
+                          />
                         </div>
-                        <button className="search-button" id="searchButton">Tìm chuyến bay</button>
+                        <button className="search-button" id="searchButton">
+                          Tìm chuyến bay
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -177,10 +218,11 @@ const Landingpage = () => {
               )}
               {activeTab === "service" && (
                 <div>
-
                   <div className="location-fields">
                     <input type="text" placeholder="Từ" id="fromLocation" />
-                    <span className="swap-icon" id="swapIcon">⇆</span>
+                    <span className="swap-icon" id="swapIcon">
+                      ⇆
+                    </span>
                     <input type="text" placeholder="Đến" id="toLocation" />
                   </div>
 
@@ -208,25 +250,40 @@ const Landingpage = () => {
 
                       <div class="form-group">
                         <label for="passengers">Hành khách / Phòng</label>
-                        <input type="text" id="passengers" placeholder="2 Hành khách, 1 phòng" />
+                        <input
+                          type="text"
+                          id="passengers"
+                          placeholder="2 Hành khách, 1 phòng"
+                        />
                       </div>
 
                       <div className="discount-search-container">
                         <div className="discount-code">
-                          <input type="text" placeholder="Mã ưu đãi" id="toLocation" />
+                          <input
+                            type="text"
+                            placeholder="Mã ưu đãi"
+                            id="toLocation"
+                          />
                         </div>
-                        <button className="search-button" id="searchButton">Tìm chuyến bay</button>
+                        <button className="search-button" id="searchButton">
+                          Tìm chuyến bay
+                        </button>
                       </div>
                     </div>
                   </div>
-
                 </div>
               )}
               {activeTab === "manage" && (
                 <div>
                   <div className="location-fields">
-                    <input type="text" placeholder="Số mã đặt chỗ" id="LocationID" />
-                    <button className="search-button" id="">Truy xuất vé</button>
+                    <input
+                      type="text"
+                      placeholder="Số mã đặt chỗ"
+                      id="LocationID"
+                    />
+                    <button className="search-button" id="">
+                      Truy xuất vé
+                    </button>
                   </div>
                 </div>
               )}
@@ -236,7 +293,6 @@ const Landingpage = () => {
             </div>
           </div>
         </div>
-
       </div>
 
       {/* Place */}
@@ -268,8 +324,6 @@ const Landingpage = () => {
             <span>Phuket</span>
           </a>
           <button className="book-button">Đặt vé</button>
-
-
         </div>
         {/* Place image 3 */}
         <div className="place-image">
@@ -280,10 +334,8 @@ const Landingpage = () => {
               alt="Beautiful Place"
             />
             <span>Tahiti</span>
-
           </a>
           <button className="book-button">Đặt vé</button>
-
         </div>
         {/* Place image 4 */}
         <div className="place-image">
@@ -296,68 +348,87 @@ const Landingpage = () => {
             <span>Tokyo</span>
           </a>
           <button className="book-button">Đặt vé</button>
-
         </div>
         {/* Place image 5 */}
         <div className="place-image">
           <a href="#">
             <img
               className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/155aaa2/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FGeorge_PachantourisCity-center-square-buildings-flowers-sky-sunset.jpg" alt="Beautiful Place"
+              src="https://travel.usnews.com/dims4/USNEWS/155aaa2/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FGeorge_PachantourisCity-center-square-buildings-flowers-sky-sunset.jpg"
+              alt="Beautiful Place"
             />
             <span>Amsterdam</span>
           </a>
           <button className="book-button">Đặt vé</button>
-
-
         </div>
         {/* Place image 6 */}
         <div className="place-image">
           <a href="#">
             <img
               className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/8c65c6b/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FParc_Guell_Gatsi_Getty.jpg" />
+              src="https://travel.usnews.com/dims4/USNEWS/8c65c6b/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FParc_Guell_Gatsi_Getty.jpg"
+            />
             <span>Barcelona</span>
-
           </a>
           <button className="book-button">Đặt vé</button>
-
         </div>
       </div>
 
       <footer>
         <div className="email">
           <h1>Đăng Ký Email!</h1>
-          <span>Đăng ký Email để nhận ngay các thông tin, ưu đãi mới nhất từ Sunrise Airline.</ span>
-          <input type="email" class="email-input" placeholder="Nhập email của bạn" />
-          <button class="submit-button">Đăng Ký</button></div>
+          <span>
+            Đăng ký Email để nhận ngay các thông tin, ưu đãi mới nhất từ Sunrise
+            Airline.
+          </span>
+          <input
+            type="email"
+            class="email-input"
+            placeholder="Nhập email của bạn"
+          />
+          <button class="submit-button">Đăng Ký</button>
+        </div>
         <div class="footer-container">
           <div class="footer-section about">
             <h2>About Us</h2>
             <p>
-              Tại Sunrise Airlines, chúng tôi mang đến những trải nghiệm bay tuyệt
-              vời và đáng nhớ cho hành khách. Với cam kết chất lượng dịch vụ cao
-              cấp và an toàn hàng đầu, chúng tôi luôn đặt sự hài lòng của khách
-              hàng lên hàng đầu.
+              Tại Sunrise Airlines, chúng tôi mang đến những trải nghiệm bay
+              tuyệt vời và đáng nhớ cho hành khách. Với cam kết chất lượng dịch
+              vụ cao cấp và an toàn hàng đầu, chúng tôi luôn đặt sự hài lòng của
+              khách hàng lên hàng đầu.
             </p>
           </div>
           <div class="footer-section links">
             <h2>Quick Links</h2>
             <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li><a href="#faq">FAQ</a></li>
+              <li>
+                <a href="#home">Home</a>
+              </li>
+              <li>
+                <a href="#about">About</a>
+              </li>
+              <li>
+                <a href="#services">Services</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+              <li>
+                <a href="#faq">FAQ</a>
+              </li>
             </ul>
           </div>
           <div class="footer-section contact">
             <h2>Contact Us</h2>
             <ul>
               <li>
-                <a href="mailto:info@sportswear.com">sunriseAirline@gmail.com</a>
+                <a href="mailto:info@sportswear.com">
+                  sunriseAirline@gmail.com
+                </a>
               </li>
-              <li><a href="#">0943894676</a></li>
+              <li>
+                <a href="#">0943894676</a>
+              </li>
               <li>144 Xuân Thủy, Cầu Giấy, Hà nội , Việt Nam</li>
             </ul>
           </div>
@@ -369,4 +440,3 @@ const Landingpage = () => {
 };
 
 export default Landingpage;
-

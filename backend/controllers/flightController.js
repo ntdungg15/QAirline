@@ -52,7 +52,29 @@ const flightController = {
     }
   },
 
-  
+  // Xóa chuyến bay (chỉ admin)
+  deleteFlight: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      // Kiểm tra xem chuyến bay có tồn tại không trước khi xóa
+      const flightDoc = await db.collection("flights").doc(id).get();
+      if (!flightDoc.exists) {
+        return res.status(404).json({ error: "Chuyến bay không tồn tại" });
+      }
+
+      // Xóa chuyến bay
+      await db.collection("flights").doc(id).delete();
+
+      res.json({
+        message: "Chuyến bay đã được xóa thành công",
+        id,
+      });
+    } catch (error) {
+      console.error("Error in deleteFlight:", error);
+      res.status(500).json({ error: error.message });
+    }
+  },
 };
 
 export default flightController;

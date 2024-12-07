@@ -56,6 +56,7 @@ const Login = () => {
 
         // Lấy thông tin user và role
         const user = await authService.getCurrentUser();
+        localStorage.setItem("user", JSON.stringify(user)); // Lưu thông tin người dùng
         const role = await authService.getUserRole(user.uid);
 
         // Chuyển hướng dựa trên role
@@ -66,6 +67,10 @@ const Login = () => {
         } else {
           setError("Role không hợp lệ");
         }
+        localStorage.setItem(
+          "currentPath",
+          role === "admin" ? "/admin-dashboard" : "/user-dashboard"
+        );
       }
     } catch (error) {
       console.error("Lỗi:", error.message);

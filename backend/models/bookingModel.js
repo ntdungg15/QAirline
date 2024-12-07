@@ -1,4 +1,4 @@
-// backend/src/models/bookingModel.js
+//backend/src/models/bookingModel.js
 class Booking {
   constructor(data) {
     this.id = data.id;
