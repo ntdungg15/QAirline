@@ -288,7 +288,7 @@ body {
   transform: translateX(200%);
 }
 
-button {
+.button-login {
   background: var(--button-gradient);
   color: #fff;
   font-size: 1em;
@@ -301,13 +301,13 @@ button {
   overflow: hidden;
 }
 
-button:hover {
+.button-login:hover {
   /* transform: translateY(-3px); */
   box-shadow: 0 10px 20px rgba(0, 179, 255, 0.3);
   animation: pulse 1.5s infinite;
 }
 
-input {
+.input-login {
   width: 100%;
   padding: 15px;
   border-radius: 15px;
@@ -319,7 +319,7 @@ input {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-input:focus {
+.input-login:focus {
   border-color: var(--primary-color);
   background-color: #fff;
   box-shadow: 0 0 20px rgba(0, 179, 255, 0.2);
@@ -331,4 +331,9 @@ input:focus {
   font-size: 14px;
   margin: 10px 0;
   text-align: center;
+}
+
+/*text under welcom*/
+.abc {
+  color: #000000;
 }

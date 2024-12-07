@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // Đảm bảo đã cài đặt axios
 import "../css/adminDashboard.css";
 import { authService } from "../../services/auth";
+import AdminInfo from "../../admin/js/post_information";
+import "../../admin/css/post_information.css";
 
 const AdminDashboard = () => {
   const [flights, setFlights] = useState([]);
@@ -139,112 +141,177 @@ const AdminDashboard = () => {
     setEditingFlightId(flight.id);
   };
 
+  // Phần UI
+  const [activeTab, setActiveTab] = useState("flight");
+  const handleTabClick = (tab) => {
+    setActiveTab(tab); // Cập nhật tab hiện tại
+    console.log(`Tab selected: ${tab}`);
+
+  };
+
+
   return (
     <div className="admin-dashboard">
-      <h1>Quản Lý Chuyến Bay</h1>
+      <div className="admin-container">
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            name="flightNumber"
-            placeholder="Mã chuyến bay"
-            value={flightData.flightNumber}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="from"
-            placeholder="Điểm đi"
-            value={flightData.from}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="to"
-            placeholder="Điểm đến"
-            value={flightData.to}
-            onChange={handleChange}
-            required
-          />
+        <div className="admin-sidebar">
+          <div className="gradient-text">
+            <span>AdminDashboard</span><br />
+            <span>SunriseAirline</span>
+          </div>
+
+          <button
+            className={`admin-tab ${activeTab === "flight" ? "active" : ""}`}
+            onClick={() => handleTabClick("post-information")}
+          >
+            Đăng thông tin
+          </button>
+
+          <button
+            className={`admin-tab ${activeTab === "admin-data-flight" ? "active" : ""}`}
+            onClick={() => handleTabClick("admin-data-flight")}
+          >
+            Dữ liệu chuyến bay
+          </button>
+
+          <button
+            className={`admin-tab ${activeTab === "plane-data" ? "active" : ""}`}
+            onClick={() => handleTabClick("plane-data")}
+          >
+            Dữ liệu máy bay
+          </button>
+
+          <button
+            className={`admin-tab ${activeTab === "statistics" ? "active" : ""}`}
+            onClick={() => handleTabClick("statistics")}
+          >
+            Thống kê
+          </button>
+
+          <button
+            className={`admin-tab ${activeTab === "change-time" ? "active" : ""}`}
+            onClick={() => handleTabClick("change-time")}
+          >
+            Giờ khởi hành
+          </button>
         </div>
 
-        <div className="form-group">
-          <input
-            type="datetime-local"
-            name="departureTime"
-            value={flightData.departureTime}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="datetime-local"
-            name="arrivalTime"
-            value={flightData.arrivalTime}
-            onChange={handleChange}
-            required
-          />
+        <div className="admin-menu" >
+          {activeTab === "admin-data-flight" && (
+            <div className="admin-data">
+              <h1>Quản Lý Chuyến Bay</h1>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="flightNumber"
+                    placeholder="Mã chuyến bay"
+                    value={flightData.flightNumber}
+                    onChange={handleChange}
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="from"
+                    placeholder="Điểm đi"
+                    value={flightData.from}
+                    onChange={handleChange}
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="to"
+                    placeholder="Điểm đến"
+                    value={flightData.to}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <input
+                    type="datetime-local"
+                    name="departureTime"
+                    value={flightData.departureTime}
+                    onChange={handleChange}
+                    required
+                  />
+                  <input
+                    type="datetime-local"
+                    name="arrivalTime"
+                    value={flightData.arrivalTime}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <input
+                    type="number"
+                    name="price"
+                    placeholder="Giá vé"
+                    value={flightData.price}
+                    onChange={handleChange}
+                    required
+                  />
+                  <input
+                    type="number"
+                    name="availableSeats"
+                    placeholder="Số ghế trống"
+                    value={flightData.availableSeats}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <button type="submit">
+                  {isEditing ? "Cập Nhật Chuyến Bay" : "Thêm Chuyến Bay"}
+                </button>
+              </form>
+
+              <div className="flights-list">
+                <h2>Danh Sách Chuyến Bay</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Mã Chuyến Bay</th>
+                      <th>Điểm Đi</th>
+                      <th>Điểm Đến</th>
+                      <th>Giờ Đi</th>
+                      <th>Giờ Đến</th>
+                      <th>Giá</th>
+                      <th>Ghế Trống</th>
+                      <th>Thao Tác</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {flights.map((flight) => (
+                      <tr key={flight.id}>
+                        <td>{flight.flightNumber}</td>
+                        <td>{flight.from}</td>
+                        <td>{flight.to}</td>
+                        <td>{flight.departureTime}</td>
+                        <td>{flight.arrivalTime}</td>
+                        <td>{flight.price}</td>
+                        <td>{flight.availableSeats}</td>
+                        <td>
+                          <button onClick={() => handleEdit(flight)}>Sửa</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          )}
+
+          {activeTab === "post-information" && <AdminInfo />}
+
         </div>
 
-        <div className="form-group">
-          <input
-            type="number"
-            name="price"
-            placeholder="Giá vé"
-            value={flightData.price}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="number"
-            name="availableSeats"
-            placeholder="Số ghế trống"
-            value={flightData.availableSeats}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit">
-          {isEditing ? "Cập Nhật Chuyến Bay" : "Thêm Chuyến Bay"}
-        </button>
-      </form>
-
-      <div className="flights-list">
-        <h2>Danh Sách Chuyến Bay</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Mã Chuyến Bay</th>
-              <th>Điểm Đi</th>
-              <th>Điểm Đến</th>
-              <th>Giờ Đi</th>
-              <th>Giờ Đến</th>
-              <th>Giá</th>
-              <th>Ghế Trống</th>
-              <th>Thao Tác</th>
-            </tr>
-          </thead>
-          <tbody>
-            {flights.map((flight) => (
-              <tr key={flight.id}>
-                <td>{flight.flightNumber}</td>
-                <td>{flight.from}</td>
-                <td>{flight.to}</td>
-                <td>{flight.departureTime}</td>
-                <td>{flight.arrivalTime}</td>
-                <td>{flight.price}</td>
-                <td>{flight.availableSeats}</td>
-                <td>
-                  <button onClick={() => handleEdit(flight)}>Sửa</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
+
     </div>
   );
 };

@@ -116,28 +116,28 @@ const Login = () => {
               </a>
             </div>
             <span>or use your email for registration</span>
-            <input
+            <input className="input-login" 
               type="text"
               name="name"
               placeholder="Name"
               value={formData.name}
               onChange={handleChange}
             />
-            <input
+            <input className="input-login"
               type="email"
               name="email"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
             />
-            <input
+            <input className="input-login" 
               type="password"
               name="password"
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
             />
-            <button type="submit">Sign Up</button>
+            <button className="button-login" type="submit">Sign Up</button>
           </form>
         </div>
         <div className="form-container sign-in">
@@ -159,14 +159,14 @@ const Login = () => {
               </a>
             </div>
             <span>or use your email password</span>
-            <input
+            <input className="input-login"
               type="email"
               name="email"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
             />
-            <input
+            <input className="input-login"
               type="password"
               name="password"
               placeholder="Password"
@@ -174,24 +174,24 @@ const Login = () => {
               onChange={handleChange}
             />
             <a href="#">Forget Your Password?</a>
-            <button type="submit">Sign In</button>
+            <button className="button-login" type="submit">Sign In</button>
           </form>
         </div>
         <div className="toggle-container">
           <div className="toggle">
             <div className="toggle-panel toggle-left">
               <h1>Welcome Back!</h1>
-              <p>Enter your personal details to use all of site features</p>
-              <button className="hidden" onClick={toggleMode}>
+              <p className="abc">Enter your personal details to use all of site features</p>
+              <button className="button-login" onClick={toggleMode}>
                 Sign In
               </button>
             </div>
             <div className="toggle-panel toggle-right">
               <h1>Welcome Sunrise Airlines!</h1>
-              <p>
+              <p className="abc">
                 Register with your personal details to use all of site features
               </p>
-              <button className="hidden" onClick={toggleMode}>
+              <button className="button-login" onClick={toggleMode}>
                 Sign Up
               </button>
             </div>
