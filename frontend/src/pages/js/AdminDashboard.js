@@ -3,6 +3,7 @@ import axios from "axios"; // Đảm bảo đã cài đặt axios
 import "../css/adminDashboard.css";
 import { authService } from "../../services/auth";
 import AdminInfo from "../../admin/js/post_information";
+import AdminPlane from "../../admin/js/plane";
 import "../../admin/css/post_information.css";
 
 const AdminDashboard = () => {
@@ -161,7 +162,7 @@ const AdminDashboard = () => {
           </div>
 
           <button
-            className={`admin-tab ${activeTab === "flight" ? "active" : ""}`}
+            className={`admin-tab ${activeTab === "post-information" ? "active" : ""}`}
             onClick={() => handleTabClick("post-information")}
           >
             Đăng thông tin
@@ -307,6 +308,9 @@ const AdminDashboard = () => {
           )}
 
           {activeTab === "post-information" && <AdminInfo />}
+          {activeTab === "plane-data" && <AdminPlane />}
+          {activeTab === "statistics" && <AdminInfo />}
+          {activeTab === "change-time" && <AdminInfo />}
 
         </div>
 
