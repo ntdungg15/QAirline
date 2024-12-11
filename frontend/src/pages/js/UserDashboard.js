@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios"; // Đảm bảo đã cài đặt axios
 import { Helmet } from "react-helmet";
 import videoFile from "../img/backairport.mp4";
 import logo from "../img/pngwing.com.png";
@@ -15,6 +16,9 @@ import {
 } from "../../components/js/locationComponent";
 import { authService } from "../../services/auth.js";
 
+import { db } from "../../config/firebase"; // Kết nối Firebase
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+
 const Landingpage = () => {
   const navigate = useNavigate();
   // Đăng xuất
@@ -27,6 +31,7 @@ const Landingpage = () => {
     }
   };
 
+
   const handleflightClick = () => {
     // window.location.href = '/login';
   };
@@ -34,6 +39,21 @@ const Landingpage = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab); // Cập nhật tab hiện tại
   };
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const fetchedPosts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPosts(fetchedPosts);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const [videoOffset, setVideoOffset] = useState(0);
 
@@ -70,6 +90,16 @@ const Landingpage = () => {
       {/* Nội dung */}
       <div className="landingpage-landingpage">
         <div className="post-infor">
+          <h1>Thông Tin Từ Admin</h1>
+          <div className="posts-container">
+            {posts.map((post) => (
+              <div key={post.id} className="post">
+                <img src={post.imageUrl} alt="Bài đăng" />
+                <p>{post.description}</p>
+                <small>{new Date(post.createdAt?.seconds * 1000).toLocaleString()}</small>
+              </div>
+            ))}
+          </div>
           <div className="post-image"></div>
           <div className="navbar">
             <div className="logo">
