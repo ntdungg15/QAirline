@@ -7,8 +7,10 @@ import flightRoutes from "./routes/flightRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import postRoutes from "./routes/postRoutes.js"; 
 
-dotenv.config(); 
+import connectDB from "./database/db.js"; 
 
+dotenv.config(); 
+connectDB();
 const app = express();
 
 // Middleware
@@ -39,3 +41,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+process.setMaxListeners(15);
