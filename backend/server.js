@@ -1,17 +1,41 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { admin, db, auth, storage } from "./config/firebase.js";
-
+import { admin, db, auth, storage as firebaseStorage } from "./config/firebase.js"; // Đổi tên biến storage thành firebaseStorage
 import flightRoutes from "./routes/flightRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
-import postRoutes from "./routes/postRoutes.js"; 
-
-import connectDB from "./database/db.js"; 
+import connectDB from "./config/db.js"; 
+import postRoutes from "./routes/postRoutes.js"; // Đổi require thành import
+import multer from 'multer';
+import path from 'path'; // Đừng quên import path nếu bạn sử dụng path.extname
 
 dotenv.config(); 
 connectDB();
 const app = express();
+
+// Cấu hình multer để lưu trữ ảnh
+const multerStorage = multer.diskStorage({ // Đổi tên thành multerStorage
+  destination: (req, file, cb) => {
+    cb(null, './uploads'); // Lưu ảnh vào thư mục 'uploads'
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Đặt tên tệp là thời gian hiện tại + đuôi mở rộng của ảnh
+  }
+});
+
+// Tạo instance multer với cấu hình multerStorage
+const upload = multer({ storage: multerStorage });
+
+// Route cho upload ảnh
+app.post('/upload', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+  }
+  res.status(200).json({
+    message: 'Image uploaded successfully',
+    imageUrl: `/uploads/${req.file.filename}`, // Đường dẫn ảnh để lưu vào cơ sở dữ liệu
+  });
+});
 
 // Middleware
 app.use(
@@ -23,23 +47,19 @@ app.use(
 );
 app.use(express.json()); 
 
-
-app.use("/uploads", express.static("uploads")); 
-
 // Routes
 app.use("/api", flightRoutes);
 app.use("/api", bookingRoutes);
-app.use("/api/posts", postRoutes); 
-
+app.use("/api/posts", postRoutes);
+app.use('/upload', upload.single('image'));
 
 app.get("/test", (req, res) => {
   res.json({ message: "Backend is working!" });
 });
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-process.setMaxListeners(15);
+process.setMaxListeners(20);

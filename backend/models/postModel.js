@@ -10,4 +10,4 @@ const PostSchema = new mongoose.Schema(
 
 const Post = mongoose.model("Post", PostSchema);
 
-export default Post; // Xuất đối tượng Post dưới dạng mặc định
+export default Post; 

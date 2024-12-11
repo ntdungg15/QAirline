@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Đảm bảo đã cài đặt axios
 import { Helmet } from "react-helmet";
 import videoFile from "../img/backairport.mp4";
 import logo from "../img/pngwing.com.png";
@@ -16,9 +15,6 @@ import {
 } from "../../components/js/locationComponent";
 import { authService } from "../../services/auth.js";
 
-import { db } from "../../config/firebase"; // Kết nối Firebase
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-
 const Landingpage = () => {
   const navigate = useNavigate();
   // Đăng xuất
@@ -31,7 +27,6 @@ const Landingpage = () => {
     }
   };
 
-
   const handleflightClick = () => {
     // window.location.href = '/login';
   };
@@ -39,21 +34,6 @@ const Landingpage = () => {
   const handleTabClick = (tab) => {
     setActiveTab(tab); // Cập nhật tab hiện tại
   };
-
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const fetchedPosts = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setPosts(fetchedPosts);
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const [videoOffset, setVideoOffset] = useState(0);
 
@@ -67,6 +47,25 @@ const Landingpage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+
+  //test đăng thông tin
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/posts");
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <div className="landingpage-container">
       <Helmet>
@@ -74,32 +73,20 @@ const Landingpage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Helmet>
 
-      {/* Video nền */}
-      {/* <div
-        className="background-video"
-        style={{
-          transform: `translateY(-${videoOffset}px)`,
-        }}
-      >
-        <video autoPlay loop muted playsInline>
-          <source src={videoFile} type="video/mp4" />
-        </video>
-
-      </div> */}
-
       {/* Nội dung */}
+      <div>
+        <h1>User Dashboard</h1>
+        <div>
+          {posts.map((post) => (
+            <div key={post._id} style={{ marginBottom: "20px" }}>
+              <img src={post.imageUrl} alt="Post" style={{ width: "100%", maxHeight: "300px" }} />
+              <p>{post.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
       <div className="landingpage-landingpage">
         <div className="post-infor">
-          <h1>Thông Tin Từ Admin</h1>
-          <div className="posts-container">
-            {posts.map((post) => (
-              <div key={post.id} className="post">
-                <img src={post.imageUrl} alt="Bài đăng" />
-                <p>{post.description}</p>
-                <small>{new Date(post.createdAt?.seconds * 1000).toLocaleString()}</small>
-              </div>
-            ))}
-          </div>
           <div className="post-image"></div>
           <div className="navbar">
             <div className="logo">
@@ -465,6 +452,7 @@ const Landingpage = () => {
         </div>
         <div class="footer-bottom">&copy; 2024 | SunriseAirline</div>
       </footer>
+
     </div>
   );
 };

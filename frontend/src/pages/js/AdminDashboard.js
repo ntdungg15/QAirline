@@ -5,11 +5,6 @@ import { authService } from "../../services/auth";
 import AdminInfo from "../../admin/js/post_information";
 import AdminPlane from "../../admin/js/plane";
 import "../../admin/css/post_information.css";
-import { storage } from "../../config/firebase";
-
-import { db } from "../../config/firebase"; // Kết nối Firebase
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const AdminDashboard = () => {
   const [flights, setFlights] = useState([]);
@@ -85,16 +80,7 @@ const AdminDashboard = () => {
         arrivalTime: new Date(flightData.arrivalTime),
       };
 
-      // if (isEditing) {
-      //   // Cập nhật chuyến bay
-      //   await axios.put(
-      //     `http://localhost:3000/api/flights/${editingFlightId}`,
-      //     submitData
-      //   );
-      // } else {
-      //   // Thêm chuyến bay mới
-      //   await axios.post("http://localhost:3000/api/flights", submitData);
-      // }
+
 
       // Gửi request với token
       const response = await axios.post(
@@ -154,71 +140,14 @@ const AdminDashboard = () => {
     console.log(`Tab selected: ${tab}`);
 
   };
-  // đăng thông tin
-  const [image, setImage] = useState(null);
-  const [description, setDescription] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
 
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
-
-  const handleSubmitPost = async (e) => {
-    e.preventDefault();
-
-    if (!image || !description) {
-      alert("Vui lòng nhập đầy đủ thông tin và chọn ảnh.");
-      return;
-    }
-
-    setIsUploading(true);
-    try {
-      // Upload image to Firebase Storage
-      const storageRef = ref(storage, `posts/${image.name}`);
-      await uploadBytes(storageRef, image);
-      const imageUrl = await getDownloadURL(storageRef);
-
-      // Save post data to Firestore
-      await addDoc(collection(db, "posts"), {
-        imageUrl,
-        description,
-        createdAt: serverTimestamp(),
-      });
-
-      alert("Đăng bài thành công!");
-      setImage(null);
-      setDescription("");
-    } catch (error) {
-      console.error("Error uploading post:", error);
-    } finally {
-      setIsUploading(false);
-    }
-  };
 
   return (
+
+
+
     <div className="admin-dashboard">
       <div className="admin-container">
-
-        <h1>Quản Lý Đăng Thông Tin</h1>
-        <form onSubmit={handleSubmitPost}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            required
-          />
-          <textarea
-            placeholder="Nhập mô tả bài đăng..."
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          ></textarea>
-          <button type="submit" disabled={isUploading}>
-            {isUploading ? "Đang đăng..." : "Đăng bài"}
-          </button>
-        </form>
 
         <div className="admin-sidebar">
           <div className="gradient-text">
