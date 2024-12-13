@@ -41,7 +41,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
 app.use(
   cors({
     origin: "http://localhost:5000", 
-    methods: ["GET", "POST", "PUT"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -51,7 +51,7 @@ app.use(express.json());
 app.use("/api", flightRoutes);
 app.use("/api", bookingRoutes);
 app.use("/api/posts", postRoutes);
-app.use('/upload', upload.single('image'));
+// app.use('/upload', upload.single('image'));
 
 app.get("/test", (req, res) => {
   res.json({ message: "Backend is working!" });
