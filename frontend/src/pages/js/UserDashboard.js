@@ -51,7 +51,9 @@ const Landingpage = () => {
 
   //test đăng thông tin
   const [posts, setPosts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Fetch bài đăng
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -64,7 +66,14 @@ const Landingpage = () => {
     };
 
     fetchPosts();
-  }, []);
+
+    // Cập nhật ảnh hiển thị mỗi 3 giây
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
+    }, 3000);
+
+    return () => clearInterval(interval); // Clean up khi component bị hủy
+  }, [posts.length]);
 
   return (
     <div className="landingpage-container">
@@ -74,20 +83,22 @@ const Landingpage = () => {
       </Helmet>
 
       {/* Nội dung */}
-      <div>
-        <h1>User Dashboard</h1>
-        <div>
-          {posts.map((post) => (
-            <div key={post._id} style={{ marginBottom: "20px" }}>
-              <img src={post.imageUrl} alt="Post" style={{ width: "100%", maxHeight: "300px" }} />
-              <p>{post.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+
       <div className="landingpage-landingpage">
         <div className="post-infor">
-          <div className="post-image"></div>
+
+          <div className="post-image">
+            <div className="post-image-container">
+              {posts.map((post, index) => (
+                <div key={post._id} className="post-item">
+                  <img className={index === currentIndex ? "active" : ""} 
+                  src={post.imageUrl} alt="Post" />
+                  <p className="post-description">{post.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="navbar">
             <div className="logo">
               <div>
