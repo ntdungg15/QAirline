@@ -66,14 +66,18 @@ const Landingpage = () => {
     };
 
     fetchPosts();
+  }, []);
 
-    // Cập nhật ảnh hiển thị mỗi 3 giây
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
-    }, 3000);
+  // Cập nhật ảnh hiển thị mỗi 3 giây
+  useEffect(() => {
+    if (posts.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
+      }, 3000);
 
-    return () => clearInterval(interval); // Clean up khi component bị hủy
-  }, [posts.length]);
+      return () => clearInterval(interval); // Clean up khi component bị hủy
+    }
+  }, [posts]);
 
   return (
     <div className="landingpage-container">
@@ -85,19 +89,8 @@ const Landingpage = () => {
       {/* Nội dung */}
 
       <div className="landingpage-landingpage">
-        <div className="post-infor">
 
-          <div className="post-image">
-            <div className="post-image-sales">
-              {posts.map((post, index) => (
-                <div key={post._id} className="post-item-img">
-                  <img className={index === currentIndex ? "active" : ""} 
-                  src={post.imageUrl} alt="Post" />
-                  <p className="post-description">{post.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="post-infor">
 
           <div className="navbar">
             <div className="logo">
@@ -145,10 +138,22 @@ const Landingpage = () => {
             </div>
           </div>
 
+          <div className="post-image">
+            {posts.map((post, index) => (
+              <div
+                key={post._id}
+                className={`post-item-img ${index === currentIndex ? "active" : ""
+                  }`}
+              >
+                <img src={post.imageUrl} alt="Post" />
+                <p className="post-description">{post.description}</p>
+              </div>
+            ))}
+          </div>
+
           <div className="post-button">
             <button className="post-button-detail">Chi tiết</button>
           </div>
-
           <div className="flight-booking-container">
             <div className="tabs">
               <button className="tab" onClick={() => handleTabClick("flight")}>
@@ -321,86 +326,93 @@ const Landingpage = () => {
             </div>
           </div>
         </div>
+
+
+
+        <div className="place-list">
+          {/* Place */}
+          <div className="heading">
+            <p>Những điểm đến hấp dẫn</p>
+          </div>
+          {/* Place image */}
+          <div className="place">
+            {/* Place image 1 */}
+            <div className="place-image">
+              <a href="#">
+                <img
+                  className="img-big"
+                  src="https://travel.usnews.com/dims4/USNEWS/abd9e30/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FMaldives-GettyImages-graphixel_mxYIcpF.jpg"
+                  alt="Beautiful Place"
+                />
+                <span>Maldives</span>
+              </a>
+              <button className="book-button">Đặt vé</button>
+            </div>
+            {/* Place image 2 */}
+            <div className="place-image">
+              <a href="#">
+                <img
+                  className="img-small"
+                  src="https://travel.usnews.com/dims4/USNEWS/4ef5ab1/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2Fmain_image_2017_getty_resized_445x280_lr3LLEU.jpg"
+                  alt="Beautiful Place"
+                />
+                <span>Phuket</span>
+              </a>
+              <button className="book-button">Đặt vé</button>
+            </div>
+            {/* Place image 3 */}
+            <div className="place-image">
+              <a href="#">
+                <img
+                  className="img-small"
+                  src="https://travel.usnews.com/dims4/USNEWS/a600cb2/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2Ftahiti_main_getty_samantha_t_photography_edited_445x280_v43QKbF.jpg"
+                  alt="Beautiful Place"
+                />
+                <span>Tahiti</span>
+              </a>
+              <button className="book-button">Đặt vé</button>
+            </div>
+            {/* Place image 4 */}
+            <div className="place-image">
+              <a href="#">
+                <img
+                  className="img-big"
+                  src="https://travel.usnews.com/dims4/USNEWS/d534628/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FTokyo-GettyImages-Jackyenjoyphotography_vj34vhs.jpg"
+                  alt="Beautiful Place"
+                />
+                <span>Tokyo</span>
+              </a>
+              <button className="book-button">Đặt vé</button>
+            </div>
+            {/* Place image 5 */}
+            <div className="place-image">
+              <a href="#">
+                <img
+                  className="img-small"
+                  src="https://travel.usnews.com/dims4/USNEWS/155aaa2/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FGeorge_PachantourisCity-center-square-buildings-flowers-sky-sunset.jpg"
+                  alt="Beautiful Place"
+                />
+                <span>Amsterdam</span>
+              </a>
+              <button className="book-button">Đặt vé</button>
+            </div>
+            {/* Place image 6 */}
+            <div className="place-image">
+              <a href="#">
+                <img
+                  className="img-small"
+                  src="https://travel.usnews.com/dims4/USNEWS/8c65c6b/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FParc_Guell_Gatsi_Getty.jpg"
+                />
+                <span>Barcelona</span>
+              </a>
+              <button className="book-button">Đặt vé</button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      {/* Place */}
-      <div className="heading">
-        <p>Những điểm đến hấp dẫn</p>
-      </div>
-      {/* Place image */}
-      <div className="place">
-        {/* Place image 1 */}
-        <div className="place-image">
-          <a href="#">
-            <img
-              className="img-big"
-              src="https://travel.usnews.com/dims4/USNEWS/abd9e30/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FMaldives-GettyImages-graphixel_mxYIcpF.jpg"
-              alt="Beautiful Place"
-            />
-            <span>Maldives</span>
-          </a>
-          <button className="book-button">Đặt vé</button>
-        </div>
-        {/* Place image 2 */}
-        <div className="place-image">
-          <a href="#">
-            <img
-              className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/4ef5ab1/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2Fmain_image_2017_getty_resized_445x280_lr3LLEU.jpg"
-              alt="Beautiful Place"
-            />
-            <span>Phuket</span>
-          </a>
-          <button className="book-button">Đặt vé</button>
-        </div>
-        {/* Place image 3 */}
-        <div className="place-image">
-          <a href="#">
-            <img
-              className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/a600cb2/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2Ftahiti_main_getty_samantha_t_photography_edited_445x280_v43QKbF.jpg"
-              alt="Beautiful Place"
-            />
-            <span>Tahiti</span>
-          </a>
-          <button className="book-button">Đặt vé</button>
-        </div>
-        {/* Place image 4 */}
-        <div className="place-image">
-          <a href="#">
-            <img
-              className="img-big"
-              src="https://travel.usnews.com/dims4/USNEWS/d534628/2147483647/resize/445x280%5E%3E/crop/445x280/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FTokyo-GettyImages-Jackyenjoyphotography_vj34vhs.jpg"
-              alt="Beautiful Place"
-            />
-            <span>Tokyo</span>
-          </a>
-          <button className="book-button">Đặt vé</button>
-        </div>
-        {/* Place image 5 */}
-        <div className="place-image">
-          <a href="#">
-            <img
-              className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/155aaa2/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FGeorge_PachantourisCity-center-square-buildings-flowers-sky-sunset.jpg"
-              alt="Beautiful Place"
-            />
-            <span>Amsterdam</span>
-          </a>
-          <button className="book-button">Đặt vé</button>
-        </div>
-        {/* Place image 6 */}
-        <div className="place-image">
-          <a href="#">
-            <img
-              className="img-small"
-              src="https://travel.usnews.com/dims4/USNEWS/8c65c6b/2147483647/resize/976x652%5E%3E/crop/976x652/quality/85/?url=https%3A%2F%2Ftravel.usnews.com%2Fimages%2FParc_Guell_Gatsi_Getty.jpg"
-            />
-            <span>Barcelona</span>
-          </a>
-          <button className="book-button">Đặt vé</button>
-        </div>
-      </div>
+
 
       <footer>
         <div className="email">
