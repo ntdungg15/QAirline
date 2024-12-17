@@ -88,9 +88,9 @@ const Landingpage = () => {
         <div className="post-infor">
 
           <div className="post-image">
-            <div className="post-image-container">
+            <div className="post-image-sales">
               {posts.map((post, index) => (
-                <div key={post._id} className="post-item">
+                <div key={post._id} className="post-item-img">
                   <img className={index === currentIndex ? "active" : ""} 
                   src={post.imageUrl} alt="Post" />
                   <p className="post-description">{post.description}</p>
