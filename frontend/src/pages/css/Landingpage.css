@@ -86,7 +86,7 @@ body {
 }
 
 .post-infor {
-  block-size: 90vh;
+  block-size: auto;
   inline-size: 100vw;
   overflow: hidden;
   position: relative;
@@ -245,7 +245,6 @@ p {
 .discount-code a:hover {
   text-decoration: underline;
 }
-
 
 
 /* service*/
