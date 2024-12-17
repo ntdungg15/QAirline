@@ -1,11 +1,12 @@
 .flight-booking-container {
-    z-index: 2; 
     background: linear-gradient(to top right, #7ca1e2, #d3b8f0);
     padding: 30px;
     border-radius: 12px;
     width: 75vw;
-    margin-top: 3vh;
+    margin-top: 70vh;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 1;
 }
 
 .tabs {
@@ -87,11 +88,11 @@
 
 .date-passenger-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 35px;
     align-items: flex-start;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .date-fields {
@@ -110,7 +111,7 @@
 .discount-search-container {
     width: calc(40%);
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 20px;
     align-items: center;
 
