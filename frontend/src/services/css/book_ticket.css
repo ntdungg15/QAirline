@@ -87,10 +87,11 @@
 
 .date-passenger-container {
     display: flex;
+    flex-direction: column;
     gap: 35px;
     align-items: flex-start;
     justify-content: space-between;
-
+    align-items: center;
 }
 
 .date-fields {
@@ -109,8 +110,8 @@
 .discount-search-container {
     width: calc(40%);
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    margin-left: 10%;
     align-items: center;
 
 }
@@ -165,3 +166,30 @@
 
     background-color: #7ca1e2;
 }
+
+@media (max-width: 768px) {
+    .date-passenger-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .discount-search-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .date-passenger-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .discount-search-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
