@@ -7,16 +7,40 @@ import "../css/Landingpage.css";
 import "../css/user.css";
 import "../css/footer.css";
 import "../../services/css/book_ticket.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useHistory } from "react-router-dom";
 import userImage from "../img/user.png";
-import {
-  useLocationSearch,
-  LocationDropdown,
-} from "../../components/js/locationComponent";
+import { LocationInput } from "../../components/js/locationComponent.js";
 import { authService } from "../../services/auth.js";
 
 const Landingpage = () => {
   const navigate = useNavigate();
+  // const [fromLocation, setFromLocation] = React.useState("");
+  // const [toLocation, setToLocation] = React.useState("");
+  const [locations, setLocations] = useState({
+    fromLocation: "",
+    toLocation: "",
+  });
+
+  const handleFromLocationSelect = (location) => {
+    setLocations((prevLocations) => ({
+      ...prevLocations,
+      fromLocation: location,
+    }));
+  };
+
+  const handleToLocationSelect = (location) => {
+    setLocations((prevLocations) => ({
+      ...prevLocations,
+      toLocation: location,
+    }));
+  };
+  const handleSearchFlights = () => {
+    const { fromLocation, toLocation } = locations;
+    const url = `/flights?from=${fromLocation}&to=${toLocation}`;
+    // Mở URL trong tab mới
+    window.open(url, "_blank");
+  };
+
   // Đăng xuất
   const handleLogout = async () => {
     try {
@@ -47,7 +71,6 @@ const Landingpage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
 
   //test đăng thông tin
   const [posts, setPosts] = useState([]);
@@ -86,13 +109,15 @@ const Landingpage = () => {
 
       <div className="landingpage-landingpage">
         <div className="post-infor">
-
           <div className="post-image">
             <div className="post-image-container">
               {posts.map((post, index) => (
                 <div key={post._id} className="post-item">
-                  <img className={index === currentIndex ? "active" : ""} 
-                  src={post.imageUrl} alt="Post" />
+                  <img
+                    className={index === currentIndex ? "active" : ""}
+                    src={post.imageUrl}
+                    alt="Post"
+                  />
                   <p className="post-description">{post.description}</p>
                 </div>
               ))}
@@ -199,12 +224,19 @@ const Landingpage = () => {
               {activeTab === "flight" && (
                 <div className="aa">
                   <div className="location-fields">
-                    <input type="text" placeholder="Từ" id="fromLocation" />
-
-                    <span className="swap-icon" id="swapIcon">
-                      ⇆
-                    </span>
-                    <input type="text" placeholder="Đến" id="toLocation" />
+                    <LocationInput
+                      id="fromLocation"
+                      placeholder="Từ"
+                      onLocationSelect={handleFromLocationSelect}
+                      isFrom={true} // Đánh dấu đây là trường "Từ"
+                    />
+                    <span className="swap-icon">⇆</span>
+                    <LocationInput
+                      id="toLocation"
+                      placeholder="Đến"
+                      onLocationSelect={handleToLocationSelect}
+                      isFrom={false} // Đánh dấu đây là trường "Đến"
+                    />
                   </div>
                   <div className="bottom-book">
                     <div className="date-passenger-container">
@@ -236,7 +268,11 @@ const Landingpage = () => {
                             id="toLocation"
                           />
                         </div>
-                        <button className="search-button" id="searchButton">
+                        <button
+                          className="search-button"
+                          id="searchButton"
+                          onClick={handleSearchFlights}
+                        >
                           Tìm chuyến bay
                         </button>
                       </div>
@@ -463,7 +499,6 @@ const Landingpage = () => {
         </div>
         <div class="footer-bottom">&copy; 2024 | SunriseAirline</div>
       </footer>
-
     </div>
   );
 };
