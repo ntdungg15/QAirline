@@ -1,38 +1,45 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { admin, db, auth, storage as firebaseStorage } from "./config/firebase.js"; // Đổi tên biến storage thành firebaseStorage
+import {
+  admin,
+  db,
+  auth,
+  storage as firebaseStorage,
+} from "./config/firebase.js"; // Đổi tên biến storage thành firebaseStorage
 import flightRoutes from "./routes/flightRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
-import connectDB from "./config/db.js"; 
+import aircraftRoutes from "./routes/aircraftRoutes.js";
+import connectDB from "./config/db.js";
 import postRoutes from "./routes/postRoutes.js"; // Đổi require thành import
-import multer from 'multer';
-import path from 'path'; // Đừng quên import path nếu bạn sử dụng path.extname
+import multer from "multer";
+import path from "path"; // Đừng quên import path nếu bạn sử dụng path.extname
 
-dotenv.config(); 
+dotenv.config();
 connectDB();
 const app = express();
 
 // Cấu hình multer để lưu trữ ảnh
-const multerStorage = multer.diskStorage({ // Đổi tên thành multerStorage
+const multerStorage = multer.diskStorage({
+  // Đổi tên thành multerStorage
   destination: (req, file, cb) => {
-    cb(null, './uploads'); // Lưu ảnh vào thư mục 'uploads'
+    cb(null, "./uploads"); // Lưu ảnh vào thư mục 'uploads'
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname)); // Đặt tên tệp là thời gian hiện tại + đuôi mở rộng của ảnh
-  }
+  },
 });
 
 // Tạo instance multer với cấu hình multerStorage
 const upload = multer({ storage: multerStorage });
 
 // Route cho upload ảnh
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post("/upload", upload.single("image"), (req, res) => {
   if (!req.file) {
-    return res.status(400).send('No file uploaded.');
+    return res.status(400).send("No file uploaded.");
   }
   res.status(200).json({
-    message: 'Image uploaded successfully',
+    message: "Image uploaded successfully",
     imageUrl: `/uploads/${req.file.filename}`, // Đường dẫn ảnh để lưu vào cơ sở dữ liệu
   });
 });
@@ -40,17 +47,18 @@ app.post('/upload', upload.single('image'), (req, res) => {
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5000", 
+    origin: "http://localhost:5000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
-app.use(express.json()); 
+app.use(express.json());
 
 // Routes
 app.use("/api", flightRoutes);
 app.use("/api", bookingRoutes);
 app.use("/api/posts", postRoutes);
+app.use("/api", aircraftRoutes);
 // app.use('/upload', upload.single('image'));
 
 app.get("/test", (req, res) => {

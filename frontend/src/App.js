@@ -11,6 +11,7 @@ import Landingpage from "./pages/js/Landingpage";
 import AdminDashboard from "./pages/js/AdminDashboard";
 import UserDashboard from "./pages/js/UserDashboard";
 import FlightResults from "./components/js/FlightResults";
+import BookTicket from "./pages/js/BookTicket";
 
 import { authService } from "./services/auth";
 // import Register from './components/js/register';
@@ -28,7 +29,7 @@ const App = () => {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/user-dashboard" element={<UserDashboard />} />
           <Route path="/flights" element={<FlightResults />} />{" "}
-          {/* Route cho FlightResults */}
+          <Route path="/book-ticket" element={<BookTicket />} />
           {/* Redirect to saved path or home */}
           <Route path="*" element={<Navigate to={savedPath} replace />} />
         </Routes>
