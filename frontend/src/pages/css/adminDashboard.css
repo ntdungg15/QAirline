@@ -24,7 +24,7 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.admin-sidebar div {
+.gradient-text {
   background: linear-gradient(135deg, #c9ffbf, #ffafbd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import "../css/FlightResults.css";
 
 const FlightResults = () => {
   const location = useLocation();
@@ -16,7 +17,7 @@ const FlightResults = () => {
     const fetchFlights = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/flights");
-        setFlights(response.data); // Lưu tất cả dữ liệu chuyến bay vào state
+        setFlights(response.data);
       } catch (error) {
         console.error("Error fetching flights:", error);
         setError("Đã xảy ra lỗi khi tìm kiếm chuyến bay.");
@@ -29,39 +30,158 @@ const FlightResults = () => {
   }, []);
 
   useEffect(() => {
-    // Lọc chuyến bay dựa trên fromLocation và toLocation
     const filtered = flights.filter(
       (flight) => flight.from === fromLocation && flight.to === toLocation
     );
-    setFilteredFlights(filtered); // Cập nhật state với chuyến bay đã lọc
-  }, [flights, fromLocation, toLocation]); // Chạy lại khi flights, fromLocation hoặc toLocation thay đổi
+    setFilteredFlights(filtered);
+  }, [flights, fromLocation, toLocation]);
 
   if (loading) {
-    return <div>Đang tải...</div>; // Hiển thị thông báo tải
+    return <div className="loading">Đang tải...</div>;
   }
 
   return (
-    <div>
-      <h1>
-        Chuyến bay từ {fromLocation} đến {toLocation}
-      </h1>
-      {error && <p>{error}</p>} {/* Hiển thị thông báo lỗi nếu có */}
+    <div className="flight-results-container">
+      <div className="header-booking">
+        <h1>
+          Chuyến bay từ {fromLocation} đến {toLocation}
+        </h1>
+      </div>
+
+      {error && <p className="error-message">{error}</p>}
       {filteredFlights.length > 0 ? (
-        <ul>
-          {filteredFlights.map((flight) => (
-            <li key={flight.id}>
-              <p>Mã chuyến bay: {flight.flightNumber}</p>
-              <p>Điểm đi: {flight.from}</p>
-              <p>Điểm đến: {flight.to}</p>
-              <p>Giờ đi: {flight.departureTime}</p>
-              <p>Giờ đến: {flight.arrivalTime}</p>
-              <p>Giá: {flight.price}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="flight-list-container">
+          <div className="flight-list">
+            {filteredFlights.map((flight) => (
+              <div key={flight.id} className="flight-card">
+                <div className="flight-info">
+                  <div className="flight-times">
+                    <div className="departure">
+                      <span className="time">{flight.departureTime}</span>
+                      <span className="code">{flight.from}</span>
+                      <span className="terminal">Sân bay {flight.from}</span>
+                    </div>
+
+                    <div className="flight-line">
+                      <span className="flight-type">Bay thẳng</span>
+                      <div className="dotted-line"></div>
+                    </div>
+
+                    <div className="arrival">
+                      <span className="time">{flight.arrivalTime}</span>
+                      <span className="code">{flight.to}</span>
+                      <span className="terminal">sân bay {flight.to}</span>
+                    </div>
+                  </div>
+
+                  <div className="flight-details">
+                    <div className="duration">
+                      <span>Thời gian bay ...</span>
+                    </div>
+                    <div className="airline">
+                      <span>Mã vé: {flight.flightNumber} </span>
+                    </div>
+                    <a href="#" className="view-details">Xem chi tiết hành trình</a>
+                  </div>
+                </div>
+
+                <div className="price-cards">
+                  <div className="price-card economy">
+                    <div className="seats-left">...</div>
+                    <div className="class-name">Economy</div>
+                    <div className="price-label">từ</div>
+                    <div className="price">
+                      {Number(flight.price).toLocaleString()}
+                    </div>
+                    <div className="currency">VND</div>
+                  </div>
+
+                  <div className="price-card business">
+                    <div className="seats-left">....</div>
+                    <div className="class-name">Business</div>
+                    <div className="price-label">từ</div>
+                    <div className="price">
+                      {(Number(flight.price) * 2).toLocaleString()}
+                    </div>
+                    <div className="currency">VND</div>
+                  </div>
+                </div>
+              </div>
+
+            ))}
+            <div className="book-ticket-container">
+              <button className="book-ticket" >
+                Đặt vé
+              </button>
+            </div>
+          </div>
+
+
+        </div>
       ) : (
-        <p>Không tìm thấy chuyến bay nào.</p> // Thông báo nếu không có chuyến bay
+        <p className="no-flights">Không tìm thấy chuyến bay nào.</p>
       )}
+      <footer class="footer-book-ticket">
+        <div className="email">
+          <h1>Đăng Ký Email!</h1>
+          <span>
+            Đăng ký Email để nhận ngay các thông tin, ưu đãi mới nhất từ Sunrise
+            Airline.
+          </span>
+          <input
+            type="email"
+            class="email-input"
+            placeholder="Nhập email của bạn"
+          />
+          <button class="submit-button">Đăng Ký</button>
+        </div>
+        <div class="footer-container">
+          <div class="footer-section about">
+            <h2>About Us</h2>
+            <p>
+              Tại Sunrise Airlines, chúng tôi mang đến những trải nghiệm bay
+              tuyệt vời và đáng nhớ cho hành khách. Với cam kết chất lượng dịch
+              vụ cao cấp và an toàn hàng đầu, chúng tôi luôn đặt sự hài lòng của
+              khách hàng lên hàng đầu.
+            </p>
+          </div>
+          <div class="footer-section links">
+            <h2>Quick Links</h2>
+            <ul>
+              <li>
+                <a href="#home">Home</a>
+              </li>
+              <li>
+                <a href="#about">About</a>
+              </li>
+              <li>
+                <a href="#services">Services</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+              <li>
+                <a href="#faq">FAQ</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-section contact">
+            <h2>Contact Us</h2>
+            <ul>
+              <li>
+                <a href="mailto:info@sportswear.com">
+                  sunriseAirline@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="#">0943894676</a>
+              </li>
+              <li>144 Xuân Thủy, Cầu Giấy, Hà nội , Việt Nam</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">&copy; 2024 | SunriseAirline</div>
+      </footer>
     </div>
   );
 };
