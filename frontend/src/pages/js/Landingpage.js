@@ -22,14 +22,21 @@ const Landingpage = () => {
   };
 
   const handleflightClick = () => {
-    // window.location.href = '/login';
+    window.location.href = '/flights';
   };
   const [activeTab, setActiveTab] = useState("flight"); // Khởi tạo state cho tab
   const handleTabClick = (tab) => {
     setActiveTab(tab); // Cập nhật tab hiện tại
   };
 
+  const handleAboutClick = () => {
+    window.location.href = "/about";
+  };
 
+  const handleExploreClick = () => {
+    window.location.href = "/explore";
+  };
+  
   const [locations, setLocations] = useState({
     fromLocation: "",
     toLocation: "",
@@ -135,10 +142,10 @@ const Landingpage = () => {
               <a href="#home" className="nav-link">
                 Home
               </a>
-              <a href="#about" className="nav-link">
+              <a href="#about" onClick={handleAboutClick} className="nav-link">
                 Thông tin hành trình
               </a>
-              <a href="#hotels" className="nav-link">
+              <a href="#explore" className="nav-link">
                 Khám phá
               </a>
               <a
