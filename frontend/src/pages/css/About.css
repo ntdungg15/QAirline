@@ -1,17 +1,17 @@
 .about-container > div {
-  padding: 20px;
-  max-width: 800px;
+  max-width: 70vw;
   margin: 0 auto;
-  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 100px;
+  height: 80vh;
 }
 
 .about-container h1 {
   text-align: center;
   color: #fff;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   font-size: 2.5em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -37,11 +37,52 @@
 }
 
 .section h2 {
-  color: #555;
+  text-align: left;
+  color: #fff;
   margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .section p {
   color: #666;
   line-height: 1.6;
+}
+
+.about-container .section:nth-child(1) {
+  background-image: url('../img/lamthutuc.jpg');
+}
+
+.about-container .section:nth-child(2) {
+  background-image: url('../img/thongtinhanhly.jpg');
+}
+
+.about-container .section:nth-child(3) {
+  background-image: url('../img/sanbaynoichuyen.jpg');
+}
+
+.about-container .section:nth-child(4) {
+  background-image: url('../img/yeucaugiayto.jpg');
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+  background-color: #f8f9fa;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #e2e6ea;
+  transform: scale(1.1);
 }

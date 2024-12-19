@@ -1,34 +1,28 @@
 import React from "react";
 import "../css/Explore.css";
+import { useNavigate } from "react-router-dom";
 
 const Explore = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="explore-container">
+      <button className="back-button" onClick={() => navigate("/")}>
+        &lt;
+      </button>
       <h1>Khám phá</h1>
       <div className="grid-container">
         <div className="section">
-          <h2>Mua vé & thanh toán</h2>
-          <p>
-            Thông tin chi tiết về các bước đặt vé máy bay và cách thanh toán an toàn, nhanh chóng.
-          </p>
+          <h2>Ưu đãi</h2>
         </div>
         <div className="section">
           <h2>Quản lý đặt chỗ</h2>
-          <p>
-            Tìm hiểu cách mua vé, thay đổi thông tin đặt chỗ và các tùy chọn khác.
-          </p>
         </div>
         <div className="section">
           <h2>Điều kiện giá</h2>
-          <p>
-            Tham khảo các điều kiện giá vé của QAirline bao gồm hoàn vé, đổi vé, và các quy định khác.
-          </p>
         </div>
         <div className="section">
           <h2>Dịch vụ bổ trợ</h2>
-          <p>
-            Tìm hiểu về các dịch vụ bổ trợ như chọn ghế ngồi, suất ăn đặc biệt, và nhiều lựa chọn khác.
-          </p>
         </div>
       </div>
       <footer>
