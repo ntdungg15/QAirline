@@ -145,7 +145,7 @@ const Landingpage = () => {
               <a href="#about" onClick={handleAboutClick} className="nav-link">
                 Thông tin hành trình
               </a>
-              <a href="#explore" className="nav-link">
+              <a href="#explore" onClick={handleExploreClick} className="nav-link">
                 Khám phá
               </a>
               <a
