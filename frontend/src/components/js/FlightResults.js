@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/FlightResults.css";
+import { LocationInput } from "../../components/js/locationComponent.js";
 
 const FlightResults = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const fromLocation = queryParams.get("from");
   const toLocation = queryParams.get("to");
+
+  // Khởi tạo state bên ngoài các điều kiện
   const [flights, setFlights] = useState([]);
   const [filteredFlights, setFilteredFlights] = useState([]);
+  const [selectedFlight, setSelectedFlight] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [activeTab, setActiveTab] = useState("flight"); 
+  const [locations, setLocations] = useState({
+    fromLocation: "",
+    toLocation: "",
+  });
 
   useEffect(() => {
     const fetchFlights = async () => {
@@ -36,19 +46,194 @@ const FlightResults = () => {
     setFilteredFlights(filtered);
   }, [flights, fromLocation, toLocation]);
 
+  const handleSelectFlight = (flight) => {
+    setSelectedFlight(flight);
+  };
+
+  const handleBookTicket = () => {
+    if (!selectedFlight) {
+      alert("Vui lòng chọn vé trước khi đặt.");
+      return;
+    }
+    navigate("/filldata", { state: { flight: selectedFlight } }); 
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab); 
+  };
+
+  const handleFromLocationSelect = (location) => {
+    setLocations((prevLocations) => ({
+      ...prevLocations,
+      fromLocation: location,
+    }));
+  };
+
+  const handleToLocationSelect = (location) => {
+    setLocations((prevLocations) => ({
+      ...prevLocations,
+      toLocation: location,
+    }));
+  };
+
+  const handleSearchFlights = () => {
+    const { fromLocation, toLocation } = locations;
+    const url = `/flights?from=${fromLocation}&to=${toLocation}`;
+    window.open(url, "_blank");
+  };
+
   if (loading) {
     return <div className="loading">Đang tải...</div>;
   }
 
+
   return (
     <div className="flight-results-container">
-      <div className="header-booking">
-        <h1>
+      <div className="head-flight-results">
+        <div className="header-booking"><h1 >
           Chuyến bay từ {fromLocation} đến {toLocation}
-        </h1>
+        </h1></div>
+        
+        <div className="booking-form">
+          {activeTab === "flight" && (
+            <div className="aa">
+              <div className="location-fields">
+                <LocationInput
+                  id="fromLocation"
+                  placeholder="Từ"
+                  onLocationSelect={handleFromLocationSelect}
+                  isFrom={true} 
+                />
+                <span className="swap-icon">⇆</span>
+                <LocationInput
+                  id="toLocation"
+                  placeholder="Đến"
+                  onLocationSelect={handleToLocationSelect}
+                  isFrom={false} 
+                />
+              </div>
+              <div className="bottom-book">
+                <div className="date-passenger-container">
+                  <div className="date-fields">
+                    <div className="date-field">
+                      <label>Ngày đi</label>
+                      <input type="date" id="departDate" />
+                    </div>
+                    <div className="date-field">
+                      <label>Ngày về</label>
+                      <input type="date" id="returnDate" />
+                    </div>
+                  </div>
+
+                  <div className="passenger-class-field">
+                    <label>Hành khách / Hạng ghế</label>
+                    <select id="passengerClass">
+                      <option>1 Hành khách Phổ thông</option>
+                      <option>2 Hành khách Phổ thông</option>
+                      <option>1 Hành khách Hạng thương gia</option>
+                    </select>
+                  </div>
+
+                  <div className="discount-search-container">
+                    <div className="discount-code">
+                      <input
+                        type="text"
+                        placeholder="Mã ưu đãi"
+                        id="toLocation"
+                      />
+                    </div>
+                    <button
+                      className="search-button"
+                      id="searchButton"
+                      onClick={handleSearchFlights}
+                    >
+                      Tìm chuyến bay
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === "service" && (
+            <div>
+              <div className="location-fields">
+                <input type="text" placeholder="Từ" id="fromLocation" />
+                <span className="swap-icon" id="swapIcon">
+                  ⇆
+                </span>
+                <input type="text" placeholder="Đến" id="toLocation" />
+              </div>
+
+              <div className="date-passenger-container">
+                <div className="stopover">
+                  <div className="date-fields">
+                    <div className="date-field">
+                      <label>Ngày đi</label>
+                      <input type="date" id="departDate" />
+                    </div>
+                    <div className="date-field">
+                      <label>Ngày về</label>
+                      <input type="date" id="returnDate" />
+                    </div>
+                  </div>
+
+                  <div className="passenger-class-field">
+                    <label>Hành khách / Hạng ghế</label>
+                    <select id="passengerClass">
+                      <option>1 Hành khách Phổ thông</option>
+                      <option>2 Hành khách Phổ thông</option>
+                      <option>1 Hành khách Hạng thương gia</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="passengers">Hành khách / Phòng</label>
+                    <input
+                      type="text"
+                      id="passengers"
+                      placeholder="2 Hành khách, 1 phòng"
+                    />
+                  </div>
+
+                  <div className="discount-search-container">
+                    <div className="discount-code">
+                      <input
+                        type="text"
+                        placeholder="Mã ưu đãi"
+                        id="toLocation"
+                      />
+                    </div>
+                    <button className="search-button" id="searchButton">
+                      Tìm chuyến bay
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === "manage" && (
+            <div>
+              <div className="location-fields">
+                <input
+                  type="text"
+                  placeholder="Số mã đặt chỗ"
+                  id="LocationID"
+                />
+                <button className="search-button" id="">
+                  Truy xuất vé
+                </button>
+              </div>
+            </div>
+          )}
+          {activeTab === "status" && (
+            <div>Content for Trạng thái chuyến bay</div>
+          )}
+        </div>
       </div>
+      <span className="KQ">Các chuyến bay còn chỗ</span>
 
       {error && <p className="error-message">{error}</p>}
+
       {filteredFlights.length > 0 ? (
         <div className="flight-list-container">
           <div className="flight-list">
@@ -81,7 +266,15 @@ const FlightResults = () => {
                     <div className="airline">
                       <span>Mã vé: {flight.flightNumber} </span>
                     </div>
-                    <a href="#" className="view-details">Xem chi tiết hành trình</a>
+                    <button
+                      className={`select-flight ${selectedFlight?.id === flight.id ? "selected" : ""
+                        }`}
+                      onClick={() => handleSelectFlight(flight)}
+                    >
+                      {selectedFlight?.id === flight.id
+                        ? "Đã chọn"
+                        : "Chọn vé"}
+                    </button>
                   </div>
                 </div>
 
@@ -107,20 +300,18 @@ const FlightResults = () => {
                   </div>
                 </div>
               </div>
-
             ))}
-            <div className="book-ticket-container">
-              <button className="book-ticket" >
-                Đặt vé
-              </button>
-            </div>
           </div>
-
-
+          <div className="book-ticket-container">
+            <button className="book-ticket" onClick={handleBookTicket}>
+              Đặt vé
+            </button>
+          </div>
         </div>
       ) : (
         <p className="no-flights">Không tìm thấy chuyến bay nào.</p>
       )}
+
       <footer class="footer-book-ticket">
         <div className="email">
           <h1>Đăng Ký Email!</h1>

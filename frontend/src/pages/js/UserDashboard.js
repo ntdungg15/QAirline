@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import videoFile from "../img/backairport.mp4";
 import logo from "../img/pngwing.com.png";
 import "../img/post.jpg";
 import "../css/Landingpage.css";
@@ -20,14 +19,6 @@ const Landingpage = () => {
     fromLocation: "",
     toLocation: "",
   });
-
-  const handleAboutClick = () => {
-    window.location.href = "/about";
-  };
-
-  const handleExploreClick = () => {
-    window.location.href = "/explore";
-  };
 
   const handleFromLocationSelect = (location) => {
     setLocations((prevLocations) => ({
@@ -59,8 +50,8 @@ const Landingpage = () => {
     }
   };
 
-  const handleBookingClick = () => {
-    window.location.href = '/booking';
+  const handleflightClick = () => {
+    // window.location.href = '/login';
   };
   const [activeTab, setActiveTab] = useState("flight"); // Khởi tạo state cho tab
   const handleTabClick = (tab) => {
@@ -104,7 +95,7 @@ const Landingpage = () => {
     if (posts.length > 0) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
-      }, 3000);
+      }, 5000);
 
       return () => clearInterval(interval); // Clean up khi component bị hủy
     }
@@ -135,18 +126,15 @@ const Landingpage = () => {
               <a href="#home" className="nav-link">
                 Home
               </a>
-
-              <a href="#about" onClick={handleAboutClick} className="nav-link">
+              <a href="#about" className="nav-link">
                 Thông tin hành trình
               </a>
-              
-              <a href="#explore" onClick={handleExploreClick} className="nav-link">
+              <a href="#hotels" className="nav-link">
                 Khám phá
               </a>
-
               <a
-                href="#booking"
-                onClick={handleBookingClick}
+                href="#flights"
+                onClick={handleflightClick}
                 className="nav-link"
               >
                 Đặt vé
