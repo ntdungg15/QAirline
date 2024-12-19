@@ -21,6 +21,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
+
 .explore-container .section:nth-child(1) {
   background-image: url('../img/uudai.jpg');
 }

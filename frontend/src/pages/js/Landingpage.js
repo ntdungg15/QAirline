@@ -21,8 +21,8 @@ const Landingpage = () => {
     navigate("/package_service");
   };
 
-  const handleflightClick = () => {
-    window.location.href = '/flights';
+  const handleBookingClick = () => {
+    window.location.href = '/booking';
   };
   const [activeTab, setActiveTab] = useState("flight"); // Khởi tạo state cho tab
   const handleTabClick = (tab) => {
@@ -142,15 +142,18 @@ const Landingpage = () => {
               <a href="#home" className="nav-link">
                 Home
               </a>
+
               <a href="#about" onClick={handleAboutClick} className="nav-link">
                 Thông tin hành trình
               </a>
+
               <a href="#explore" onClick={handleExploreClick} className="nav-link">
                 Khám phá
               </a>
+
               <a
-                href="#flights"
-                onClick={handleflightClick}
+                href="#booking"
+                onClick={handleBookingClick}
                 className="nav-link"
               >
                 Đặt vé

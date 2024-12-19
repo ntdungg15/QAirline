@@ -21,6 +21,14 @@ const Landingpage = () => {
     toLocation: "",
   });
 
+  const handleAboutClick = () => {
+    window.location.href = "/about";
+  };
+
+  const handleExploreClick = () => {
+    window.location.href = "/explore";
+  };
+
   const handleFromLocationSelect = (location) => {
     setLocations((prevLocations) => ({
       ...prevLocations,
@@ -51,8 +59,8 @@ const Landingpage = () => {
     }
   };
 
-  const handleflightClick = () => {
-    // window.location.href = '/login';
+  const handleBookingClick = () => {
+    window.location.href = '/booking';
   };
   const [activeTab, setActiveTab] = useState("flight"); // Khởi tạo state cho tab
   const handleTabClick = (tab) => {
@@ -127,15 +135,18 @@ const Landingpage = () => {
               <a href="#home" className="nav-link">
                 Home
               </a>
-              <a href="#about" className="nav-link">
+
+              <a href="#about" onClick={handleAboutClick} className="nav-link">
                 Thông tin hành trình
               </a>
-              <a href="#hotels" className="nav-link">
+              
+              <a href="#explore" onClick={handleExploreClick} className="nav-link">
                 Khám phá
               </a>
+
               <a
-                href="#flights"
-                onClick={handleflightClick}
+                href="#booking"
+                onClick={handleBookingClick}
                 className="nav-link"
               >
                 Đặt vé
