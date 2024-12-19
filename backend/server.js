@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 import {
   admin,
   db,
@@ -10,6 +11,7 @@ import {
 import flightRoutes from "./routes/flightRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 import aircraftRoutes from "./routes/aircraftRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import connectDB from "./config/db.js";
 import postRoutes from "./routes/postRoutes.js"; // Đổi require thành import
 import multer from "multer";
@@ -44,28 +46,30 @@ app.post("/upload", upload.single("image"), (req, res) => {
   });
 });
 
-// Middleware
+// Middleware------------------------------------------------------------
 app.use(
   cors({
-    origin: "http://localhost:5000",
+    origin: ["http://localhost:5000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 app.use(express.json());
+app.use(bodyParser.json());
 
 // Routes
 app.use("/api", flightRoutes);
 app.use("/api", bookingRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api", aircraftRoutes);
+app.use("/api", userRoutes);
 // app.use('/upload', upload.single('image'));
 
 app.get("/test", (req, res) => {
   res.json({ message: "Backend is working!" });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

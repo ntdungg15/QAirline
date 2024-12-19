@@ -29,7 +29,6 @@ const Landingpage = () => {
     setActiveTab(tab); // Cập nhật tab hiện tại
   };
 
-
   const [locations, setLocations] = useState({
     fromLocation: "",
     toLocation: "",
@@ -64,8 +63,6 @@ const Landingpage = () => {
       console.error("Logout failed", error);
     }
   };
-
-
 
   const [videoOffset, setVideoOffset] = useState(0);
 
@@ -161,15 +158,15 @@ const Landingpage = () => {
                 Sign Up
               </a>
             </div>
-            
           </div>
 
           <div className="post-image">
             {posts.map((post, index) => (
               <div
                 key={post._id}
-                className={`post-item-img ${index === currentIndex ? "active" : ""
-                  }`}
+                className={`post-item-img ${
+                  index === currentIndex ? "active" : ""
+                }`}
               >
                 <img src={post.imageUrl} alt="Post" />
                 <p className="post-description">{post.description}</p>

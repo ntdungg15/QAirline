@@ -40,15 +40,30 @@ const bookingController = {
         return res.status(400).json({ error: "Hạng ghế không hợp lệ" });
       }
 
-      // Tạo booking
+      // Validate required fields
+      if (!bookingData.passengerName || !bookingData.passengerEmail) {
+        return res.status(400).json({
+          error: "Vui lòng cung cấp đầy đủ thông tin hành khách",
+        });
+      }
+
+      // Generate seat number (you may want to implement your own logic)
+      const seatNumber = `${seatClass
+        .charAt(0)
+        .toUpperCase()}${availableSeats}`;
+
+      // Tạo booking với đầy đủ thông tin theo model
       const newBooking = {
-        ...bookingData,
         userId: req.user.id,
+        flightId: bookingData.flightId,
+        passengerName: bookingData.passengerName,
+        passengerEmail: bookingData.passengerEmail,
         bookingDate: new Date(),
         status: "Active",
+        seatNumber: seatNumber,
+        cancellationDeadline: new Date(Date.now() + 24 * 60 * 60 * 1000),
         seatClass: seatClass,
         seatPrice: seatPrice,
-        cancellationDeadline: new Date(Date.now() + 24 * 60 * 60 * 1000),
       };
 
       const docRef = await db.collection("bookings").add(newBooking);
@@ -66,6 +81,7 @@ const bookingController = {
 
       res.status(201).json({ id: docRef.id, ...newBooking });
     } catch (error) {
+      console.error("Booking error:", error);
       res.status(500).json({ error: error.message });
     }
   },
@@ -113,42 +129,21 @@ const bookingController = {
 
       const bookingData = bookingDoc.data();
 
-      // Kiểm tra quyền hủy vé
-      if (bookingData.userId !== req.user.id) {
-        return res
-          .status(403)
-          .json({ error: "Bạn không có quyền hủy booking này" });
-      }
+      // Get flight data before updating seats
+      const flightDoc = await db
+        .collection("flights")
+        .doc(bookingData.flightId)
+        .get();
+      const flight = flightDoc.data();
 
-      // Kiểm tra trạng thái booking
-      if (bookingData.status === "Cancelled") {
-        return res.status(400).json({ error: "Booking đã bị hủy trước đó" });
-      }
-      // Kiểm tra hạn hủy vé
-      const cancellationDeadline = bookingData.cancellationDeadline.toDate();
-      if (new Date() > cancellationDeadline) {
-        return res.status(400).json({ error: "Đã quá hạn hủy vé" });
-      }
-
-      // Cập nhật trạng thái booking
-      await db.collection("bookings").doc(id).update({
-        status: "Cancelled",
-      });
-      // Hoàn lại số ghế cho chuyến bay
+      // Define the reference and update field correctly
       const flightRef = db.collection("flights").doc(bookingData.flightId);
-
-      // Xác định hạng ghế để cập nhật
       const seatUpdateField =
         bookingData.seatClass === "business"
           ? "businessSeats.available"
           : "economySeats.available";
 
-      const seatUpdateValue =
-        bookingData.seatClass === "business"
-          ? flight.businessSeats.available + 1
-          : flight.economySeats.available + 1;
-
-      session.update(flightRef, {
+      await flightRef.update({
         [seatUpdateField]: seatUpdateValue,
       });
 
