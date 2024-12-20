@@ -1,0 +1,117 @@
+.blog-container {
+  margin: 20px auto;
+  max-width: 70vw;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  text-align: justify;
+}
+
+.blog-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.blog-container h2 {
+  font-size: 1.8em;
+  margin-top: 20px;
+  color: #555;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.blog-container p {
+  font-size: 1em;
+  margin: 10px 0;
+  color: #666;
+}
+
+.blog-container ul {
+  margin: 20px 0;
+  padding-left: 40px;
+  list-style: disc;
+}
+
+.blog-container ul li {
+  margin: 10px 0;
+}
+
+.blog-container ol {
+  margin: 20px 0;
+  padding-left: 40px;
+  list-style: decimal;
+}
+
+.blog-container ol li {
+  margin: 10px 0;
+}
+
+.blog-container .email {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #fff3e6;
+  border: 1px solid #ffd699;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.lamthutuc-container > div {
+  max-width: 70vw;
+  margin: 0 auto;
+  border-radius: 8px;
+  
+  margin-bottom: 100px;
+  height: 80vh;
+}
+
+.lamthutuc-container h1 {
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.lamthutuc-container .section:nth-child(1) {
+  background-image: url('../img/lamthutuctructuyen.jpg');
+}
+
+.lamthutuc-container .section:nth-child(2) {
+  background-image: url('../img/lamthutuctaisanbay.jpg');
+}
+
+.lamthutuc-container .section:nth-child(3) {
+  background-image: url('../img/quaylamthutuctudong.jpg');
+}
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.blog-table th,
+.blog-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.blog-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.blog-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.blog-table tr:hover {
+  background-color: #f1f1f1;
+}
