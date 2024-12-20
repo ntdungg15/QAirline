@@ -11,7 +11,7 @@ const BookTicket = () => {
   const fromLocation = queryParams.get("from");
   const toLocation = queryParams.get("to");
 
-  // Khởi tạo state bên ngoài các điều kiện
+  // State
   const [flights, setFlights] = useState([]);
   const [filteredFlights, setFilteredFlights] = useState([]);
   const [selectedFlight, setSelectedFlight] = useState(null);
@@ -22,7 +22,9 @@ const BookTicket = () => {
     fromLocation: "",
     toLocation: "",
   });
+  const [selectedClass, setSelectedClass] = useState(""); // State khai báo tại đây
 
+  // Effect: Fetch flights
   useEffect(() => {
     const fetchFlights = async () => {
       try {
@@ -39,6 +41,7 @@ const BookTicket = () => {
     fetchFlights();
   }, []);
 
+  // Effect: Filter flights
   useEffect(() => {
     const filtered = flights.filter(
       (flight) => flight.from === fromLocation && flight.to === toLocation
@@ -46,9 +49,27 @@ const BookTicket = () => {
     setFilteredFlights(filtered);
   }, [flights, fromLocation, toLocation]);
 
+  // Handlers
   const handleSelectClass = (flight, seatClass) => {
     setSelectedFlight(flight);
     setSelectedClass(seatClass);
+  };
+
+  const handleFromLocationSelect = (from) => {
+    setLocations((prev) => ({ ...prev, fromLocation: from }));
+  };
+
+  const handleToLocationSelect = (to) => {
+    setLocations((prev) => ({ ...prev, toLocation: to }));
+  };
+
+  const handleSearchFlights = () => {
+    const filtered = flights.filter(
+      (flight) =>
+        flight.from === locations.fromLocation &&
+        flight.to === locations.toLocation
+    );
+    setFilteredFlights(filtered);
   };
 
   const handleBookTicket = () => {
@@ -71,7 +92,6 @@ const BookTicket = () => {
           selectedClass === "economy"
             ? selectedFlight.economySeats.available
             : selectedFlight.businessSeats.available,
-        // Thêm các thông tin cần thiết
         bookingDate: new Date().toISOString(),
         status: "Active",
         flightId: selectedFlight.id,
@@ -83,6 +103,7 @@ const BookTicket = () => {
     }
   };
 
+  // Loading state
   if (loading) {
     return <div className="loading">Đang tải...</div>;
   }
@@ -313,8 +334,8 @@ const BookTicket = () => {
                 </div>
                 {selectedFlight?.id === flight.id && selectedClass && (
                   <div className="book-ticket-container">
-                    <button className="book-ticket" onClick={handleBookTicket}>
-                      Tiếp tục đặt vé
+                    <button className="select-ticket" >
+                      Chọn vé
                     </button>
                   </div>
                 )}
