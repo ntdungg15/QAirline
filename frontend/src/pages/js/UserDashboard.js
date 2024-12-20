@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
+import videoFile from "../img/backairport.mp4";
 import logo from "../img/pngwing.com.png";
 import "../img/post.jpg";
 import "../css/Landingpage.css";
@@ -10,96 +11,21 @@ import { useNavigate } from "react-router-dom";
 import userImage from "../img/user.png";
 import { LocationInput } from "../../components/js/locationComponent.js";
 import { authService } from "../../services/auth.js";
+import { useUserDashboard } from "../../hooks/useUserDashboard.js";
 
 const Landingpage = () => {
-  const navigate = useNavigate();
-  // const [fromLocation, setFromLocation] = React.useState("");
-  // const [toLocation, setToLocation] = React.useState("");
-  const [locations, setLocations] = useState({
-    fromLocation: "",
-    toLocation: "",
-  });
-
-  const handleFromLocationSelect = (location) => {
-    setLocations((prevLocations) => ({
-      ...prevLocations,
-      fromLocation: location,
-    }));
-  };
-
-  const handleToLocationSelect = (location) => {
-    setLocations((prevLocations) => ({
-      ...prevLocations,
-      toLocation: location,
-    }));
-  };
-  const handleSearchFlights = () => {
-    const { fromLocation, toLocation } = locations;
-    const url = `/flights?from=${fromLocation}&to=${toLocation}`;
-    // Mở URL trong tab mới
-    window.open(url, "_blank");
-  };
-
-  // Đăng xuất
-  const handleLogout = async () => {
-    try {
-      await authService.logout();
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout failed", error);
-    }
-  };
-
-  const handleflightClick = () => {
-    // window.location.href = '/login';
-  };
-  const [activeTab, setActiveTab] = useState("flight"); // Khởi tạo state cho tab
-  const handleTabClick = (tab) => {
-    setActiveTab(tab); // Cập nhật tab hiện tại
-  };
-
-  const [videoOffset, setVideoOffset] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const maxOffset = window.innerHeight * 0.95; // Tính 95vh
-      const scrollY = window.scrollY;
-      setVideoOffset(Math.min(scrollY, maxOffset));
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  //test đăng thông tin
-  const [posts, setPosts] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Fetch bài đăng
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/posts");
-        const data = await response.json();
-        setPosts(data);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  // Cập nhật ảnh hiển thị mỗi 3 giây
-  useEffect(() => {
-    if (posts.length > 0) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
-      }, 5000);
-
-      return () => clearInterval(interval); // Clean up khi component bị hủy
-    }
-  }, [posts]);
+  const {
+    locations,
+    activeTab,
+    posts,
+    currentIndex,
+    handleFromLocationSelect,
+    handleToLocationSelect,
+    handleSearchFlights,
+    handleLogout,
+    handleTabClick,
+    handleflightClick,
+  } = useUserDashboard();
 
   return (
     <div className="landingpage-container">
