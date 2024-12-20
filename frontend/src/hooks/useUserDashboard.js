@@ -86,7 +86,7 @@ export const useUserDashboard = () => {
     if (posts.length > 0) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
-      }, 3000);
+      }, 5000);
 
       return () => clearInterval(interval);
     }

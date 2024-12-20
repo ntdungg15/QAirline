@@ -12,6 +12,10 @@ import userImage from "../img/user.png";
 import { LocationInput } from "../../components/js/locationComponent.js";
 import { authService } from "../../services/auth.js";
 import { useUserDashboard } from "../../hooks/useUserDashboard.js";
+import saleimg from "../img/saleimg.png";
+import flc from "../img/flc.png";
+import nhatrang from "../img/nhatrang.jpg";
+
 
 const Landingpage = () => {
   const {
@@ -360,6 +364,65 @@ const Landingpage = () => {
             </div>
           </div>
         </div>
+
+        <div className="deals-container">
+          <div className="deals-header">
+            <div className="heading">
+              <p>Ưu đãi</p>
+            </div>
+            <div className="tips">
+              Tips: Tham khảo <a href="#" className="tips-link">các ưu đãi</a> hấp dẫn!
+            </div>
+          </div>
+
+          <div className="deals-grid">
+            <div className="midnight-card">
+              <img src={saleimg}
+                alt="Midnight Deal" className="deal-image" />
+              <div className="midnight-content">
+                <div className="discount">
+                  <h2>Giảm tới <span className="percent">20%</span></h2>
+                  <div className="promo-code">Nhập mã: SUNRISE23</div>
+                </div>
+                <button className="detail-btn">Chi Tiết →</button>
+              </div>
+            </div>
+
+            <div className="side-deals">
+              <div className="sunrise-card">
+                <img src={flc} alt="sunrise Airways" className="deal-image" />
+                <div className="sunrise-content">
+                  <div className="sunrise-logo">BAY SUNRISE</div>
+                  <div className="sunrise-subtitle">NGHỈ FLC</div>
+                  <div className="price-grid">
+                    <div className="price-item">
+                      <div>COMBO 2N1Đ</div>
+                      <div className="price">3.099.000</div>
+                    </div>
+                    <div className="price-item">
+                      <div>COMBO 3N2Đ</div>
+                      <div className="price">3.499.000</div>
+                    </div>
+                  </div>
+                  <button className="detail-btn">Chi Tiết →</button>
+                </div>
+              </div>
+
+              <div className="nhatrang-card">
+                <img src={nhatrang} alt="Nha Trang" className="deal-image" />
+                <div className="nhatrang-content">
+                  <h2>Nha Trang</h2>
+                  {/* <div className="subtitle">biển gọi</div> */}
+                  <div className="starting-price">
+                    Giá chỉ từ <span className="price">389k</span>
+                  </div>
+                  <button className="detail-btn">Chi Tiết →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div className="place-list">
           {/* Place */}
