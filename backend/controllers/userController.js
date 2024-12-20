@@ -1,5 +1,6 @@
 import { db } from "../config/firebase.js";
 import User from "../models/userModel.js";
+import { userService } from "../services/userService.js";
 
 const userController = {
   // Đăng ký người dùng
@@ -42,17 +43,64 @@ const userController = {
   // Lấy thông tin người dùng
   getUserProfile: async (req, res) => {
     try {
-      const userId = req.user.id;
-      const userDoc = await db.collection("users").doc(userId).get();
+      const userId = req.user.uid;
+      const user = await userService.getUserById(userId); // Sửa thành userService.getUserById
 
-      if (!userDoc.exists) {
+      if (!user) {
         return res.status(404).json({ error: "Người dùng không tồn tại" });
       }
 
-      const userData = userDoc.data();
-      delete userData.password; // Loại bỏ thông tin mật khẩu
+      delete user.password;
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
 
-      res.json(new User({ id: userDoc.id, ...userData }));
+  // Cập nhật thông tin người dùng
+  updateUserProfile: async (req, res) => {
+    try {
+      const userId = req.user.uid;
+      const { username, email } = req.body;
+
+      // Kiểm tra email đã tồn tại (nếu email thay đổi)
+      if (email) {
+        const existingUser = await db
+          .collection("users")
+          .where("email", "==", email)
+          .where("id", "!=", userId)
+          .get();
+
+        if (!existingUser.empty) {
+          return res.status(400).json({ error: "Email đã được sử dụng" });
+        }
+      }
+
+      // Cập nhật thông tin người dùng
+      const updateData = {};
+      if (username) updateData.username = username;
+      if (email) updateData.email = email;
+
+      await db.collection("users").doc(userId).update(updateData);
+
+      // Lấy thông tin người dùng sau khi cập nhật
+      const updatedUser = await userService.getUserById(userId);
+      delete updatedUser.password;
+
+      res.json({
+        message: "Cập nhật thông tin thành công",
+        user: updatedUser,
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  // Đăng xuất người dùng
+  logout: async (req, res) => {
+    try {
+      await authService.logout();
+      res.status(200).json({ message: "Đăng xuất thành công" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

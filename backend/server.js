@@ -64,7 +64,7 @@ app.use("/api", flightRoutes);
 app.use("/api", bookingRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api", aircraftRoutes);
-app.use("/api", userRoutes);
+app.use("/api/users", userRoutes);
 // app.use('/upload', upload.single('image'));
 
 app.get("/test", (req, res) => {
