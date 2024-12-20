@@ -17,6 +17,7 @@ import Explore from "./pages/js/Explore";
 import Booking from "./pages/js/Booking";
 import Payment from "./components/js/pay";
 import FillData from "./components/js/filldata";
+import BookingTestFirebase from "./components/BookingTestFirebase";
 
 import { authService } from "./services/auth";
 // import Register from './components/js/register';
@@ -35,6 +36,8 @@ const App = () => {
           <Route path="/user-dashboard" element={<UserDashboard />} />
           <Route path="/user/book-ticket" element={<BookTicket />} />
           <Route path="user/shopping-cart" element={<ShoppingCart />} />
+
+          <Route path="/booking-test" element={<BookingTestFirebase />} />
           {/* Redirect to saved path or home */}
           <Route path="*" element={<Navigate to={savedPath} replace />} />
           <Route path="/about" element={<About />} />

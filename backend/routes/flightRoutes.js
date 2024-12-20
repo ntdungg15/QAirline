@@ -14,7 +14,7 @@
 import express from "express";
 const router = express.Router();
 import flightController from "../controllers/flightController.js";
-import { isAdmin, isAuth } from "../middleware/auth.js";
+import { isAdmin, isAuth } from "../middleware/middleware.js";
 
 // Tìm kiếm chuyến bay (cho tất cả user)
 router.get("/flights/search", isAuth, flightController.searchFlights);

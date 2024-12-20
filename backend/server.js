@@ -16,7 +16,7 @@ import connectDB from "./config/db.js";
 import postRoutes from "./routes/postRoutes.js"; // Đổi require thành import
 import multer from "multer";
 import path from "path"; // Đừng quên import path nếu bạn sử dụng path.extname
-import { isAuth } from "./middleware/auth.js";
+import { isAuth } from "./middleware/middleware.js";
 
 dotenv.config();
 connectDB();

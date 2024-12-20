@@ -57,6 +57,38 @@ const userController = {
       res.status(500).json({ error: error.message });
     }
   },
+
+  // Thêm booking vào user
+  addBookingToUser: async (userId, bookingId) => {
+    try {
+      await db
+        .collection("users")
+        .doc(userId)
+        .update({
+          bookings: admin.firestore.FieldValue.arrayUnion(bookingId),
+        });
+      return true;
+    } catch (error) {
+      console.error("Error adding booking to user:", error);
+      return false;
+    }
+  },
+
+  // Xóa booking khỏi user
+  removeBookingFromUser: async (userId, bookingId) => {
+    try {
+      await db
+        .collection("users")
+        .doc(userId)
+        .update({
+          bookings: admin.firestore.FieldValue.arrayRemove(bookingId),
+        });
+      return true;
+    } catch (error) {
+      console.error("Error removing booking from user:", error);
+      return false;
+    }
+  },
 };
 
 export default userController;

@@ -60,13 +60,21 @@ const bookingController = {
         passengerEmail: bookingData.passengerEmail,
         bookingDate: new Date(),
         status: "Active",
-        seatNumber: seatNumber,
+        seatNumber: seatNumber, // Được tạo tự động bên controller
         cancellationDeadline: new Date(Date.now() + 24 * 60 * 60 * 1000),
         seatClass: seatClass,
         seatPrice: seatPrice,
       };
 
       const docRef = await db.collection("bookings").add(newBooking);
+
+      // Thêm booking ID vào mảng bookings của user
+      await db
+        .collection("users")
+        .doc(req.user.id)
+        .update({
+          bookings: admin.firestore.FieldValue.arrayUnion(docRef.id),
+        });
 
       // Cập nhật số ghế còn trống của chuyến bay
       const updateData =

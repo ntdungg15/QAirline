@@ -12,7 +12,7 @@
 import express from "express";
 const router = express.Router();
 import bookingController from "../controllers/bookingController.js";
-import { isAuth } from "../middleware/auth.js";
+import { isAuth } from "../middleware/middleware.js";
 
 // Đặt vé mới
 router.post("/bookings", isAuth, bookingController.createBooking);
