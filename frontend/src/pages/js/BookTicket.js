@@ -159,9 +159,7 @@ const BookTicket = () => {
                     <div className="class-name">Business</div>
                     <div className="price-label">từ</div>
                     <div className="price">
-                      {(
-                        Number(flight.businessSeats.price) * 2
-                      ).toLocaleString()}
+                      {Number(flight.businessSeats.price).toLocaleString()}
                     </div>
                     <div className="currency">VND</div>
                   </div>

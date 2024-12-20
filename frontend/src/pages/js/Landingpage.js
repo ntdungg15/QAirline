@@ -160,7 +160,7 @@ const Landingpage = () => {
             </div>
           </div>
 
-          <div className="post-image">
+          {/* <div className="post-image">
             {posts.map((post, index) => (
               <div
                 key={post._id}
@@ -172,7 +172,7 @@ const Landingpage = () => {
                 <p className="post-description">{post.description}</p>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <div className="post-button">
             <button className="post-button-detail">Chi tiết</button>

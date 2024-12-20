@@ -16,6 +16,7 @@ import connectDB from "./config/db.js";
 import postRoutes from "./routes/postRoutes.js"; // Đổi require thành import
 import multer from "multer";
 import path from "path"; // Đừng quên import path nếu bạn sử dụng path.extname
+import { isAuth } from "./middleware/auth.js";
 
 dotenv.config();
 connectDB();
@@ -49,13 +50,14 @@ app.post("/upload", upload.single("image"), (req, res) => {
 // Middleware------------------------------------------------------------
 app.use(
   cors({
-    origin: ["http://localhost:5000"],
+    origin: ["http://localhost:5000", "http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 app.use(express.json());
 app.use(bodyParser.json());
+// Sử dụng middleware xác thực
 
 // Routes
 app.use("/api", flightRoutes);
