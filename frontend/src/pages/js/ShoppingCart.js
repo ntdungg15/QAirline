@@ -66,8 +66,6 @@ const ShoppingCart = () => {
         flightId: bookingDetails.flightId,
         passengerName: userData.username,
         passengerEmail: currentUser.email,
-        bookingDate: new Date(),
-        status: "Active",
         seatClass: bookingDetails.seatClass,
         seatPrice: parseFloat(bookingDetails.price),
       };
@@ -97,17 +95,22 @@ const ShoppingCart = () => {
         }
       );
 
-      setBookingStatus({
-        success: true,
-        message:
-          "Đặt vé thành công! Bạn có thể xem chi tiết trong lịch sử đặt vé.",
-      });
-
-      setTimeout(() => {
-        navigate("/bookings", {
-          state: { bookingId: response.data.id },
+      if (response.data && response.data.id) {
+        setBookingStatus({
+          success: true,
+          message:
+            "Đặt vé thành công! Bạn có thể xem chi tiết trong lịch sử đặt vé.",
         });
-      }, 2000);
+
+        // Chuyển hướng sau khi đặt vé thành công
+        setTimeout(() => {
+          navigate("/bookings", {
+            state: { bookingId: response.data.id },
+          });
+        }, 2000);
+      } else {
+        throw new Error("Không nhận được thông tin đặt vé");
+      }
     } catch (error) {
       console.error("Booking error:", error);
       let errorMessage = "Có lỗi xảy ra khi đặt vé. Vui lòng thử lại sau.";
@@ -126,7 +129,9 @@ const ShoppingCart = () => {
             errorMessage = "Không tìm thấy chuyến bay";
             break;
           default:
-            errorMessage = "Có lỗi xảy ra khi đặt vé. Vui lòng thử lại sau.";
+            errorMessage =
+              error.response.data.error ||
+              "Có lỗi xảy ra khi đặt vé. Vui lòng thử lại sau.";
         }
       }
 

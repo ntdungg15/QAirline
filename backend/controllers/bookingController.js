@@ -1,93 +1,90 @@
-import { db } from "../config/firebase.js";
+import { db, admin } from "../config/firebase.js";
+
 import Booking from "../models/bookingModel.js";
 import Flight from "../models/flightModel.js";
 
 const bookingController = {
-  // Tạo đặt vé mới
   createBooking: async (req, res) => {
+    const bookingRef = db.collection("bookings");
+    const flightRef = db.collection("flights");
+
     try {
       const bookingData = req.body;
 
-      // Kiểm tra chuyến bay
-      const flightDoc = await db
-        .collection("flights")
-        .doc(bookingData.flightId)
-        .get();
-      if (!flightDoc.exists) {
-        return res.status(404).json({ error: "Chuyến bay không tồn tại" });
-      }
-      const flight = new Flight({ id: flightDoc.id, ...flightDoc.data() });
+      // Kiểm tra chuyến bay trong transaction để đảm bảo concurrent booking
+      const bookingResult = await db.runTransaction(async (transaction) => {
+        const flightDoc = await transaction.get(
+          flightRef.doc(bookingData.flightId)
+        );
 
-      // Kiểm tra hạng ghế và số ghế còn trống
-      const seatClass = bookingData.seatClass || "economy";
-      let availableSeats, seatPrice;
-
-      if (seatClass === "economy") {
-        availableSeats = flight.economySeats.available;
-        seatPrice = flight.economySeats.price;
-
-        if (availableSeats <= 0) {
-          return res.status(400).json({ error: "Hết ghế Economy" });
+        if (!flightDoc.exists) {
+          throw new Error("Chuyến bay không tồn tại");
         }
-      } else if (seatClass === "business") {
-        availableSeats = flight.businessSeats.available;
-        seatPrice = flight.businessSeats.price;
 
-        if (availableSeats <= 0) {
-          return res.status(400).json({ error: "Hết ghế Business" });
+        const flight = new Flight({ id: flightDoc.id, ...flightDoc.data() });
+        const seatClass = bookingData.seatClass || "economy";
+        let availableSeats, seatPrice;
+
+        if (seatClass === "economy") {
+          availableSeats = flight.economySeats.available;
+          seatPrice = flight.economySeats.price;
+
+          if (availableSeats <= 0) {
+            throw new Error("Hết ghế Economy");
+          }
+        } else if (seatClass === "business") {
+          availableSeats = flight.businessSeats.available;
+          seatPrice = flight.businessSeats.price;
+
+          if (availableSeats <= 0) {
+            throw new Error("Hết ghế Business");
+          }
+        } else {
+          throw new Error("Hạng ghế không hợp lệ");
         }
-      } else {
-        return res.status(400).json({ error: "Hạng ghế không hợp lệ" });
-      }
 
-      // Validate required fields
-      if (!bookingData.passengerName || !bookingData.passengerEmail) {
-        return res.status(400).json({
-          error: "Vui lòng cung cấp đầy đủ thông tin hành khách",
+        if (!bookingData.passengerName || !bookingData.passengerEmail) {
+          throw new Error("Vui lòng cung cấp đầy đủ thông tin hành khách");
+        }
+
+        const seatNumber = `${seatClass
+          .charAt(0)
+          .toUpperCase()}${availableSeats}`;
+
+        const newBooking = {
+          userId: bookingData.userId,
+          flightId: bookingData.flightId,
+          passengerName: bookingData.passengerName,
+          passengerEmail: bookingData.passengerEmail,
+          bookingDate: admin.firestore.Timestamp.now(),
+          status: "Active",
+          seatNumber: seatNumber,
+          cancellationDeadline: admin.firestore.Timestamp.fromDate(
+            new Date(Date.now() + 24 * 60 * 60 * 1000)
+          ),
+          seatClass: seatClass,
+          seatPrice: seatPrice,
+        };
+
+        // Tạo booking mới
+        const newBookingRef = bookingRef.doc();
+        transaction.set(newBookingRef, newBooking);
+
+        // Cập nhật số ghế còn trống
+        const updateData = {
+          [`${seatClass}Seats.available`]: availableSeats - 1,
+        };
+        transaction.update(flightRef.doc(bookingData.flightId), updateData);
+
+        // Cập nhật mảng bookings của user - sử dụng userId từ bookingData
+        transaction.update(db.collection("users").doc(bookingData.userId), {
+          bookings: admin.firestore.FieldValue.arrayUnion(newBookingRef.id),
         });
-      }
 
-      // Generate seat number (you may want to implement your own logic)
-      const seatNumber = `${seatClass
-        .charAt(0)
-        .toUpperCase()}${availableSeats}`;
+        return { id: newBookingRef.id, ...newBooking };
+      });
 
-      // Tạo booking với đầy đủ thông tin theo model
-      const newBooking = {
-        userId: req.user.id,
-        flightId: bookingData.flightId,
-        passengerName: bookingData.passengerName,
-        passengerEmail: bookingData.passengerEmail,
-        bookingDate: new Date(),
-        status: "Active",
-        seatNumber: seatNumber, // Được tạo tự động bên controller
-        cancellationDeadline: new Date(Date.now() + 24 * 60 * 60 * 1000),
-        seatClass: seatClass,
-        seatPrice: seatPrice,
-      };
-
-      const docRef = await db.collection("bookings").add(newBooking);
-
-      // Thêm booking ID vào mảng bookings của user
-      await db
-        .collection("users")
-        .doc(req.user.id)
-        .update({
-          bookings: admin.firestore.FieldValue.arrayUnion(docRef.id),
-        });
-
-      // Cập nhật số ghế còn trống của chuyến bay
-      const updateData =
-        seatClass === "economy"
-          ? { "economySeats.available": flight.economySeats.available - 1 }
-          : { "businessSeats.available": flight.businessSeats.available - 1 };
-
-      await db
-        .collection("flights")
-        .doc(bookingData.flightId)
-        .update(updateData);
-
-      res.status(201).json({ id: docRef.id, ...newBooking });
+      res.status(201).json(bookingResult);
     } catch (error) {
       console.error("Detailed booking error:", {
         message: error.message,
@@ -103,7 +100,6 @@ const bookingController = {
     }
   },
 
-  // Lấy danh sách đặt vé của user
   getUserBookings: async (req, res) => {
     try {
       const bookingsSnapshot = await db
@@ -115,7 +111,6 @@ const bookingController = {
       for (const doc of bookingsSnapshot.docs) {
         const bookingData = doc.data();
 
-        // Lấy thông tin chuyến bay chi tiết
         const flightDoc = await db
           .collection("flights")
           .doc(bookingData.flightId)
@@ -134,34 +129,57 @@ const bookingController = {
     }
   },
 
-  // Hủy vé
   cancelBooking: async (req, res) => {
+    const bookingRef = db.collection("bookings");
+    const flightRef = db.collection("flights");
+
     try {
       const { id } = req.params;
-      const bookingDoc = await db.collection("bookings").doc(id).get();
 
-      if (!bookingDoc.exists) {
-        return res.status(404).json({ error: "Booking không tồn tại" });
-      }
+      // Sử dụng transaction để đảm bảo tính nhất quán
+      await db.runTransaction(async (transaction) => {
+        const bookingDoc = await transaction.get(bookingRef.doc(id));
 
-      const bookingData = bookingDoc.data();
+        if (!bookingDoc.exists) {
+          throw new Error("Booking không tồn tại");
+        }
 
-      // Get flight data before updating seats
-      const flightDoc = await db
-        .collection("flights")
-        .doc(bookingData.flightId)
-        .get();
-      const flight = flightDoc.data();
+        const bookingData = bookingDoc.data();
 
-      // Define the reference and update field correctly
-      const flightRef = db.collection("flights").doc(bookingData.flightId);
-      const seatUpdateField =
-        bookingData.seatClass === "business"
-          ? "businessSeats.available"
-          : "economySeats.available";
+        // Kiểm tra deadline hủy vé
+        if (bookingData.cancellationDeadline.toDate() < new Date()) {
+          throw new Error("Đã quá hạn hủy vé");
+        }
 
-      await flightRef.update({
-        [seatUpdateField]: seatUpdateValue,
+        // Kiểm tra trạng thái booking
+        if (bookingData.status === "Cancelled") {
+          throw new Error("Booking đã được hủy trước đó");
+        }
+
+        // Cập nhật số ghế trống của chuyến bay
+        const flightDoc = await transaction.get(
+          flightRef.doc(bookingData.flightId)
+        );
+        const flight = flightDoc.data();
+
+        const seatUpdateField = `${bookingData.seatClass}Seats.available`;
+        const currentAvailable =
+          flight[`${bookingData.seatClass}Seats`].available;
+
+        transaction.update(flightRef.doc(bookingData.flightId), {
+          [seatUpdateField]: currentAvailable + 1,
+        });
+
+        // Cập nhật trạng thái booking
+        transaction.update(bookingRef.doc(id), {
+          status: "Cancelled",
+          cancelledAt: admin.firestore.Timestamp.now(),
+        });
+
+        // Xóa booking ID khỏi mảng bookings của user
+        transaction.update(db.collection("users").doc(bookingData.userId), {
+          bookings: admin.firestore.FieldValue.arrayRemove(id),
+        });
       });
 
       res.json({ message: "Hủy booking thành công" });
