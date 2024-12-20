@@ -12,13 +12,13 @@ const ShoppingCart = () => {
   const [loading, setLoading] = useState(false);
   const [bookingStatus, setBookingStatus] = useState(null);
 
-  // Hàm chuyển đổi timestamp
-  const convertTimestamp = (timestamp) => {
-    if (timestamp && timestamp._seconds) {
-      return new Date(timestamp._seconds * 1000).toLocaleString();
-    }
-    return timestamp;
-  };
+  // // Hàm chuyển đổi timestamp
+  // const convertTimestamp = (timestamp) => {
+  //   if (timestamp && timestamp._seconds) {
+  //     return new Date(timestamp._seconds * 1000).toLocaleString();
+  //   }
+  //   return timestamp;
+  // };
 
   if (!bookingDetails) {
     return (
@@ -66,11 +66,8 @@ const ShoppingCart = () => {
         flightId: bookingDetails.flightId,
         passengerName: userData.username,
         passengerEmail: currentUser.email,
-        bookingDate: new Date(bookingDetails.bookingDate),
-        seatClass: bookingDetails.seatClass,
-        status: bookingDetails.status,
-        seatNumber: parseInt(bookingDetails.availableSeats),
-        cancellationDeadline: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        bookingDate: new Date(),
+        status: "Active",
         seatClass: bookingDetails.seatClass,
         seatPrice: parseFloat(bookingDetails.price),
       };

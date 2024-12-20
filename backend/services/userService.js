@@ -1,13 +1,12 @@
 // src/services/userService.js
-import { db } from "../config/firebase";
-import { doc, setDoc, getDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../config/firebase.js"; // Thêm .js vào
 
 const USERS_COLLECTION = "users";
 
 export const userService = {
   createUser: async (uid, userData) => {
     try {
-      await setDoc(doc(db, USERS_COLLECTION, uid), userData);
+      await db.collection(USERS_COLLECTION).doc(uid).set(userData);
     } catch (error) {
       console.error("Error creating user:", error);
       throw error;
@@ -16,11 +15,10 @@ export const userService = {
 
   getUserById: async (uid) => {
     try {
-      const userRef = doc(db, "users", uid);
-      const userSnap = await getDoc(userRef);
+      const userDoc = await db.collection(USERS_COLLECTION).doc(uid).get();
 
-      if (userSnap.exists()) {
-        return { id: userSnap.id, ...userSnap.data() };
+      if (userDoc.exists) {
+        return { id: userDoc.id, ...userDoc.data() };
       }
       return null;
     } catch (error) {
@@ -31,7 +29,7 @@ export const userService = {
 
   deleteUser: async (uid) => {
     try {
-      await deleteDoc(doc(db, USERS_COLLECTION, uid));
+      await db.collection(USERS_COLLECTION).doc(uid).delete();
     } catch (error) {
       console.error("Error deleting user:", error);
       throw error;

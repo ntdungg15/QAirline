@@ -3,20 +3,16 @@ import { admin } from "../config/firebase.js";
 
 const isAuth = async (req, res, next) => {
   try {
-    console.log("Headers:", req.headers); // Log toàn bộ headers
     const token = req.headers.authorization?.split("Bearer ")[1];
     if (!token) {
-      console.log("No token found in request");
       return res.status(401).json({ error: "No token provided" });
     }
 
-    console.log("Token received:", token); // Log token
     const decodedToken = await admin.auth().verifyIdToken(token);
-    console.log("Decoded token:", decodedToken); // Log decoded token
-    req.user = decodedToken;
+    req.user = decodedToken; // Lưu thông tin user đã decode vào req
     next();
   } catch (error) {
-    console.error("Detailed auth error:", error);
+    console.error("Auth error:", error);
     res.status(401).json({ error: "Invalid or expired token" });
   }
 };

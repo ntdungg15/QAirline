@@ -86,6 +86,17 @@ const Login = () => {
           formData.password
         );
 
+        // Lấy token từ Firebase
+        const token = await userCredential.user.getIdToken();
+
+        // Lưu thông tin cần thiết vào localStorage
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", userCredential.user.uid);
+        localStorage.setItem("user", JSON.stringify(userCredential.user));
+
+        console.log(token);
+        console.log(userCredential.user.uid);
+
         console.log("Đăng nhập thành công");
 
         // Lấy thông tin user và role

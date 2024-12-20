@@ -26,7 +26,6 @@ import LamThuTucTaiSanBay from "./pages/js/blogs/LamThuTucTaiSanBay";
 import Payment from "./components/js/pay";
 import FillData from "./components/js/filldata";
 
-
 import { authService } from "./services/auth";
 // import Register from './components/js/register';
 
@@ -43,7 +42,8 @@ const App = () => {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/user-dashboard" element={<UserDashboard />} />
           <Route path="/user/book-ticket" element={<BookTicket />} />
-          <Route path="user/shopping-cart" element={<ShoppingCart />} />
+          <Route path="/user/shopping-cart" element={<ShoppingCart />} />
+
           {/* Redirect to saved path or home */}
           <Route path="*" element={<Navigate to={savedPath} replace />} />
 
@@ -54,18 +54,25 @@ const App = () => {
 
           <Route path="/blog/lam-thu-tuc" element={<LamThuTuc />} />
           <Route path="/blog/thong-tin-hanh-ly" element={<ThongTinHanhLy />} />
-          <Route path="/blog/san-bay-noi-chuyen" element={<SanBayNoiChuyen />} />
+          <Route
+            path="/blog/san-bay-noi-chuyen"
+            element={<SanBayNoiChuyen />}
+          />
           <Route path="/blog/yeu-cau-giay-to" element={<YeuCauGiayTo />} />
-          <Route path="/blog/lam-thu-tuc-truc-tuyen" element={<LamThuTucTrucTuyen />} />
-          <Route path="/blog/lam-thu-tuc-tai-san-bay" element={<LamThuTucTaiSanBay />} />
+          <Route
+            path="/blog/lam-thu-tuc-truc-tuyen"
+            element={<LamThuTucTrucTuyen />}
+          />
+          <Route
+            path="/blog/lam-thu-tuc-tai-san-bay"
+            element={<LamThuTucTaiSanBay />}
+          />
 
           <Route path="/payment" element={<Payment />} />
           <Route path="/filldata" element={<FillData />} />
         </Routes>
       </div>
     </Router>
-
-
   );
 };
 

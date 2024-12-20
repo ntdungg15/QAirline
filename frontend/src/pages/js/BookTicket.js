@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/bookTicket.css";
 import { LocationInput } from "../../components/js/locationComponent.js";
+import { useBookTicket } from "../../hooks/useBookTicket.js";
 
 const BookTicket = () => {
   const location = useLocation();
@@ -11,102 +12,22 @@ const BookTicket = () => {
   const fromLocation = queryParams.get("from");
   const toLocation = queryParams.get("to");
 
-  // State
-  const [flights, setFlights] = useState([]);
-  const [filteredFlights, setFilteredFlights] = useState([]);
-  const [selectedFlight, setSelectedFlight] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState("flight");
-  const [locations, setLocations] = useState({
-    fromLocation: "",
-    toLocation: "",
-  });
-  const [selectedClass, setSelectedClass] = useState(""); // State khai báo tại đây
-
-  // Effect: Fetch flights
-  useEffect(() => {
-    const fetchFlights = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/flights");
-        setFlights(response.data);
-      } catch (error) {
-        console.error("Error fetching flights:", error);
-        setError("Đã xảy ra lỗi khi tìm kiếm chuyến bay.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFlights();
-  }, []);
-
-  // Effect: Filter flights
-  useEffect(() => {
-    const filtered = flights.filter(
-      (flight) => flight.from === fromLocation && flight.to === toLocation
-    );
-    setFilteredFlights(filtered);
-  }, [flights, fromLocation, toLocation]);
-
-  // Handlers
-  const handleSelectClass = (flight, seatClass) => {
-    setSelectedFlight(flight);
-    setSelectedClass(seatClass);
-  };
-
-  const handleFromLocationSelect = (from) => {
-    setLocations((prev) => ({ ...prev, fromLocation: from }));
-  };
-
-  const handleToLocationSelect = (to) => {
-    setLocations((prev) => ({ ...prev, toLocation: to }));
-  };
-
-  const handleSearchFlights = () => {
-    const filtered = flights.filter(
-      (flight) =>
-        flight.from === locations.fromLocation &&
-        flight.to === locations.toLocation
-    );
-    setFilteredFlights(filtered);
-  };
-
-  const handleBookTicket = () => {
-    if (selectedFlight && selectedClass) {
-      const bookingDetails = {
-        flight: {
-          ...selectedFlight,
-          departureTime: selectedFlight.departureTime,
-          arrivalTime: selectedFlight.arrivalTime,
-          flightNumber: selectedFlight.flightNumber,
-          from: selectedFlight.from,
-          to: selectedFlight.to,
-        },
-        seatClass: selectedClass,
-        price:
-          selectedClass === "economy"
-            ? Number(selectedFlight.economySeats.price)
-            : Number(selectedFlight.businessSeats.price),
-        availableSeats:
-          selectedClass === "economy"
-            ? selectedFlight.economySeats.available
-            : selectedFlight.businessSeats.available,
-        bookingDate: new Date().toISOString(),
-        status: "Active",
-        flightId: selectedFlight.id,
-      };
-
-      navigate("/user/shopping-cart", {
-        state: { bookingDetails },
-      });
-    }
-  };
-
-  // Loading state
-  if (loading) {
-    return <div className="loading">Đang tải...</div>;
-  }
+  const {
+    flights,
+    filteredFlights,
+    selectedFlight,
+    selectedClass,
+    loading,
+    error,
+    activeTab,
+    locations,
+    handleFromLocationSelect,
+    handleToLocationSelect,
+    handleSelectClass,
+    handleSearchFlights,
+    handleBookTicket,
+    setActiveTab,
+  } = useBookTicket(fromLocation, toLocation);
 
   return (
     <div className="flight-results-container">
@@ -334,9 +255,7 @@ const BookTicket = () => {
                 </div>
                 {selectedFlight?.id === flight.id && selectedClass && (
                   <div className="book-ticket-container">
-                    <button className="select-ticket" >
-                      Chọn vé
-                    </button>
+                    <button className="select-ticket">Chọn vé</button>
                   </div>
                 )}
               </div>
