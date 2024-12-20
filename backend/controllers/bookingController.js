@@ -81,8 +81,17 @@ const bookingController = {
 
       res.status(201).json({ id: docRef.id, ...newBooking });
     } catch (error) {
-      console.error("Booking error:", error);
-      res.status(500).json({ error: error.message });
+      console.error("Detailed booking error:", {
+        message: error.message,
+        stack: error.stack,
+        requestBody: req.body,
+        user: req.user,
+      });
+      res.status(500).json({
+        error: error.message || "Internal server error",
+        details:
+          process.env.NODE_ENV === "development" ? error.stack : undefined,
+      });
     }
   },
 

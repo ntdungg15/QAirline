@@ -12,6 +12,14 @@ const ShoppingCart = () => {
   const [loading, setLoading] = useState(false);
   const [bookingStatus, setBookingStatus] = useState(null);
 
+  // Hàm chuyển đổi timestamp
+  const convertTimestamp = (timestamp) => {
+    if (timestamp && timestamp._seconds) {
+      return new Date(timestamp._seconds * 1000).toLocaleString();
+    }
+    return timestamp;
+  };
+
   if (!bookingDetails) {
     return (
       <div className="no-booking">
@@ -46,8 +54,7 @@ const ShoppingCart = () => {
         return;
       }
 
-      console.log("User ID:", currentUser.uid); // Debug log
-
+      // Lấy thông tin người dùng
       const userData = await userService.getUserById(currentUser.uid);
       if (!userData) {
         throw new Error("Không tìm thấy thông tin người dùng");
@@ -55,18 +62,17 @@ const ShoppingCart = () => {
 
       // Sử dụng dữ liệu từ bookingDetails
       const bookingData = {
+        userId: currentUser.uid,
         flightId: bookingDetails.flightId,
-        passengerName: userData.name,
+        passengerName: userData.username,
         passengerEmail: currentUser.email,
+        bookingDate: new Date(bookingDetails.bookingDate),
         seatClass: bookingDetails.seatClass,
-        bookingDate: bookingDetails.bookingDate,
         status: bookingDetails.status,
-        // Thêm thông tin chuyến bay
-        flightNumber: bookingDetails.flight.flightNumber,
-        departureTime: bookingDetails.flight.departureTime,
-        arrivalTime: bookingDetails.flight.arrivalTime,
-        from: bookingDetails.flight.from,
-        to: bookingDetails.flight.to,
+        seatNumber: parseInt(bookingDetails.availableSeats),
+        cancellationDeadline: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        seatClass: bookingDetails.seatClass,
+        seatPrice: parseFloat(bookingDetails.price),
       };
 
       // Validate dữ liệu
@@ -78,6 +84,10 @@ const ShoppingCart = () => {
       ) {
         throw new Error("Thiếu thông tin đặt vé");
       }
+
+      // Log chi tiết request
+      console.log("Token:", await currentUser.getIdToken());
+      console.log("Complete booking data:", bookingData);
 
       const response = await axios.post(
         `http://localhost:3000/api/bookings`,

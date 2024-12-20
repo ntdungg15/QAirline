@@ -13,6 +13,14 @@ import UserDashboard from "./pages/js/UserDashboard";
 import BookTicket from "./pages/js/BookTicket";
 import ShoppingCart from "./pages/js/ShoppingCart";
 
+
+import About from "./pages/js/About";
+import Explore from "./pages/js/Explore";
+import Booking from "./pages/js/Booking";
+import Payment from "./components/js/pay";
+import FillData from "./components/js/filldata";
+
+
 import { authService } from "./services/auth";
 // import Register from './components/js/register';
 

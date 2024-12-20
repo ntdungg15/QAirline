@@ -57,6 +57,11 @@ const Login = () => {
             email: formData.email,
             password: formData.password,
             firebaseUid: userCredential.user.uid, // Thêm Firebase UID
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${await userCredential.user.getIdToken()}`,
+            },
           }
         );
 

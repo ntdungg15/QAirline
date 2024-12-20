@@ -5,7 +5,7 @@ const userController = {
   // Đăng ký người dùng
   register: async (req, res) => {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, firebaseUid } = req.body;
 
       // Kiểm tra email đã tồn tại
       const existingUser = await db
@@ -26,10 +26,10 @@ const userController = {
         bookings: [],
       };
 
-      const docRef = await db.collection("users").add(userData);
+      await db.collection("users").doc(firebaseUid).set(userData);
 
       res.status(201).json({
-        id: docRef.id,
+        id: firebaseUid,
         username,
         email,
         role: userData.role,
