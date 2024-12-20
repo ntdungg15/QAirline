@@ -255,9 +255,7 @@ const BookTicket = () => {
                 </div>
                 {selectedFlight?.id === flight.id && selectedClass && (
                   <div className="book-ticket-container">
-                    <button className="book-ticket" onClick={handleBookTicket}>
-                      Tiếp tục đặt vé
-                    </button>
+                    <button className="select-ticket">Chọn vé</button>
                   </div>
                 )}
               </div>
