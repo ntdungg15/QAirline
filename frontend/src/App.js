@@ -12,7 +12,7 @@ import AdminDashboard from "./pages/js/AdminDashboard";
 import UserDashboard from "./pages/js/UserDashboard";
 import BookTicket from "./pages/js/BookTicket";
 import ShoppingCart from "./pages/js/ShoppingCart";
-
+import InforUser from "./pages/js/inforUser";
 
 import About from "./pages/js/About";
 import Explore from "./pages/js/Explore";
@@ -47,7 +47,7 @@ const App = () => {
           {/* Redirect to saved path or home */}
           <Route path="*" element={<Navigate to={savedPath} replace />} />
 
-          
+          <Route path="/infor-user" element={<InforUser />} />
           <Route path="/about" element={<About />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/booking" element={<Booking />} />

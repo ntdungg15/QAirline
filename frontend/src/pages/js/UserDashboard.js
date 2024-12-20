@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import videoFile from "../img/backairport.mp4";
 import logo from "../img/pngwing.com.png";
@@ -38,7 +38,34 @@ const Landingpage = () => {
   const handleBookingClick = () => {
     window.location.href = "/booking";
   };
+  // dũng test account
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Đóng dropdown khi click ra ngoài
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleAccountInfoClick = () => {
+    // navigate("/infor-user");
+    window.location.href = "/infor-user";
+
+  };
 
   return (
     <div className="landingpage-container">
@@ -79,8 +106,16 @@ const Landingpage = () => {
                 Đặt vé
               </a>
             </div>
-            <div className="account">
-              <a href="#acc" className="account-link">
+
+            <div className="account" style={{ position: "relative" }} ref={dropdownRef}>
+              <a
+                href="#acc"
+                className="account-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleDropdown();
+                }}
+              >
                 <img
                   src={userImage}
                   alt="Avatar"
@@ -92,18 +127,46 @@ const Landingpage = () => {
                     marginRight: "10px",
                   }}
                 />
-                {/* {user.name} */}
               </a>
+              {isDropdownOpen && (
+                <div
+                  className="dropdown-menu"
+                  style={{
+                    position: "absolute",
+                    top: "50px",
+                    right: "0",
+                    backgroundColor: "#fff",
+                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                    borderRadius: "8px",
+                    zIndex: 1000,
+                    padding: "10px",
+                    minWidth: "150px",
+                  }}
+                >
+                  <ul
+                    style={{
+                      listStyleType: "none",
+                      margin: 0,
+                      padding: 0,
+                    }}
+                  >
+                    <li style={{ padding: "8px 0", cursor: "pointer" }} onClick={handleAccountInfoClick}
+                    >Thông tin tài khoản</li>
+                    <li style={{ padding: "8px 0", cursor: "pointer" }}>Cài đặt</li>
+                    <li style={{ padding: "8px 0", cursor: "pointer" }}>Đăng xuất</li>
+                  </ul>
+                </div>
+              )}
             </div>
+
           </div>
 
           <div className="post-image">
             {posts.map((post, index) => (
               <div
                 key={post._id}
-                className={`post-item-img ${
-                  index === currentIndex ? "active" : ""
-                }`}
+                className={`post-item-img ${index === currentIndex ? "active" : ""
+                  }`}
               >
                 <img src={post.imageUrl} alt="Post" />
                 <p className="post-description">{post.description}</p>

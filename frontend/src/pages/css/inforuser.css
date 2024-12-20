@@ -1,0 +1,69 @@
+/* Tổng quan container */
+.account-info-container {
+    width: 80vw;
+    height: 60vh;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Tiêu đề */
+  .account-info-header {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Card chứa thông tin */
+  .account-info-card {
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Row chứa từng mục thông tin */
+  .account-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Label và Value */
+  .account-info-label {
+    font-weight: bold;
+    color: #555555;
+    flex: 1;
+  }
+  
+  .account-info-value {
+    flex: 2;
+    text-align: right;
+    color: #333333;
+  }
+  
+  /* Nút chỉnh sửa */
+  .account-info-edit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .account-info-edit-button:hover {
+    background-color: #0056b3;
+  }
+  
