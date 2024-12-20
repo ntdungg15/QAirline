@@ -15,7 +15,7 @@
 
 .header-booking {
   background: linear-gradient(135deg, #1b2333, #3c2d46);
-  /* -webkit-background-clip: text; */
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 18px;
   font-weight: bold;
@@ -53,12 +53,13 @@
   /* background-color: #cca300; */
 }
 
-/* .flight-list {
+.flight-list {
   /* display: flex; */
-/* align-items: center;
+  /* align-items: center;
     justify-content: center; */
-/* height: 30%;
+  /* height: 30%;
     width: 80%; */
+}
 
 .flight-card {
   background: #fff;
@@ -159,6 +160,18 @@
 .price-cards {
   display: flex;
   gap: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.price-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.price-card.selected {
+  border: 4px solid #d20d17;
+  background-color: rgba(0, 123, 255, 0.1);
 }
 
 .price-card {

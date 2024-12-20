@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "../css/Login.css";
 import { auth } from "../../config/firebase";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { authService } from "../../services/auth";
 
 const Login = () => {
@@ -14,6 +15,7 @@ const Login = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const [error, setError] = useState("");
@@ -23,7 +25,6 @@ const Login = () => {
     e.preventDefault();
     setError("");
 
-    // Kiểm tra thông tin đầu vào
     if (!formData.email || !formData.password) {
       setError("Vui lòng điền đầy đủ thông tin!");
       return;
@@ -31,27 +32,60 @@ const Login = () => {
 
     try {
       if (isSignUp) {
-        // Kiểm tra thêm trường name khi đăng ký
         if (!formData.name) {
           setError("Vui lòng nhập tên để đăng ký!");
           return;
         }
 
-        // Đăng ký
-        await authService.register(
-          formData.name,
-          formData.email,
-          formData.password,
-          formData.comfirmPassword
-        );
-        console.log("Đăng ký thành công");
-      } else {
-        // Đăng nhập
-        await signInWithEmailAndPassword(
+        if (formData.password !== formData.confirmPassword) {
+          setError("Mật khẩu và xác nhận mật khẩu không khớp!");
+          return;
+        }
+
+        // Tạo Firebase auth user trước
+        const userCredential = await createUserWithEmailAndPassword(
           auth,
           formData.email,
           formData.password
         );
+
+        // Sau đó tạo user trong backend
+        const response = await axios.post(
+          "http://localhost:3000/api/register",
+          {
+            username: formData.name,
+            email: formData.email,
+            password: formData.password,
+            firebaseUid: userCredential.user.uid, // Thêm Firebase UID
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${await userCredential.user.getIdToken()}`,
+            },
+          }
+        );
+
+        if (response.status === 201) {
+          console.log("Đăng ký thành công");
+          // Sau khi đăng ký thành công, tự động đăng nhập
+          await signInWithEmailAndPassword(
+            auth,
+            formData.email,
+            formData.password
+          );
+          const user = auth.currentUser;
+          localStorage.setItem("user", JSON.stringify(user));
+          navigate("/user-dashboard");
+          localStorage.setItem("currentPath", "/user-dashboard");
+        }
+      } else {
+        // Đăng nhập vẫn giữ nguyên logic cũ
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+
         console.log("Đăng nhập thành công");
 
         // Lấy thông tin user và role
@@ -59,26 +93,36 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(user)); // Lưu thông tin người dùng
         const role = await authService.getUserRole(user.uid);
 
-        // Chuyển hướng dựa trên role
         if (role === "admin") {
           navigate("/admin-dashboard");
-        } else if (role === "user") {
-          navigate("/user-dashboard");
+          localStorage.setItem("currentPath", "/admin-dashboard");
         } else {
-          setError("Role không hợp lệ");
+          navigate("/user-dashboard");
+          localStorage.setItem("currentPath", "/user-dashboard");
         }
-        localStorage.setItem(
-          "currentPath",
-          role === "admin" ? "/admin-dashboard" : "/user-dashboard"
-        );
       }
     } catch (error) {
-      console.error("Lỗi:", error.message);
-      setError(
-        isSignUp
-          ? "Đăng ký không thành công. Vui lòng thử lại."
-          : "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin."
-      );
+      if (error.response?.data?.error) {
+        setError(error.response.data.error);
+      } else if (error.code) {
+        // Handle Firebase Auth errors
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            setError("Email đã được đăng ký");
+            break;
+          case "auth/wrong-password":
+            setError("Sai mật khẩu");
+            break;
+          case "auth/user-not-found":
+            setError("Không tìm thấy tài khoản với email này");
+            break;
+          case "auth/invalid-email":
+            setError("Email không hợp lệ");
+            break;
+          default:
+            setError("Đăng nhập không thành công. Vui lòng thử lại.");
+        }
+      }
     }
   };
 
@@ -91,7 +135,8 @@ const Login = () => {
 
   const toggleMode = () => {
     setIsSignUp(!isSignUp);
-    setError(""); // Reset lỗi khi đổi chế độ
+    console.log(isSignUp);
+    setError("");
   };
 
   return (
@@ -116,28 +161,41 @@ const Login = () => {
               </a>
             </div>
             <span>or use your email for registration</span>
-            <input className="input-login" 
+            <input
+              className="input-login"
               type="text"
               name="name"
               placeholder="Name"
               value={formData.name}
               onChange={handleChange}
             />
-            <input className="input-login"
+            <input
+              className="input-login"
               type="email"
               name="email"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
             />
-            <input className="input-login" 
+            <input
+              className="input-login"
               type="password"
               name="password"
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
             />
-            <button className="button-login" type="submit">Sign Up</button>
+            <input
+              className="input-login"
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+            <button className="button-login" type="submit">
+              Sign Up
+            </button>
           </form>
         </div>
         <div className="form-container sign-in">
@@ -159,14 +217,16 @@ const Login = () => {
               </a>
             </div>
             <span>or use your email password</span>
-            <input className="input-login"
+            <input
+              className="input-login"
               type="email"
               name="email"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
             />
-            <input className="input-login"
+            <input
+              className="input-login"
               type="password"
               name="password"
               placeholder="Password"
@@ -174,14 +234,18 @@ const Login = () => {
               onChange={handleChange}
             />
             <a href="#">Forget Your Password?</a>
-            <button className="button-login" type="submit">Sign In</button>
+            <button className="button-login" type="submit">
+              Sign In
+            </button>
           </form>
         </div>
         <div className="toggle-container">
           <div className="toggle">
             <div className="toggle-panel toggle-left">
               <h1>Welcome Back!</h1>
-              <p className="abc">Enter your personal details to use all of site features</p>
+              <p className="abc">
+                Enter your personal details to use all of site features
+              </p>
               <button className="button-login" onClick={toggleMode}>
                 Sign In
               </button>

@@ -22,7 +22,7 @@ const Landingpage = () => {
   };
 
   const handleBookingClick = () => {
-    window.location.href = '/booking';
+    window.location.href = "/booking";
   };
   const [activeTab, setActiveTab] = useState("flight"); // Khởi tạo state cho tab
   const handleTabClick = (tab) => {
@@ -36,7 +36,7 @@ const Landingpage = () => {
   const handleExploreClick = () => {
     window.location.href = "/explore";
   };
-  
+
   const [locations, setLocations] = useState({
     fromLocation: "",
     toLocation: "",
@@ -71,8 +71,6 @@ const Landingpage = () => {
       console.error("Logout failed", error);
     }
   };
-
-
 
   const [videoOffset, setVideoOffset] = useState(0);
 
@@ -111,7 +109,7 @@ const Landingpage = () => {
     if (posts.length > 0) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
-      }, 3000);
+      }, 5000);
 
       return () => clearInterval(interval); // Clean up khi component bị hủy
     }
@@ -147,7 +145,11 @@ const Landingpage = () => {
                 Thông tin hành trình
               </a>
 
-              <a href="#explore" onClick={handleExploreClick} className="nav-link">
+              <a
+                href="#explore"
+                onClick={handleExploreClick}
+                className="nav-link"
+              >
                 Khám phá
               </a>
 
@@ -171,15 +173,15 @@ const Landingpage = () => {
                 Sign Up
               </a>
             </div>
-            
           </div>
 
           <div className="post-image">
             {posts.map((post, index) => (
               <div
                 key={post._id}
-                className={`post-item-img ${index === currentIndex ? "active" : ""
-                  }`}
+                className={`post-item-img ${
+                  index === currentIndex ? "active" : ""
+                }`}
               >
                 <img src={post.imageUrl} alt="Post" />
                 <p className="post-description">{post.description}</p>

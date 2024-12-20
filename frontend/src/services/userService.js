@@ -16,9 +16,11 @@ export const userService = {
 
   getUserById: async (uid) => {
     try {
-      const userDoc = await getDoc(doc(db, USERS_COLLECTION, uid));
-      if (userDoc.exists()) {
-        return { id: userDoc.id, ...userDoc.data() };
+      const userRef = doc(db, "users", uid);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        return { id: userSnap.id, ...userSnap.data() };
       }
       return null;
     } catch (error) {
