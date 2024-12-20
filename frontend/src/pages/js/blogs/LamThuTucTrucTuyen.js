@@ -7,7 +7,7 @@ const About = () => {
   return (
     <div className="about-container">
       <button className="back-button" onClick={() => navigate("/blog/lam-thu-tuc")}>
-        &lt;
+        &#8678;
       </button>
       <h1>Thông tin hành trình</h1>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import '../../css/Blog.css';
+import  bgImg from '../../img/lamthutuctaisanbay1.jpg';
 import { useNavigate } from "react-router-dom";
 
 const About = () => {
@@ -8,10 +9,11 @@ const About = () => {
   return (
     <div>
       <button className="back-button" onClick={() => navigate("/blog/lam-thu-tuc")}>
-        &lt;
+        &#8678; 
       </button>
       <div className="blog-container">
         <h1>Làm thủ tục tại sân bay</h1>
+        <img src={bgImg}></img>
         <p>Để hành trình với Bamboo Airways được bắt đầu suôn sẻ và thuận lợi, Quý khách vui lòng lưu ý một số thông tin dưới đây khi làm thủ tục tại sân bay: </p>
         <h2>Hướng dẫn làm thủ tục tại sân bay </h2>
         
@@ -67,6 +69,78 @@ const About = () => {
         <p>
           Với mong muốn cung cấp cho khách hàng sự thuận tiện và thoải mái nhất từ khi làm thủ tục cho đến khi hoàn thành chuyến bay, Bamboo Airways đem đến những tiện ích của các dịch vụ làm thủ tục như sau: 
         </p>
+
+        <div>
+          <h2>
+            Thời gian mở, đóng quầy của các hình thức làm thủ tục
+          </h2>
+          <table className="blog-table">
+            <thead>
+              <tr>
+                <th>Hình thức làm thủ tục</th>
+                <th>Thời gian mở chuyến bay</th>
+                <th>Thời gian đóng chuyến so với giờ khởi hành dự kiến</th>
+                <th>Chuyến bay nội địa</th>
+                <th>Chuyến bay quốc tế</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Làm thủ tục tại quầy Kiosk</td>
+                <td>Trong vòng 24 giờ</td>
+                <td>– 40 phút</td>
+                <td>Áp dụng</td>
+                <td>Không áp dụng</td>
+              </tr>
+              <tr>
+                <td>Làm thủ tục trực tuyến</td>
+                <td>Trong vòng 24 giờ</td>
+                <td>– 60 phút</td>
+                <td>Áp dụng</td>
+                <td>Không áp dụng</td>
+              </tr>
+              <tr>
+                <td>Làm thủ tục qua thiết bị di động</td>
+                <td>Trong vòng 24 giờ</td>
+                <td>– 60 phút</td>
+                <td>Áp dụng</td>
+                <td>Không áp dụng</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>
+            Thời gian mở quầy, đóng quầy và đóng cửa khởi hành tại sân bay
+          </h2>
+          <table className="blog-table">
+            <thead>
+              <tr>
+                <th>Loại chuyến bay</th>
+                <th>Thời gian mở quầy</th>
+                <th>Thời gian đóng quầy</th>
+                <th>Lưu ý khác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Chuyến bay nội địa</td>
+                <td>– 02 giờ</td>
+                <td>– 40 phút</td>
+                <td>
+                  Đối với khách hạng Business, khách là thành viên thẻ First của Bamboo Club: thời gian đóng quầy là 35 phút trước giờ khởi hành dự kiến.
+                </td>
+              </tr>
+              <tr>
+                <td>Chuyến bay quốc tế</td>
+                <td>– 03 giờ</td>
+                <td>– 50 phút hoặc – 60 phút</td>
+                <td>
+                  Thông thường, các chuyến bay quốc tế sẽ đóng quầy 50 phút trước giờ khởi hành dự kiến. Tuy nhiên, quầy làm thủ tục cho các chuyến bay của Bamboo Airways tại một số sân bay quốc tế sẽ đóng cửa 60 phút trước giờ khởi hành.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       
 
