@@ -1,0 +1,33 @@
+.explore-container > div {
+  max-width: 70vw;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 100px;
+  height: 80vh;
+}
+
+.explore-container h1 {
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.explore-container .section:nth-child(1) {
+  background-image: url('../img/uudai.jpg');
+}
+
+.explore-container .section:nth-child(2) {
+  background-image: url('../img/quanlydatcho.jpg');
+}
+
+.explore-container .section:nth-child(3) {
+  background-image: url('../img/dieukiengia.jpg');
+}
+
+.explore-container .section:nth-child(4) {
+  background-image: url('../img/dichvubotro.jpg');
+}

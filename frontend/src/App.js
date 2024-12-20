@@ -12,6 +12,11 @@ import AdminDashboard from "./pages/js/AdminDashboard";
 import UserDashboard from "./pages/js/UserDashboard";
 import BookTicket from "./pages/js/BookTicket";
 import ShoppingCart from "./pages/js/ShoppingCart";
+import About from "./pages/js/About";
+import Explore from "./pages/js/Explore";
+import Booking from "./pages/js/Booking";
+import Payment from "./components/js/pay";
+import FillData from "./components/js/filldata";
 
 import { authService } from "./services/auth";
 // import Register from './components/js/register';
@@ -32,6 +37,11 @@ const App = () => {
           <Route path="user/shopping-cart" element={<ShoppingCart />} />
           {/* Redirect to saved path or home */}
           <Route path="*" element={<Navigate to={savedPath} replace />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/filldata" element={<FillData />} />
         </Routes>
       </div>
     </Router>

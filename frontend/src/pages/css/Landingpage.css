@@ -114,15 +114,15 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0; /* Ẩn mặc định */
-  transition: opacity 1s ease-in-out;
+  opacity: 0; 
+  transition: opacity 1.8s ease-in-out;
   z-index: -1; /* Hiệu ứng mờ dần */
 }
 
 .post-item-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Đảm bảo ảnh luôn phù hợp với khung */
+  object-fit: cover; 
 }
 
 /* Mô tả bài đăng */
@@ -141,13 +141,9 @@ body {
 
 /* Ảnh được active sẽ hiện lên */
 .post-item-img.active {
-  opacity: 1; /* Ảnh được chọn sẽ hiện lên */
-  z-index: -1; /* Đưa ảnh active lên trên cùng */
+  opacity: 1; 
+  z-index: -1; 
 }
-
-
-
-
 
 
 .post-button{

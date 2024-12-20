@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import videoFile from "../img/backairport.mp4";
 import logo from "../img/pngwing.com.png";
 import "../img/post.jpg";
 import "../css/Landingpage.css";

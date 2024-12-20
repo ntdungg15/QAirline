@@ -1,0 +1,270 @@
+.flight-results-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #5281c8, #b6fbff);
+  background-size: cover;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  color: #333;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.header-booking {
+  background: linear-gradient(135deg, #1b2333, #3c2d46);
+  /* -webkit-background-clip: text; */
+  -webkit-text-fill-color: transparent;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #666;
+}
+
+.no-flights {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Flight card styles */
+.flight-list-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 80vw;
+  margin-bottom: 70px;
+  /* background-color: #cca300; */
+}
+
+/* .flight-list {
+  /* display: flex; */
+/* align-items: center;
+    justify-content: center; */
+/* height: 30%;
+    width: 80%; */
+
+.flight-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Flight info section */
+.flight-info {
+  flex: 1;
+}
+
+.flight-times {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.departure,
+.arrival {
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+.code {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 4px 0;
+}
+
+.terminal {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Flight line */
+.flight-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 40px;
+}
+
+.flight-type {
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.dotted-line {
+  width: 120px;
+  border-top: 2px dotted #ccc;
+}
+
+/* Flight details */
+.flight-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.duration,
+.airline {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.view-details {
+  color: #0066cc;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.view-details:hover {
+  text-decoration: underline;
+}
+
+/* Price cards */
+.price-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.price-card {
+  width: 180px;
+  padding: 16px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.price-card.economy {
+  background-color: #4caf50;
+}
+
+.price-card.business {
+  background-color: #003366;
+}
+
+.seats-left {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.class-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.price-label {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.currency {
+  font-size: 14px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .flight-card {
+    flex-direction: column;
+  }
+
+  .price-cards {
+    margin-top: 20px;
+    flex-direction: column;
+  }
+
+  .price-card {
+    width: 100%;
+  }
+
+  .flight-times {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .flight-line {
+    margin: 20px 0;
+  }
+}
+
+/* Book ticket button styles */
+.book-ticket-container {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.book-ticket {
+  margin-right: 10%;
+  width: 15%;
+  background-color: #1e90ff;
+  color: #fff;
+  font-size: 16px;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.book-ticket:hover {
+  background-color: #104e8b;
+  /* transform: scale(1.05); */
+}
+
+.book-ticket:active {
+  background-color: #0b3d6b;
+  transform: scale(1);
+}
+
+.footer-book-ticket {
+  margin-top: 100px;
+}
