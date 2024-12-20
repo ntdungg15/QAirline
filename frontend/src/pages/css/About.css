@@ -36,11 +36,30 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+.section.active {
+  transform: scale(1.2);
+  background-color: #e0f7fa;
+}
+
+.section-description {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .section h2 {
-  text-align: left;
+  text-align: center;
   color: #fff;
   margin-bottom: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  width: 60%;
 }
 
 .section p {

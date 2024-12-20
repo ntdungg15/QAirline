@@ -1,32 +1,26 @@
 import React from "react";
-import "../css/About.css";
 import { useNavigate } from "react-router-dom";
 
 const About = () => {
   const navigate = useNavigate();
   
   return (
-    <div className="about-container">
-      <button className="back-button" onClick={() => navigate("/")}>
+    <div className="lamthutuc-container">
+      <button className="back-button" onClick={() => navigate("/about")}>
         &lt;
       </button>
-      <h1>Thông tin hành trình</h1>
+      <h1>Làm Thủ Tục</h1>
       
       <div className="grid-container">
         <div className="section">
-          <h2 onClick={() => navigate("/blog/lam-thu-tuc")}>Làm thủ tục</h2>
+          <h2 onClick={() => navigate("/blog/lam-thu-tuc-truc-tuyen")}>Làm thủ tục trực tuyến</h2>
         </div>
         <div className="section">
-          <h2 onClick={() => navigate("/blog/thong-tin-hanh-ly")}>Thông tin hành lý</h2>
+          <h2 onClick={() => navigate("/blog/lam-thu-tuc-tai-san-bay")}>Làm thủ tục tại sân bay</h2>
         </div>
         <div className="section">
-          <h2 onClick={() => navigate("/blog/san-bay-noi-chuyen")}>
-            Sân bay & Nối chuyến
-          </h2>
-        </div>
-        <div className="section">
-          <h2 onClick={() => navigate("/blog/yeu-cau-giay-to")}>
-            Yêu cầu giấy tờ
+          <h2 onClick={() => navigate("/blog/quay-lam-thu-tuc-tu-dong")}>
+            Quầy làm thủ tục tự động
           </h2>
         </div>
       </div>
