@@ -16,7 +16,6 @@ import saleimg from "../img/saleimg.png";
 import flc from "../img/flc.png";
 import nhatrang from "../img/nhatrang.jpg";
 
-
 const Landingpage = () => {
   const {
     locations,
@@ -68,7 +67,6 @@ const Landingpage = () => {
   const handleAccountInfoClick = () => {
     // navigate("/infor-user");
     window.location.href = "/infor-user";
-
   };
 
   return (
@@ -99,7 +97,11 @@ const Landingpage = () => {
               <a href="#about" onClick={handleAboutClick} className="nav-link">
                 Thông tin hành trình
               </a>
-              <a href="#explore" onClick={handleExploreClick} className="nav-link">
+              <a
+                href="#explore"
+                onClick={handleExploreClick}
+                className="nav-link"
+              >
                 Khám phá
               </a>
               <a
@@ -111,7 +113,11 @@ const Landingpage = () => {
               </a>
             </div>
 
-            <div className="account" style={{ position: "relative" }} ref={dropdownRef}>
+            <div
+              className="account"
+              style={{ position: "relative" }}
+              ref={dropdownRef}
+            >
               <a
                 href="#acc"
                 className="account-link"
@@ -154,23 +160,34 @@ const Landingpage = () => {
                       padding: 0,
                     }}
                   >
-                    <li style={{ padding: "8px 0", cursor: "pointer" }} onClick={handleAccountInfoClick}
-                    >Thông tin tài khoản</li>
-                    <li style={{ padding: "8px 0", cursor: "pointer" }}>Cài đặt</li>
-                    <li style={{ padding: "8px 0", cursor: "pointer" }}>Đăng xuất</li>
+                    <li
+                      style={{ padding: "8px 0", cursor: "pointer" }}
+                      onClick={handleAccountInfoClick}
+                    >
+                      Thông tin tài khoản
+                    </li>
+                    <li style={{ padding: "8px 0", cursor: "pointer" }}>
+                      Cài đặt
+                    </li>
+                    <li
+                      style={{ padding: "8px 0", cursor: "pointer" }}
+                      onClick={handleLogout}
+                    >
+                      Đăng xuất
+                    </li>
                   </ul>
                 </div>
               )}
             </div>
-
           </div>
 
           <div className="post-image">
             {posts.map((post, index) => (
               <div
                 key={post._id}
-                className={`post-item-img ${index === currentIndex ? "active" : ""
-                  }`}
+                className={`post-item-img ${
+                  index === currentIndex ? "active" : ""
+                }`}
               >
                 <img src={post.imageUrl} alt="Post" />
                 <p className="post-description">{post.description}</p>
@@ -371,17 +388,22 @@ const Landingpage = () => {
               <p>Ưu đãi</p>
             </div>
             <div className="tips">
-              Tips: Tham khảo <a href="#" className="tips-link">các ưu đãi</a> hấp dẫn!
+              Tips: Tham khảo{" "}
+              <a href="#" className="tips-link">
+                các ưu đãi
+              </a>{" "}
+              hấp dẫn!
             </div>
           </div>
 
           <div className="deals-grid">
             <div className="midnight-card">
-              <img src={saleimg}
-                alt="Midnight Deal" className="deal-image" />
+              <img src={saleimg} alt="Midnight Deal" className="deal-image" />
               <div className="midnight-content">
                 <div className="discount">
-                  <h2>Giảm tới <span className="percent">20%</span></h2>
+                  <h2>
+                    Giảm tới <span className="percent">20%</span>
+                  </h2>
                   <div className="promo-code">Nhập mã: SUNRISE23</div>
                 </div>
                 <button className="detail-btn">Chi Tiết →</button>
@@ -422,7 +444,6 @@ const Landingpage = () => {
             </div>
           </div>
         </div>
-
 
         <div className="place-list">
           {/* Place */}

@@ -196,28 +196,44 @@ const Landingpage = () => {
             <div className="tabs">
               <button
                 className="tab"
-                style={activeTab === "flight" ? { backgroundColor: "#f0e5e8", color: "#c2185b" } : {}}
+                style={
+                  activeTab === "flight"
+                    ? { backgroundColor: "#f0e5e8", color: "#c2185b" }
+                    : {}
+                }
                 onClick={() => handleTabClick("flight")}
               >
                 ✈️ Đặt chuyến bay
               </button>
               <button
                 className="tab"
-                style={activeTab === "service" ? { backgroundColor: "#f0e5e8", color: "#c2185b" } : {}}
+                style={
+                  activeTab === "service"
+                    ? { backgroundColor: "#f0e5e8", color: "#c2185b" }
+                    : {}
+                }
                 onClick={() => handleTabClick("service")}
               >
                 ➕ Stopover / Gói dịch vụ
               </button>
               <button
                 className="tab"
-                style={activeTab === "manage" ? { backgroundColor: "#f0e5e8", color: "#c2185b" } : {}}
+                style={
+                  activeTab === "manage"
+                    ? { backgroundColor: "#f0e5e8", color: "#c2185b" }
+                    : {}
+                }
                 onClick={() => handleTabClick("manage")}
               >
                 📅 Quản lý / Làm thủ tục
               </button>
               <button
                 className="tab"
-                style={activeTab === "status" ? { backgroundColor: "#f0e5e8", color: "#c2185b" } : {}}
+                style={
+                  activeTab === "status"
+                    ? { backgroundColor: "#f0e5e8", color: "#c2185b" }
+                    : {}
+                }
                 onClick={() => handleTabClick("status")}
               >
                 📍 Trạng thái chuyến bay
