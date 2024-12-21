@@ -159,3 +159,338 @@ button[type="submit"]:hover {
 .flights-list button:hover {
   background-color: #002244;
 }
+
+/* DỮ LIỆU MÁY BAY */
+
+.admin-plane {
+  margin-top: 20px;
+}
+
+.admin-plane h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #003366;
+}
+
+.admin-plane form {
+  display: grid;
+  gap: 15px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-plane .form-group-plane {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-plane .form-group-plane label {
+  margin-bottom: 5px;
+  color: #34495e;
+  font-weight: bold;
+}
+
+.admin-plane .form-group-plane input,
+.admin-plane .form-group-plane select {
+  padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.admin-plane .form-group-plane input:focus,
+.admin-plane .form-group-plane select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.admin-plane .form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.admin-plane .btn {
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-plane .btn:hover {
+  background-color: #2980b9;
+}
+
+.admin-plane .cancel-btn {
+  background-color: #e74c3c;
+}
+
+.admin-plane .cancel-btn:hover {
+  background-color: #c0392b;
+}
+
+.admin-plane .plane-table-container {
+  margin-top: 20px;
+}
+
+.admin-plane .plane-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-plane .plane-table th {
+  background-color: #3498db;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+.admin-plane .plane-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.admin-plane .plane-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.admin-plane .plane-table tr:hover {
+  background-color: #e9ecef;
+}
+
+.admin-plane .btn-action {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-plane .edit-btn {
+  background-color: #f39c12;
+  color: white;
+}
+
+.admin-plane .edit-btn:hover {
+  background-color: #e67e22;
+}
+
+.admin-plane .delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.admin-plane .delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.admin-header {
+  margin-bottom: 30px;
+}
+
+.admin-subtitle {
+  color: #666;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.admin-form-container {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-section-title {
+  color: #003366;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-button,
+.delete-button,
+.delay-button {
+  padding: 6px 12px;
+  margin: 0;
+  font-size: 14px;
+}
+
+.edit-button {
+  background-color: #4a90e2;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+}
+
+.delay-button {
+  background-color: #f39c12;
+}
+
+.submit-button {
+  background-color: #003366;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #002244;
+}
+
+/* Sections */
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-section-title {
+  color: #2c5282;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* Row layout */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+/* Field styling */
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  font-size: 14px;
+  color: #4a5568;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field select {
+  height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #4299e1;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+/* Readonly inputs */
+.readonly-input {
+  background-color: #f8fafc !important;
+  border-color: #edf2f7 !important;
+  cursor: not-allowed;
+}
+
+/* Submit button */
+.submit-button {
+  display: block;
+  width: auto;
+  margin: 30px auto 0;
+  padding: 12px 40px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #002855;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .admin-form-container {
+    padding: 20px;
+  }
+
+  .admin-data {
+    padding: 15px;
+  }
+}
+
+/* Placeholder styling */
+::placeholder {
+  color: #a0aec0;
+  opacity: 1;
+}
+
+/* Input type number styling */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+* Phần chia cách giữa menu và nút đăng xuất */ .sidebar-spacer {
+  flex: 1;
+  min-height: 20px;
+}
+
+/* Style cho nút đăng xuất */
+.logout-button {
+  margin-top: auto;
+  background-color: #dc3545 !important;
+  color: white !important;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c82333 !important;
+}

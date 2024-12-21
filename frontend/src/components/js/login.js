@@ -51,7 +51,7 @@ const Login = () => {
 
         // Sau đó tạo user trong backend
         const response = await axios.post(
-          "http://localhost:3000/api/register",
+          "http://localhost:3000/api/users/register",
           {
             username: formData.name,
             email: formData.email,

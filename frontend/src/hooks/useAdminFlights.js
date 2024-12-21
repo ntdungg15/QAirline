@@ -4,6 +4,49 @@ import { authService } from "../services/auth";
 
 const useAdminFlights = () => {
   const [flights, setFlights] = useState([]);
+  const [aircrafts, setAircrafts] = useState([]); // Thêm state cho aircraft list
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingFlightId, setEditingFlightId] = useState(null);
+
+  // Fetch aircraft data
+  const fetchAircrafts = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/aircrafts");
+      setAircrafts(response.data);
+    } catch (error) {
+      console.error("Error fetching aircrafts:", error);
+    }
+  };
+
+  // Timestamp conversion utility
+  const convertTimestamp = (timestamp) => {
+    if (timestamp && timestamp._seconds) {
+      return new Date(timestamp._seconds * 1000).toLocaleString();
+    }
+    return timestamp;
+  };
+
+  // Fetch flights
+  const fetchFlights = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/flights");
+      const convertedFlights = response.data.map((flight) => ({
+        ...flight,
+        departureTime: convertTimestamp(flight.departureTime),
+        arrivalTime: convertTimestamp(flight.arrivalTime),
+      }));
+      setFlights(convertedFlights);
+    } catch (error) {
+      console.error("Error fetching flights:", error);
+    }
+  };
+
+  // Initialize data
+  useEffect(() => {
+    fetchFlights();
+    fetchAircrafts();
+  }, []);
+
   const [flightData, setFlightData] = useState({
     flightNumber: "",
     from: "",
@@ -20,36 +63,8 @@ const useAdminFlights = () => {
     businessSeatsTotal: 0,
     businessSeatsPrice: 0,
   });
-  const [isEditing, setIsEditing] = useState(false);
-  const [editingFlightId, setEditingFlightId] = useState(null);
 
-  // Hàm chuyển đổi timestamp
-  const convertTimestamp = (timestamp) => {
-    if (timestamp && timestamp._seconds) {
-      return new Date(timestamp._seconds * 1000).toLocaleString();
-    }
-    return timestamp;
-  };
-
-  // Fetch flights từ backend
-  const fetchFlights = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/api/flights");
-      const convertedFlights = response.data.map((flight) => ({
-        ...flight,
-        departureTime: convertTimestamp(flight.departureTime),
-        arrivalTime: convertTimestamp(flight.arrivalTime),
-      }));
-      setFlights(convertedFlights);
-    } catch (error) {
-      console.error("Error fetching flights:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchFlights();
-  }, []);
-
+  // Handle regular form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFlightData((prev) => ({
@@ -58,7 +73,24 @@ const useAdminFlights = () => {
     }));
   };
 
-  // Hàm thêm mới chuyến bay
+  // Handle aircraft selection and auto-fill
+  const handleAircraftSelect = (e) => {
+    const selectedAircraft = aircrafts.find(
+      (aircraft) => aircraft.model === e.target.value
+    );
+
+    if (selectedAircraft) {
+      setFlightData((prev) => ({
+        ...prev,
+        aircraft: selectedAircraft.model,
+        manufacturer: selectedAircraft.manufacturer,
+        economySeatsTotal: selectedAircraft.seatConfiguration.economy.total,
+        businessSeatsTotal: selectedAircraft.seatConfiguration.business.total,
+      }));
+    }
+  };
+
+  // Form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -84,9 +116,8 @@ const useAdminFlights = () => {
         },
       };
 
-      let response;
       if (isEditing) {
-        response = await axios.put(
+        await axios.put(
           `http://localhost:3000/api/flights/${editingFlightId}`,
           submitData,
           {
@@ -97,46 +128,44 @@ const useAdminFlights = () => {
           }
         );
       } else {
-        response = await axios.post(
-          "http://localhost:3000/api/flights",
-          submitData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        await axios.post("http://localhost:3000/api/flights", submitData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
       }
 
-      console.log(isEditing ? "Flight updated" : "Flight added", response.data);
-
-      // Reset form và fetch lại danh sách chuyến bay
-      setFlightData({
-        flightNumber: "",
-        from: "",
-        to: "",
-        departureTime: "",
-        arrivalTime: "",
-        price: "",
-        availableSeats: "",
-        aircraft: "",
-        manufacturer: "",
-        status: "On Time",
-        economySeatsTotal: 0,
-        economySeatsPrice: 0,
-        businessSeatsTotal: 0,
-        businessSeatsPrice: 0,
-      });
-      setIsEditing(false);
-      setEditingFlightId(null);
+      resetForm();
       fetchFlights();
     } catch (error) {
       console.error("Error saving flight:", error);
     }
   };
 
-  // Chỉnh sửa chuyến bay
+  // Reset form
+  const resetForm = () => {
+    setFlightData({
+      flightNumber: "",
+      from: "",
+      to: "",
+      departureTime: "",
+      arrivalTime: "",
+      price: "",
+      availableSeats: 0,
+      aircraft: "",
+      manufacturer: "",
+      status: "On Time",
+      economySeatsTotal: 0,
+      economySeatsPrice: 0,
+      businessSeatsTotal: 0,
+      businessSeatsPrice: 0,
+    });
+    setIsEditing(false);
+    setEditingFlightId(null);
+  };
+
+  // Edit flight
   const handleEdit = (flight) => {
     setFlightData({
       flightNumber: flight.flightNumber,
@@ -164,7 +193,7 @@ const useAdminFlights = () => {
     setEditingFlightId(flight.id);
   };
 
-  // Xóa chuyến bay
+  // Delete flight
   const handleDelete = async (flightId) => {
     try {
       const user = authService.getCurrentUser();
@@ -179,12 +208,12 @@ const useAdminFlights = () => {
         },
       });
       fetchFlights();
-      alert("Flight deleted successfully");
     } catch (error) {
       console.error("Error deleting flight:", error);
     }
   };
 
+  // Delay flight
   const handleDelay = async (flightId) => {
     const delayTime = prompt("Enter delay time in minutes:");
     if (delayTime) {
@@ -206,7 +235,6 @@ const useAdminFlights = () => {
           }
         );
         fetchFlights();
-        alert(`Flight delayed by ${delayTime} minutes`);
       } catch (error) {
         console.error("Error delaying flight:", error);
       }
@@ -216,12 +244,15 @@ const useAdminFlights = () => {
   return {
     flights,
     flightData,
+    aircrafts, // Export aircrafts list
     isEditing,
     handleChange,
+    handleAircraftSelect, // Export aircraft selection handler
     handleSubmit,
     handleEdit,
     handleDelete,
     handleDelay,
+    setFlightData,
   };
 };
 
