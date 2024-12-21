@@ -192,9 +192,9 @@ const Landingpage = () => {
             ))}
           </div>
 
-          <div className="post-button">
+          {/* <div className="post-button">
             <button className="post-button-detail">Chi tiết</button>
-          </div>
+          </div> */}
           <div className="flight-booking-container">
             <div className="tabs">
               <button
@@ -547,7 +547,7 @@ const Landingpage = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">

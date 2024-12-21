@@ -23,8 +23,10 @@ import SanBayNoiChuyen from "./pages/js/blogs/SanBayNoiChuyen";
 import YeuCauGiayTo from "./pages/js/blogs/YeuCauGiayTo";
 import LamThuTucTrucTuyen from "./pages/js/blogs/LamThuTucTrucTuyen";
 import LamThuTucTaiSanBay from "./pages/js/blogs/LamThuTucTaiSanBay";
+import UuDai from "./pages/js/blogs/UuDai";
 import Payment from "./components/js/pay";
 import FillData from "./components/js/filldata";
+import SanVeDem from "./pages/js/blogs/SanVeDem";
 
 import { authService } from "./services/auth";
 // import Register from './components/js/register';
@@ -67,6 +69,8 @@ const App = () => {
             path="/blog/lam-thu-tuc-tai-san-bay"
             element={<LamThuTucTaiSanBay />}
           />
+          <Route path="/blog/uu-dai" element={<UuDai />} />
+          <Route path="/blog/san-ve-dem" element={<SanVeDem />} />
 
           <Route path="/payment" element={<Payment />} />
           <Route path="/filldata" element={<FillData />} />

@@ -13,7 +13,7 @@ const Explore = () => {
       <h1>Khám phá</h1>
       <div className="grid-container">
         <div className="section">
-          <h2>Ưu đãi</h2>
+          <h2 onClick={() => navigate("/blog/uu-dai")}>Ưu đãi</h2>
         </div>
         <div className="section">
           <h2>Quản lý đặt chỗ</h2>
@@ -37,7 +37,7 @@ const Explore = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">

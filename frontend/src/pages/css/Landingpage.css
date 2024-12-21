@@ -104,7 +104,8 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 0; /* Ẩn các phần tràn ra ngoài */
+  z-index: 0;
+  /* Ẩn các phần tràn ra ngoài */
 }
 
 /* Ảnh bài đăng được xếp lớp */
@@ -114,26 +115,37 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0; 
+  opacity: 0;
   transition: opacity 1.8s ease-in-out;
-  z-index: -1; /* Hiệu ứng mờ dần */
+  z-index: -1;
+  /* Hiệu ứng mờ dần */
 }
 
 .post-item-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 /* Mô tả bài đăng */
+.des {
+  position: absolute;
+  display: flex;
+  height: 50%;
+  width: 100%;
+  margin-left: 12%;
+  margin-top: 6%;
+}
+
 .post-description {
   position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  text-align: center;
+  align-items: center;
+  justify-content: left;
+  height: 15%;
+  width: 20%;
+  bottom: 2px;
   color: white;
-  background: rgba(0, 0, 0, 0.5); /* Nền mờ cho mô tả */
+  background: rgba(0, 0, 0, 0.5);
   padding: 10px;
   margin: 0;
   font-size: 16px;
@@ -141,12 +153,12 @@ body {
 
 /* Ảnh được active sẽ hiện lên */
 .post-item-img.active {
-  opacity: 1; 
-  z-index: -1; 
+  opacity: 1;
+  z-index: -1;
 }
 
 
-.post-button{
+.post-button {
   z-index: 1;
   /* margin-top: 30vh; */
   margin-top: 58vh;
@@ -156,24 +168,23 @@ body {
   padding: 5px 20px;
 }
 
-.post-button-detail{
+.post-button-detail {}
 
-}
-
-.post-button-detail{
+.post-button-detail {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4CAF50; 
-  color: white; 
-  border: none; 
-  border-radius: 15px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease; 
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .post-button-detail:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
+
 .auth-buttons {
   display: flex;
   margin-right: 10px;
@@ -252,6 +263,7 @@ body {
   z-index: 1;
 
 }
+
 .heading {
   width: 80vw;
   display: flex;
@@ -294,6 +306,7 @@ p {
   div.place {
     grid-template-columns: repeat(1, 1fr);
   }
+
   div.place-image a img {
     width: 90vw;
     height: 100%;

@@ -253,11 +253,12 @@ const BookTicket = () => {
                     <div className="currency">VND</div>
                   </div>
                 </div>
-                {selectedFlight?.id === flight.id && selectedClass && (
+                {/* {selectedFlight?.id === flight.id && selectedClass && (
                   <div className="book-ticket-container">
-                    <button className="select-ticket">Chọn vé</button>
+                    <button className="select-ticket"
+                    >Chọn vé</button>
                   </div>
-                )}
+                )} */}
               </div>
             ))}
           </div>
@@ -283,7 +284,7 @@ const BookTicket = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">

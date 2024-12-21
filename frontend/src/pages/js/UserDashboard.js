@@ -172,18 +172,18 @@ const Landingpage = () => {
                 className={`post-item-img ${index === currentIndex ? "active" : ""
                   }`}
               >
+                <div className="des"><p className="post-description">{post.description}</p> </div>
                 <img src={post.imageUrl} alt="Post" />
-                <p className="post-description">{post.description}</p>
               </div>
             ))}
           </div>
 
-          <div className="post-button">
+          {/* <div className="post-button">
             <button className="post-button-detail">Chi tiết</button>
-          </div>
+          </div> */}
           <div className="flight-booking-container">
             <div className="tabs">
-            <button
+              <button
                 className="tab"
                 style={activeTab === "flight" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
                 onClick={() => handleTabClick("flight")}
@@ -534,7 +534,7 @@ const Landingpage = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">

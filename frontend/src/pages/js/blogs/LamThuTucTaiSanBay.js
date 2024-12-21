@@ -3,7 +3,7 @@ import '../../css/Blog.css';
 import  bgImg from '../../img/lamthutuctaisanbay1.jpg';
 import { useNavigate } from "react-router-dom";
 
-const About = () => {
+const LamThuTucTaiSanBay = () => {
   const navigate = useNavigate();
   
   return (
@@ -13,8 +13,8 @@ const About = () => {
       </button>
       <div className="blog-container">
         <h1>Làm thủ tục tại sân bay</h1>
-        <img src={bgImg}></img>
         <p>Để hành trình với Bamboo Airways được bắt đầu suôn sẻ và thuận lợi, Quý khách vui lòng lưu ý một số thông tin dưới đây khi làm thủ tục tại sân bay: </p>
+        <img src={bgImg}></img>
         <h2>Hướng dẫn làm thủ tục tại sân bay </h2>
         
         <p><strong>
@@ -156,7 +156,7 @@ const About = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">
@@ -209,4 +209,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default LamThuTucTaiSanBay;

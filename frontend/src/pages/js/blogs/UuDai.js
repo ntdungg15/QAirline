@@ -1,26 +1,31 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const LamThuTuc = () => {
+const UuDai = () => {
   const navigate = useNavigate();
   
   return (
-    <div className="lamthutuc-container">
-      <button className="back-button" onClick={() => navigate("/about")}>
+    <div className="uudai-container">
+      <button className="back-button" onClick={() => navigate("/explore")}>
         &#8678;
       </button>
-      <h1>Làm Thủ Tục</h1>
+      <h1>Ưu đãi</h1>
       
       <div className="grid-container">
         <div className="section">
-          <h2 onClick={() => navigate("/blog/lam-thu-tuc-truc-tuyen")}>Làm thủ tục trực tuyến</h2>
+          <h2 onClick={() => navigate("/blog/san-ve-dem")}>Săn vé đêm, giảm tới 20%</h2>
         </div>
         <div className="section">
-          <h2 onClick={() => navigate("/blog/lam-thu-tuc-tai-san-bay")}>Làm thủ tục tại sân bay</h2>
+          <h2>Mở bán vé Tết chỉ từ 627K/chiều</h2>
         </div>
         <div className="section">
-          <h2 onClick={() => navigate("/blog/quay-lam-thu-tuc-tu-dong")}>
-            Quầy làm thủ tục tự động
+          <h2>
+          Giảm 38% cho hội viên khi chọn trước chỗ ngồi
+          </h2>
+        </div>
+        <div className="section">
+          <h2>
+            Ưu đãi hội viên
           </h2>
         </div>
       </div>
@@ -90,4 +95,4 @@ const LamThuTuc = () => {
   );
 };
 
-export default LamThuTuc;
+export default UuDai;
