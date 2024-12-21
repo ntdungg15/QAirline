@@ -1,5 +1,5 @@
 .flight-booking-container {
-    background: linear-gradient(to top right, #7ca1e2, #d3b8f0);
+    background: linear-gradient(to top right, #040e20, #d3b8f0);
     padding: 30px;
     border-radius: 12px;
     width: 75vw;
@@ -164,8 +164,8 @@
 
 
 .stopover {
-
-    background-color: #7ca1e2;
+    /* background-color: #7ca1e2; */
+    display: flex;
 }
 
 @media (max-width: 768px) {
