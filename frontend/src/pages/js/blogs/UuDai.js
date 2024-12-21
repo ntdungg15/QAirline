@@ -1,30 +1,35 @@
 import React from "react";
-import "../css/Explore.css";
 import { useNavigate } from "react-router-dom";
 
-const Explore = () => {
+const UuDai = () => {
   const navigate = useNavigate();
-
+  
   return (
-    <div className="explore-container">
-      <button className="back-button" onClick={() => navigate("/")}>
-        &lt;
+    <div className="uudai-container">
+      <button className="back-button" onClick={() => navigate("/explore")}>
+        &#8678;
       </button>
-      <h1>Khám phá</h1>
+      <h1>Ưu đãi</h1>
+      
       <div className="grid-container">
         <div className="section">
-          <h2 onClick={() => navigate("/blog/uu-dai")}>Ưu đãi</h2>
+          <h2 onClick={() => navigate("/blog/san-ve-dem")}>Săn vé đêm, giảm tới 20%</h2>
         </div>
         <div className="section">
-          <h2>Quản lý đặt chỗ</h2>
+          <h2>Mở bán vé Tết chỉ từ 627K/chiều</h2>
         </div>
         <div className="section">
-          <h2>Điều kiện giá</h2>
+          <h2>
+          Giảm 38% cho hội viên khi chọn trước chỗ ngồi
+          </h2>
         </div>
         <div className="section">
-          <h2>Dịch vụ bổ trợ</h2>
+          <h2>
+            Ưu đãi hội viên
+          </h2>
         </div>
       </div>
+      
       <footer>
         <div className="email">
           <h1>Đăng Ký Email!</h1>
@@ -90,4 +95,4 @@ const Explore = () => {
   );
 };
 
-export default Explore;
+export default UuDai;
