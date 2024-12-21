@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 import userImage from "../img/user.png";
 import { LocationInput } from "../../components/js/locationComponent.js";
 import { authService } from "../../services/auth.js";
+import saleimg from "../img/saleimg.png";
+import flc from "../img/flc.png";
+import nhatrang from "../img/nhatrang.jpg";
+
 
 const Landingpage = () => {
   const navigate = useNavigate();
@@ -179,9 +183,8 @@ const Landingpage = () => {
             {posts.map((post, index) => (
               <div
                 key={post._id}
-                className={`post-item-img ${
-                  index === currentIndex ? "active" : ""
-                }`}
+                className={`post-item-img ${index === currentIndex ? "active" : ""
+                  }`}
               >
                 <img src={post.imageUrl} alt="Post" />
                 <p className="post-description">{post.description}</p>
@@ -189,9 +192,9 @@ const Landingpage = () => {
             ))}
           </div>
 
-          <div className="post-button">
+          {/* <div className="post-button">
             <button className="post-button-detail">Chi tiết</button>
-          </div>
+          </div> */}
           <div className="flight-booking-container">
             <div className="tabs">
               <button
@@ -392,6 +395,64 @@ const Landingpage = () => {
           </div>
         </div>
 
+        <div className="deals-container">
+          <div className="deals-header">
+            <div className="heading">
+              <p>Ưu đãi</p>
+            </div>
+            <div className="tips">
+              Tips: Tham khảo <a href="#" className="tips-link">các ưu đãi</a> hấp dẫn!
+            </div>
+          </div>
+
+          <div className="deals-grid">
+            <div className="midnight-card">
+              <img src={saleimg}
+                alt="Midnight Deal" className="deal-image" />
+              <div className="midnight-content">
+                <div className="discount">
+                  <h2>Giảm tới <span className="percent">20%</span></h2>
+                  <div className="promo-code">Nhập mã: SUNRISE23</div>
+                </div>
+                <button className="detail-btn">Chi Tiết →</button>
+              </div>
+            </div>
+
+            <div className="side-deals">
+              <div className="sunrise-card">
+                <img src={flc} alt="sunrise Airways" className="deal-image" />
+                <div className="sunrise-content">
+                  <div className="sunrise-logo">BAY SUNRISE</div>
+                  <div className="sunrise-subtitle">NGHỈ FLC</div>
+                  <div className="price-grid">
+                    <div className="price-item">
+                      <div>COMBO 2N1Đ</div>
+                      <div className="price">3.099.000</div>
+                    </div>
+                    <div className="price-item">
+                      <div>COMBO 3N2Đ</div>
+                      <div className="price">3.499.000</div>
+                    </div>
+                  </div>
+                  <button className="detail-btn">Chi Tiết →</button>
+                </div>
+              </div>
+
+              <div className="nhatrang-card">
+                <img src={nhatrang} alt="Nha Trang" className="deal-image" />
+                <div className="nhatrang-content">
+                  <h2>Nha Trang</h2>
+                  {/* <div className="subtitle">biển gọi</div> */}
+                  <div className="starting-price">
+                    Giá chỉ từ <span className="price">389k</span>
+                  </div>
+                  <button className="detail-btn">Chi Tiết →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="place-list">
           {/* Place */}
           <div className="heading">
@@ -486,7 +547,7 @@ const Landingpage = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">

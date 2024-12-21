@@ -130,7 +130,7 @@ const SanVeDem = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">

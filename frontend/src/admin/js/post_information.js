@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import '../css/post_information.css';
 const Post_information = () => {
     const [imageUrl, setImageUrl] = useState("");
     const [description, setDescription] = useState("");
@@ -26,7 +26,7 @@ const Post_information = () => {
         if (posts.length > 0) {
             const interval = setInterval(() => {
                 setCurrentIndex((prevIndex) => (prevIndex + 1) % posts.length);
-            }, 3000);
+            }, 5000);
             return () => clearInterval(interval);
         }
     }, [posts]);
@@ -78,60 +78,70 @@ const Post_information = () => {
         }
     };
     return (
-        <div>
-        <h1>Admin Dashboard</h1>
+        <div className="post-info-dashboard">
+            <h1 className="post-info-title">Admin Dashboard</h1>
 
-        {/* Form tạo bài đăng */}
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>URL Ảnh:</label>
-                <input
-                    type="text"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                />
-            </div>
-            <div>
-                <label>Mô tả:</label>
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-            </div>
-            <button type="submit">Đăng</button>
-        </form>
-
-        {/* Hiển thị ảnh dạng xếp lớp */}
-        <div className="post-container">
-            <div className="post-image-container">
-                {posts.map((post, index) => (
-                    <img
-                        key={post._id}
-                        src={post.imageUrl}
-                        alt="Post"
-                        className={index === currentIndex ? "active" : ""}
+            {/* Post Creation Form */}
+            <form className="post-creation-form" onSubmit={handleSubmit}>
+                <div className="post-form-group">
+                    <label className="post-form-label">URL Ảnh:</label>
+                    <input
+                        type="text"
+                        className="post-image-url-input"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
                     />
-                ))}
-            </div>
-        </div>
-
-        {/* Danh sách bài đăng cho quản lý */}
-        <div className="post-list">
-            <h2>Quản lý bài đăng</h2>
-            {posts.map((post) => (
-                <div className="post-item" key={post._id}>
-                    <img
-                        src={post.imageUrl}
-                        alt="Post"
-                    />
-                    <p>{post.description}</p>
-                    <button onClick={() => handleDeletePost(post._id)}>
-                        Xóa
-                    </button>
+                    <label>Chọn Tệp Ảnh:</label>
+                    <input className="fileUpload" type="file" id="fileUpload" accept=".png, .jpg" />
                 </div>
-            ))}
+                <div className="post-form-group">
+                    <label className="post-form-label">Mô tả:</label>
+                    <textarea
+                        className="post-description-input"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <button type="submit" className="post-submit-btn">Đăng</button>
+            </form>
+
+            {/* Slideshow */}
+            <div className="post-slideshow">
+                <div className="post-slideshow-wrapper">
+                    {posts.map((post, index) => (
+                        <img
+                            key={post._id}
+                            src={post.imageUrl}
+                            alt="Post"
+                            className={`post-slide ${index === currentIndex ? 'active' : ''}`}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {/* Post Management Section */}
+            <div className="post-management">
+                <h2 className="post-management-title">Quản lý bài đăng</h2>
+                <div className="post-list">
+                    {posts.map((post) => (
+                        <div className="post-card" key={post._id}>
+                            <img
+                                src={post.imageUrl}
+                                alt="Post"
+                                className="post-card-image"
+                            />
+                            <p className="post-card-description">{post.description}</p>
+                            <button 
+                                className="post-delete-btn"
+                                onClick={() => handleDeletePost(post._id)}
+                            >
+                                Xóa
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
-    </div>
     );
 };
 

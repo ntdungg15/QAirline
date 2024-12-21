@@ -43,10 +43,12 @@ export const useUserDashboard = () => {
   // Hàm đăng xuất
   const handleLogout = async () => {
     try {
-      await authService.logout();
+      await authService.logout(); // Gọi trực tiếp từ authService
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       navigate("/login");
     } catch (error) {
-      console.error("Logout failed", error);
+      console.error("Error during logout:", error);
     }
   };
 

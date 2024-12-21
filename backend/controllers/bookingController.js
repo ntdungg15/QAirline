@@ -102,29 +102,56 @@ const bookingController = {
 
   getUserBookings: async (req, res) => {
     try {
+      if (!req.user?.uid) {
+        return res.status(400).json({ error: "User ID không hợp lệ" });
+      }
+
       const bookingsSnapshot = await db
         .collection("bookings")
-        .where("userId", "==", req.user.id)
+        .where("userId", "==", req.user.uid)
         .get();
 
       const bookings = [];
       for (const doc of bookingsSnapshot.docs) {
         const bookingData = doc.data();
 
+        // Lấy thông tin chuyến bay và tạo đối tượng Flight
         const flightDoc = await db
           .collection("flights")
           .doc(bookingData.flightId)
           .get();
-        const flight = flightDoc.data();
+        const flightData = flightDoc.data();
+        const flight = new Flight({ id: flightDoc.id, ...flightData });
+
+        // Chuyển đổi Timestamp thành Date string
+        const cancellationDeadline =
+          bookingData.cancellationDeadline instanceof admin.firestore.Timestamp
+            ? bookingData.cancellationDeadline.toDate().toISOString()
+            : bookingData.cancellationDeadline;
 
         bookings.push({
-          ...new Booking({ id: doc.id, ...bookingData }),
-          flightDetails: flight,
+          ...new Booking({
+            id: doc.id,
+            ...bookingData,
+            cancellationDeadline: cancellationDeadline,
+          }),
+          flightDetails: {
+            id: flight.id,
+            flightNumber: flight.flightNumber,
+            from: flight.from,
+            to: flight.to,
+            departureTime: flight.departureTime,
+            arrivalTime: flight.arrivalTime,
+            aircraft: flight.aircraft,
+            manufacturer: flight.manufacturer,
+            status: flight.status,
+          },
         });
       }
 
       res.json(bookings);
     } catch (error) {
+      console.error("Error fetching bookings:", error);
       res.status(500).json({ error: error.message });
     }
   },

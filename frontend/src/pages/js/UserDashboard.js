@@ -16,7 +16,6 @@ import saleimg from "../img/saleimg.png";
 import flc from "../img/flc.png";
 import nhatrang from "../img/nhatrang.jpg";
 
-
 const Landingpage = () => {
   const {
     locations,
@@ -68,7 +67,6 @@ const Landingpage = () => {
   const handleAccountInfoClick = () => {
     // navigate("/infor-user");
     window.location.href = "/infor-user";
-
   };
 
   return (
@@ -99,7 +97,11 @@ const Landingpage = () => {
               <a href="#about" onClick={handleAboutClick} className="nav-link">
                 Thông tin hành trình
               </a>
-              <a href="#explore" onClick={handleExploreClick} className="nav-link">
+              <a
+                href="#explore"
+                onClick={handleExploreClick}
+                className="nav-link"
+              >
                 Khám phá
               </a>
               <a
@@ -111,7 +113,11 @@ const Landingpage = () => {
               </a>
             </div>
 
-            <div className="account" style={{ position: "relative" }} ref={dropdownRef}>
+            <div
+              className="account"
+              style={{ position: "relative" }}
+              ref={dropdownRef}
+            >
               <a
                 href="#acc"
                 className="account-link"
@@ -154,45 +160,72 @@ const Landingpage = () => {
                       padding: 0,
                     }}
                   >
-                    <li style={{ padding: "8px 0", cursor: "pointer" }} onClick={handleAccountInfoClick}
-                    >Thông tin tài khoản</li>
-                    <li style={{ padding: "8px 0", cursor: "pointer" }}>Cài đặt</li>
-                    <li style={{ padding: "8px 0", cursor: "pointer" }}>Đăng xuất</li>
+                    <li
+                      style={{ padding: "8px 0", cursor: "pointer" }}
+                      onClick={handleAccountInfoClick}
+                    >
+                      Thông tin tài khoản
+                    </li>
+                    <li style={{ padding: "8px 0", cursor: "pointer" }}>
+                      Cài đặt
+                    </li>
+                    <li
+                      style={{ padding: "8px 0", cursor: "pointer" }}
+                      onClick={handleLogout}
+                    >
+                      Đăng xuất
+                    </li>
                   </ul>
                 </div>
               )}
             </div>
-
           </div>
 
           <div className="post-image">
             {posts.map((post, index) => (
               <div
                 key={post._id}
-                className={`post-item-img ${index === currentIndex ? "active" : ""
-                  }`}
+                className={`post-item-img ${
+                  index === currentIndex ? "active" : ""
+                }`}
               >
+                <div className="des"><p className="post-description">{post.description}</p> </div>
                 <img src={post.imageUrl} alt="Post" />
-                <p className="post-description">{post.description}</p>
               </div>
             ))}
           </div>
 
-          <div className="post-button">
+          {/* <div className="post-button">
             <button className="post-button-detail">Chi tiết</button>
-          </div>
+          </div> */}
           <div className="flight-booking-container">
             <div className="tabs">
-              <button className="tab" onClick={() => handleTabClick("flight")}>
+              <button
+                className="tab"
+                style={activeTab === "flight" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("flight")}
+              >
                 ✈️ Đặt chuyến bay
               </button>
-              <button className="tab" onClick={() => handleTabClick("service")}>
+              <button
+                className="tab"
+                style={activeTab === "service" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("service")}
+              >
                 ➕ Stopover / Gói dịch vụ
               </button>
-              <button className="tab" onClick={() => handleTabClick("manage")}>
+              <button
+                className="tab"
+                style={activeTab === "manage" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("manage")}
+              >
                 📅 Quản lý / Làm thủ tục
               </button>
-              <button className="tab" onClick={() => handleTabClick("status")}>
+              <button
+                className="tab"
+                style={activeTab === "status" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("status")}
+              >
                 📍 Trạng thái chuyến bay
               </button>
             </div>
@@ -371,17 +404,22 @@ const Landingpage = () => {
               <p>Ưu đãi</p>
             </div>
             <div className="tips">
-              Tips: Tham khảo <a href="#" className="tips-link">các ưu đãi</a> hấp dẫn!
+              Tips: Tham khảo{" "}
+              <a href="#" className="tips-link">
+                các ưu đãi
+              </a>{" "}
+              hấp dẫn!
             </div>
           </div>
 
           <div className="deals-grid">
             <div className="midnight-card">
-              <img src={saleimg}
-                alt="Midnight Deal" className="deal-image" />
+              <img src={saleimg} alt="Midnight Deal" className="deal-image" />
               <div className="midnight-content">
                 <div className="discount">
-                  <h2>Giảm tới <span className="percent">20%</span></h2>
+                  <h2>
+                    Giảm tới <span className="percent">20%</span>
+                  </h2>
                   <div className="promo-code">Nhập mã: SUNRISE23</div>
                 </div>
                 <button className="detail-btn">Chi Tiết →</button>
@@ -422,7 +460,6 @@ const Landingpage = () => {
             </div>
           </div>
         </div>
-
 
         <div className="place-list">
           {/* Place */}
@@ -518,7 +555,7 @@ const Landingpage = () => {
             class="email-input"
             placeholder="Nhập email của bạn"
           />
-          <button class="submit-button">Đăng Ký</button>
+          <button class="submit1-button">Đăng Ký</button>
         </div>
         <div class="footer-container">
           <div class="footer-section about">

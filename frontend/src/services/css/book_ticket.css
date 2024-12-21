@@ -1,5 +1,5 @@
 .flight-booking-container {
-    background: linear-gradient(to top right, #7ca1e2, #d3b8f0);
+    background: linear-gradient(to top, #ffffff, #575555);
     padding: 30px;
     border-radius: 12px;
     width: 75vw;
@@ -17,27 +17,33 @@
     justify-content:space-between;
 }
 
+
+
 .tab {
     width: calc(22%);
-    background: #f5f5f5;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    background: linear-gradient(to bottom , #ffffff, #6b6868);
     color: #333;
-    font-weight: bold;
-    transition: background 0.3s, color 0.3s;
-}
-
-.tab:hover {
-    background-color: #f0e5e8;
-    color: #c2185b;
-}
-
-/* .tab.active {
-    background-color: #fce4ec;
-    color: #c2185b;
-} */
+    font-size: 17px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 5px;
+    display: inline-block;
+  }
+  
+  .tab:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+  }
+  
+  .tab:active {
+    background-color: #d0d0d0;
+    transform: scale(1);
+  }
+  
 
 .booking-options {
     display: flex;
@@ -53,108 +59,170 @@
     color: #333;
 }
 
-.booking-form {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    gap: 20px;
-}
 
-.location-fields {
+.aa {
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .location-fields {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 15px;
-}
-
-
-
-.location-fields input {
-    padding: 10px;
-    width: calc(50% - 15px);
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box;
-}
-
-.swap-icon {
-    font-size: 20px;
-    cursor: pointer;
-    color: #333;
-}
-
-.date-passenger-container {
-    display: flex;
-    /* flex-direction: column; */
-    gap: 35px;
-    align-items: flex-start;
-    justify-content: space-between;
-    /* align-items: center; */
-}
-
-.date-fields {
-    display: flex;
-    gap: 20px;
-}
-
-.date-field,
-.passenger-class-field {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-    color: #333;
-}
-
-.discount-search-container {
-    width: calc(40%);
-    display: flex;
-    /* flex-direction: column; */
-    gap: 20px;
-    align-items: center;
-
-}
-
-.discount-code {
-    width: calc(50%);
-    font-size: 0.9rem;
-    color: #c2185b;
-}
-
-.discount-code input {
-    /* background-color: #7ca1e2; */
-    color: #c2185b;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px;
+    margin-bottom: 25px;
+  }
+  
+  .location-fields input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    border-color: #d3b8f0;
-}
-
-.discount-code a:hover {
-    text-decoration: underline;
-}
-.bottom-book{
-    align-items: center;
-
-}
-.search-button {
-    width: calc(50%);
-    background-color: #c2185b;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .location-fields input:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+  }
+  
+  .swap-icon {
+    font-size: 24px;
+    color: #666;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
+    padding: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  .swap-icon:hover {
+    transform: scale(1.2);
+    color: #2196f3;
+  }
+  
+  .bottom-book {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .date-passenger-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+  }
+  
+  .date-fields {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .date-field {
+    min-width: 140px;
+  }
+  
+  .date-field label, 
+  .passenger-class-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #4a4a4a;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  
+  .date-field input,
+  .passenger-class-field select,
+  .discount-code input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+  }
+  
+  .passenger-class-field {
+    min-width: 200px;
+  }
+  
+  .passenger-class-field select {
+    cursor: pointer;
+  }
+  
+  .discount-code {
+    min-width: 120px;
+  }
+  
+  .discount-code input {
+    margin-top: 8px; /* Để căn chỉnh với các input khác */
+  }
+  
+  .search-button {
+    padding: 12px 30px;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 45px; /* Đảm bảo chiều cao bằng với các input khác */
+  }
+  
+  .search-button:hover {
+    background: #1976d2;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .date-passenger-container {
+      flex-wrap: wrap;
+    }
+    
+    .date-fields,
+    .passenger-class-field,
+    .discount-code,
+    .search-button {
+      flex: 1 1 auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .date-passenger-container {
+      flex-direction: column;
+    }
+    
+    .location-fields {
+      flex-direction: column;
+    }
+    
+    .swap-icon {
+      transform: rotate(90deg);
+    }
+    
+    .date-fields {
+      flex-direction: column;
+      width: 100%;
+    }
+    
+    .date-field,
+    .passenger-class-field,
+    .discount-code {
+      width: 100%;
+      min-width: unset;
+    }
+    
+    .search-button {
+      width: 100%;
+    }
+  }
 
-.search-button:hover {
-    background-color: #a01548;
-}
+
 
 
 /* dịch vụ */
@@ -164,8 +232,8 @@
 
 
 .stopover {
-
-    background-color: #7ca1e2;
+    /* background-color: #7ca1e2; */
+    display: flex;
 }
 
 @media (max-width: 768px) {
