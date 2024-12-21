@@ -18,7 +18,7 @@ const SanVeDem = () => {
         </header>
         <section>
             <p><strong>Xin chào, Cú đêm!</strong></p>
-            <p>10 giờ đêm rồi bạn còn chưa ngủ, tương tư về những chuyến du lịch biết bao nhiêu cho đủ? Bamboo Airways mang đến ưu đãi đặc biệt dành riêng cho những "cú đêm" đang trằn trọc lên kế hoạch cho chuyến đi sắp tới của mình. "Đêm chưa ngủ, tranh thủ săn deal" cùng Bamboo Airways ngay thôi!</p>
+            <p>10 giờ đêm rồi bạn còn chưa ngủ, tương tư về những chuyến du lịch biết bao nhiêu cho đủ? Sunrise Airlines mang đến ưu đãi đặc biệt dành riêng cho những "cú đêm" đang trằn trọc lên kế hoạch cho chuyến đi sắp tới của mình. "Đêm chưa ngủ, tranh thủ săn deal" cùng Sunrise Airlines ngay thôi!</p>
         </section>
         <img src={bgImg}></img>
         <section>
@@ -34,8 +34,8 @@ const SanVeDem = () => {
                     <li>Thời gian bay từ 01/01/2025 đến 30/6/2025: Giảm 10% giá vé cơ bản/khách/chặng</li>
                 </ul>
             </ul>
-            <p><strong>Kênh bán:</strong> Website và ứng dụng di động chính thức của Bamboo Airways</p>
-            <p><strong>Đường bay áp dụng:</strong> Tất cả các đường bay nội địa Bamboo Airways đang khai thác và đường bay TP. Hồ Chí Minh - Bangkok (SGN-DMK)</p>
+            <p><strong>Kênh bán:</strong> Website và ứng dụng di động chính thức của Sunrise Airlines</p>
+            <p><strong>Đường bay áp dụng:</strong> Tất cả các đường bay nội địa Sunrise Airlines đang khai thác và đường bay TP. Hồ Chí Minh - Bangkok (SGN-DMK)</p>
         </section>
         <section>
             <h3>Giai đoạn bay áp dụng</h3>

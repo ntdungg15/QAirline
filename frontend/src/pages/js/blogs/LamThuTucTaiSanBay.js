@@ -13,7 +13,7 @@ const LamThuTucTaiSanBay = () => {
       </button>
       <div className="blog-container">
         <h1>Làm thủ tục tại sân bay</h1>
-        <p>Để hành trình với Bamboo Airways được bắt đầu suôn sẻ và thuận lợi, Quý khách vui lòng lưu ý một số thông tin dưới đây khi làm thủ tục tại sân bay: </p>
+        <p>Để hành trình với Sunrise Airlines được bắt đầu suôn sẻ và thuận lợi, Quý khách vui lòng lưu ý một số thông tin dưới đây khi làm thủ tục tại sân bay: </p>
         <img src={bgImg}></img>
         <h2>Hướng dẫn làm thủ tục tại sân bay </h2>
         
@@ -44,9 +44,9 @@ const LamThuTucTaiSanBay = () => {
         <p>
         Sau khi đã hoàn thành các thủ tục trước chuyến bay, kiểm tra an ninh, hải quan, xuất nhập cảnh, hành khách cần có mặt tại cửa ra máy bay từ 30 đến 40 phút trước giờ khởi hành của chuyến bay. 
 
-        Trong thời gian chờ lên máy bay, hành khách đi hạng Thương gia hoặc đặt mua Voucher sử dụng phòng chờ Thương gia có thể sử dụng dịch vụ tại Phòng chờ Thương gia của Bamboo Airways. 
+        Trong thời gian chờ lên máy bay, hành khách đi hạng Thương gia hoặc đặt mua Voucher sử dụng phòng chờ Thương gia có thể sử dụng dịch vụ tại Phòng chờ Thương gia của Sunrise Airlines. 
 
-        Tại thời điểm 15 phút trước giờ khởi hành của chuyến bay, nếu hành khách không có mặt tại cửa ra máy bay, Bamboo Airways sẽ làm các thủ tục liên quan đến việc không thực hiện chuyến bay của hành khách. 
+        Tại thời điểm 15 phút trước giờ khởi hành của chuyến bay, nếu hành khách không có mặt tại cửa ra máy bay, Sunrise Airlines sẽ làm các thủ tục liên quan đến việc không thực hiện chuyến bay của hành khách. 
         </p>
         
         <p><strong>
@@ -61,13 +61,13 @@ const LamThuTucTaiSanBay = () => {
           <li>Khi chuyến bay thay đổi kế hoạch, thời gian mở quầy, đóng quầy làm thủ tục sẽ được điều chỉnh phù hợp với giờ bay mới. </li>
           <li>Thời gian mở quầy, đóng quầy làm thủ tục tùy thuộc vào quy định của nhà chức trách tại sân bay và từng hãng hàng không. </li>
           <li>Hành khách phải thu xếp thời gian có mặt tại sân bay để đảm bảo hoàn thành các thủ tục chuyến bay, hải quan, an ninh, xuất nhập cảnh đúng giờ. </li>
-          <li>Bamboo Airways không chấp nhận vận chuyển hành khách đến làm thủ tục chuyến bay từ sau thời điểm đóng quầy làm thủ tục. </li>
-          <li>Bamboo Airways không phải chịu trách nhiệm về các chứng từ vận chuyển và các thủ tục pháp lý liên quan đến việc hành khách không thực hiện chuyến bay do không có mặt tại cửa ra máy bay theo thời gian quy định đã được đề cập ở trên. </li>
+          <li>Sunrise Airlines không chấp nhận vận chuyển hành khách đến làm thủ tục chuyến bay từ sau thời điểm đóng quầy làm thủ tục. </li>
+          <li>Sunrise Airlines không phải chịu trách nhiệm về các chứng từ vận chuyển và các thủ tục pháp lý liên quan đến việc hành khách không thực hiện chuyến bay do không có mặt tại cửa ra máy bay theo thời gian quy định đã được đề cập ở trên. </li>
         </ul>
 
         <h2>Thời gian làm thủ tục tại sân bay </h2>
         <p>
-          Với mong muốn cung cấp cho khách hàng sự thuận tiện và thoải mái nhất từ khi làm thủ tục cho đến khi hoàn thành chuyến bay, Bamboo Airways đem đến những tiện ích của các dịch vụ làm thủ tục như sau: 
+          Với mong muốn cung cấp cho khách hàng sự thuận tiện và thoải mái nhất từ khi làm thủ tục cho đến khi hoàn thành chuyến bay, Sunrise Airlines đem đến những tiện ích của các dịch vụ làm thủ tục như sau: 
         </p>
 
         <div>
@@ -135,7 +135,7 @@ const LamThuTucTaiSanBay = () => {
                 <td>– 03 giờ</td>
                 <td>– 50 phút hoặc – 60 phút</td>
                 <td>
-                  Thông thường, các chuyến bay quốc tế sẽ đóng quầy 50 phút trước giờ khởi hành dự kiến. Tuy nhiên, quầy làm thủ tục cho các chuyến bay của Bamboo Airways tại một số sân bay quốc tế sẽ đóng cửa 60 phút trước giờ khởi hành.
+                  Thông thường, các chuyến bay quốc tế sẽ đóng quầy 50 phút trước giờ khởi hành dự kiến. Tuy nhiên, quầy làm thủ tục cho các chuyến bay của Sunrise Airlines tại một số sân bay quốc tế sẽ đóng cửa 60 phút trước giờ khởi hành.
                 </td>
               </tr>
             </tbody>
