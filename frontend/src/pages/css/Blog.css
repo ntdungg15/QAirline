@@ -60,7 +60,7 @@
   text-align: center;
 }
 
-.lamthutuc-container > div {
+.lamthutuc-container > div, .uudai-container > div {
   max-width: 70vw;
   margin: 0 auto;
   border-radius: 8px;
@@ -69,7 +69,7 @@
   height: 80vh;
 }
 
-.lamthutuc-container h1 {
+.lamthutuc-container h1, .uudai-container h1 {
   text-align: center;
   color: #fff;
   margin-top: 20px;
@@ -114,4 +114,20 @@
 
 .blog-table tr:hover {
   background-color: #f1f1f1;
+}
+
+.uudai-container .section:nth-child(1) {
+  background-image: url('../img/sanvedem.jpg');
+}
+
+.uudai-container .section:nth-child(2) {
+  background-image: url('../img/vetet.jpg');
+}
+
+.uudai-container .section:nth-child(3) {
+  background-image: url('../img/chontruocchongoi.jpg');
+}
+
+.uudai-container .section:nth-child(4) {
+  background-image: url('../img/lamthutuctructuyen.jpg');
 }

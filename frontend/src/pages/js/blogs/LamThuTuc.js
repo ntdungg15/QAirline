@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const About = () => {
+const LamThuTuc = () => {
   const navigate = useNavigate();
   
   return (
@@ -90,4 +90,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default LamThuTuc;
