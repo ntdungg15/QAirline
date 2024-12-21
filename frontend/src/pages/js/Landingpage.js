@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 import userImage from "../img/user.png";
 import { LocationInput } from "../../components/js/locationComponent.js";
 import { authService } from "../../services/auth.js";
+import saleimg from "../img/saleimg.png";
+import flc from "../img/flc.png";
+import nhatrang from "../img/nhatrang.jpg";
+
 
 const Landingpage = () => {
   const navigate = useNavigate();
@@ -179,9 +183,8 @@ const Landingpage = () => {
             {posts.map((post, index) => (
               <div
                 key={post._id}
-                className={`post-item-img ${
-                  index === currentIndex ? "active" : ""
-                }`}
+                className={`post-item-img ${index === currentIndex ? "active" : ""
+                  }`}
               >
                 <img src={post.imageUrl} alt="Post" />
                 <p className="post-description">{post.description}</p>
@@ -194,16 +197,32 @@ const Landingpage = () => {
           </div>
           <div className="flight-booking-container">
             <div className="tabs">
-              <button className="tab" onClick={() => handleTabClick("flight")}>
+              <button
+                className="tab"
+                style={activeTab === "flight" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("flight")}
+              >
                 ✈️ Đặt chuyến bay
               </button>
-              <button className="tab" onClick={() => handleTabClick("service")}>
+              <button
+                className="tab"
+                style={activeTab === "service" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("service")}
+              >
                 ➕ Stopover / Gói dịch vụ
               </button>
-              <button className="tab" onClick={() => handleTabClick("manage")}>
+              <button
+                className="tab"
+                style={activeTab === "manage" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("manage")}
+              >
                 📅 Quản lý / Làm thủ tục
               </button>
-              <button className="tab" onClick={() => handleTabClick("status")}>
+              <button
+                className="tab"
+                style={activeTab === "status" ? { backgroundColor: "#000000", color: "#0043d3" } : {}}
+                onClick={() => handleTabClick("status")}
+              >
                 📍 Trạng thái chuyến bay
               </button>
             </div>
@@ -372,6 +391,64 @@ const Landingpage = () => {
               {activeTab === "status" && (
                 <div>Content for Trạng thái chuyến bay</div>
               )}
+            </div>
+          </div>
+        </div>
+
+        <div className="deals-container">
+          <div className="deals-header">
+            <div className="heading">
+              <p>Ưu đãi</p>
+            </div>
+            <div className="tips">
+              Tips: Tham khảo <a href="#" className="tips-link">các ưu đãi</a> hấp dẫn!
+            </div>
+          </div>
+
+          <div className="deals-grid">
+            <div className="midnight-card">
+              <img src={saleimg}
+                alt="Midnight Deal" className="deal-image" />
+              <div className="midnight-content">
+                <div className="discount">
+                  <h2>Giảm tới <span className="percent">20%</span></h2>
+                  <div className="promo-code">Nhập mã: SUNRISE23</div>
+                </div>
+                <button className="detail-btn">Chi Tiết →</button>
+              </div>
+            </div>
+
+            <div className="side-deals">
+              <div className="sunrise-card">
+                <img src={flc} alt="sunrise Airways" className="deal-image" />
+                <div className="sunrise-content">
+                  <div className="sunrise-logo">BAY SUNRISE</div>
+                  <div className="sunrise-subtitle">NGHỈ FLC</div>
+                  <div className="price-grid">
+                    <div className="price-item">
+                      <div>COMBO 2N1Đ</div>
+                      <div className="price">3.099.000</div>
+                    </div>
+                    <div className="price-item">
+                      <div>COMBO 3N2Đ</div>
+                      <div className="price">3.499.000</div>
+                    </div>
+                  </div>
+                  <button className="detail-btn">Chi Tiết →</button>
+                </div>
+              </div>
+
+              <div className="nhatrang-card">
+                <img src={nhatrang} alt="Nha Trang" className="deal-image" />
+                <div className="nhatrang-content">
+                  <h2>Nha Trang</h2>
+                  {/* <div className="subtitle">biển gọi</div> */}
+                  <div className="starting-price">
+                    Giá chỉ từ <span className="price">389k</span>
+                  </div>
+                  <button className="detail-btn">Chi Tiết →</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

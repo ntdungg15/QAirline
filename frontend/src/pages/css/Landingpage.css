@@ -257,8 +257,8 @@ body {
   display: flex;
   margin-top: 60px;
   margin-bottom: 10px;
-  font-size: 26px;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 400;
   align-items: flex-start;
 }
 
@@ -289,3 +289,13 @@ p {
 
 
 /* service*/
+
+@media (max-width: 768px) {
+  div.place {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  div.place-image a img {
+    width: 90vw;
+    height: 100%;
+  }
+}

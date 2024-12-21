@@ -209,6 +209,7 @@
   color: white;
   text-align: center;
   position: relative;
+  background-color: #ffffff;
 }
 
 .price-card.economy {
